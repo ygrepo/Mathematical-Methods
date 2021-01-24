@@ -1,0 +1,111 @@
+\documentclass[12pt,twoside]{article}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz,graphicx,amsmath,amsfonts,amscd,amssymb,bm,cite,epsfig,epsf,url}
+\usepackage[hang,flushmargin]{footmisc}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue]{hyperref}
+\usepackage{amsthm,multirow,wasysym,appendix}
+\usepackage{array,subcaption} 
+% \usepackage[small,bf]{caption}
+\usepackage{bbm}
+\usepackage{pgfplots}
+\usetikzlibrary{spy}
+\usepgfplotslibrary{external}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{arrows,automata}
+\usepackage{thmtools}
+\usepackage{blkarray} 
+\usepackage{textcomp}
+\usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+
+\usepackage{times}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{color}
+\usepackage{graphics}
+\usepackage{enumerate}
+\usepackage{amstext}
+\usepackage{blkarray}
+\usepackage{url}
+\usepackage{epsfig}
+\usepackage{bm}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\usepackage{textcomp}
+\usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+\usepackage{mathtools}
+\usepackage{minted}
+
+\input{macros}
+\title{Integral transforms}
+
+\begin{document}
+\maketitle
+
+\section{Fourier transforms}
+
+Fourier transform of $f(t)$:
+\[	
+	\tilde{f}(w) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} f(t) e^{-i w t} \, dt
+\]
+And its inverse defined by:
+\[	
+	f(t) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \tilde{f}(w) e^{i w t} \, dw
+\]
+
+\section{The Dirac $\delta$-Function}
+
+$\delta(t) = 0$ for $t = 0$.
+Provided the range of integration includes the point $t=a$:
+\[
+	\int f(t) \delta(t-a) \, dt = f(a)
+\] otherwise the integral equals $0$.
+This leads to:
+
+\ba
+	\int_{-a}^b \delta(t) \, dt &= 1  ~ \text{ for all } a, b > 0 \\
+	\int \delta(t-a) \, dt &= 1 ~ \text{if range of integration includes a}\\	
+	\delta(t) &= \delta(-t) \\
+	\delta(b t) &= \frac{1}{|b|} \delta(t) \\
+	t \delta(t) &= 0 \\
+	\delta(h(t)) &= \sum_i \frac{\delta(t - t_i)} {|h'(t_i)|}
+\ea
+where the $t_i$ are the zeros of $h(t)$.
+The derivatives $\delta^n(t)$ are defined by: $\int_{-\infty}^{\infty} f(t) \delta^n (t) \, dt = (-1)^n f^n (0)$.
+The heaviside function $H(t)$, which is defined as $H(t)=1$ for $t>0$ and $H(t)=0$ for $t<0$ has the property $H'(t) = \delta(t)$.
+
+Integral representation:
+\[
+\delta(t - u) = \frac{1}{2 \pi} \int_{-\infty}^{\infty}  e^{i w (t - u)} \, dw
+\]
+
+\section{Properties of Fourier transforms}
+
+\bi
+	\item $\ml{F} \big[ f^n(t) \big] = (i)^n w^n \tilde{f}(w)$
+	\item $\ml{F} \big[ \int^t f(s) ds \big] = \frac{1}{i w} \tilde{f(w)} + 2 \pi c \delta(w)$
+	\item  $\ml{F}  \big[  f(at) \big] \frac{1}{a} \tilde{f}(\frac{w}{a})$
+\ei
+
+\section{Parseval's theorem}
+
+\[
+	\int_{-\infty}^{\infty} |f(x)|^2 \, dx = \int_{-\infty}^{\infty} |\tilde{f}(k)|^2 dk 
+\]
+
+\section{Laplace transform}
+By definition:
+\[
+	\bar{f}(s) = \int_{-\infty}^{\infty} f(t) e^{-st} \, dt
+\]
+And
+\[
+	\ml{L} [t^n f(t)] = (-1)^n \frac{d^n \bar{f}(s)} {ds^n} %~ \text{for} n =1 ,2 ,3,...
+\]
+
+\end{document}
