@@ -17,7 +17,7 @@
 % to finally compute Ci.
 % After computings the values of Ci(t), we plot Cp(t) and Ci(t) versus time.
 
-% Clean environment
+%% Clean environment
 clear all;
 close all;
 clc;
@@ -45,9 +45,8 @@ legend('$C_p(t)$','$C_i(t)$');
 saveas(gcf,"cp_ci_vs_time",'pdf')
 
 
-%% get_parameters function
 function [ts, cp, alpha_1, alpha_2, A, B] = get_parameters(workbook, worksheet)
-% Description
+%% get_parameters Description
 % Set the parameters needed to determine Ci(t).
 % The parameters are given in PET Scan Brooks paper.
 % Inputs:
@@ -75,13 +74,13 @@ data = import_data(workbook, worksheet);
 
 cp = data.Concentration(2:end);
 ts = data.Time(2:end);
-% k1, k2 ,k3 , k4 rate constants
+%% k1, k2 ,k3 , k4 rate constants
 k1 = 0.102;
 k2 = 0.130;
 k3 = 0.062;
 k4 = .0068;
 d = sqrt((k2 + k3 + k4)^2 -4 * k2 *k4);
-% Alpha_1, Alpha_2, A, B
+%% Alpha_1, Alpha_2, A, B
 alpha_1 = 0.5 * (k2 + k3 + k4  - d);
 alpha_2 = 0.5 * (k2 + k3 + k4  + d);
 A = (k1 * (k3 + k4 - alpha_1)) / (alpha_2 - alpha_1);
@@ -89,9 +88,8 @@ B = (k1 * (alpha_2 -k3 -k4)) / (alpha_2 - alpha_1);
 
 end
 
-%% convolution_by_integration function
 function conv_res = convolution_by_integration(cp, ts, alpha)
-% Description
+%% convolution_by_integration description
 % Performs a convolution between the exponential function
 % parametrized by alpha with concentration Cp over time.
 % Inputs:
@@ -132,7 +130,6 @@ for i=1: n
 end
 end
 
-%% alpha_function function
 function f_value = alpha_function(t1, t2, alpha, cp, ts)
 % Description
 % Compute the value of exp(-alpha * (t2-t1)) * Cp(t2)
@@ -148,10 +145,9 @@ function f_value = alpha_function(t1, t2, alpha, cp, ts)
     exp_f = exp(-alpha * diff_t);
     f_value = exp_f * cp(t2);
 end
-      
-%% import_data function
+          
 function project1extendeddata = import_data(workbookFile, sheetName, dataLines)
-% import_data Import data from a spreadsheet
+%import_data Import data from a spreadsheet
 %  data = import_data(FILE) reads data from the first
 %  worksheet in the Microsoft Excel spreadsheet file named workbookFile.
 %  Returns the data as a table.
@@ -168,7 +164,7 @@ function project1extendeddata = import_data(workbookFile, sheetName, dataLines)
 %  data = importfile("./project_1_extended_data.xlsx", "Sheet1", [1, 71]);
 %
 
-% Input handling
+%% Input handling
 
 % If no sheet is specified, read first sheet
 if nargin == 1 || isempty(sheetName)
@@ -180,7 +176,7 @@ if nargin <= 2
     dataLines = [1, 71];
 end
 
-% Set up the Import Options and import the data
+%% Set up the Import Options and import the data
 opts = spreadsheetImportOptions("NumVariables", 3);
 
 % Specify sheet and range
