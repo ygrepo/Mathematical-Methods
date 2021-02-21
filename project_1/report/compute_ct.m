@@ -2,20 +2,22 @@
 % Compute the total concentration
 % of FDG in the brain over time, Ci(t), by performing a 
 % numerical integration.
-%   Ci(t) = Ce(t) + Cp(t)
+%   Ci(t) = Ce(t) + Cm(t)
 % where 
-%   - Ce(t): FDG in the brain tissue
-%   - Cp(t): FDG concentration in the arterial system
+%   - Ce(t): "free" FDG in the brain tissue
+%   - Cm(t): FDG concentration "trapped" in brain tissue
 % However in the first part of the project, we showed that the
 % Ci(t) can be expressed as a sum of two convolutions:
 %   => A * conv(exp(-alpha_1* t), Cp(t))
 %   => B * conv(exp(-alpha_2* t), Cp(t))
+% where Cp(t) is the FDG concentration in the arterial system.
+
 % The full expression of Ci(t) and values for 
-% alpha_1, alpha_1, Ci(t), A, and B: are given in Brooks paper in:
-% equation (3), (4), (5) and (6).
+% alpha_1, alpha_1, Ci(t), A, and B are given in Brooks paper:
+%       equation (3), (4), (5) and (6).
 % We then perform a numerical integration to compute the two sums above
-% to finally compute Ci.
-% After computings the values of Ci(t), we plot Cp(t) and Ci(t) versus time.
+% to finally obtain Ci.
+% With Ci(t), we then plot Cp(t) and Ci(t) versus time.
 
 % Clean environment
 clear all;
@@ -44,8 +46,15 @@ ylabel('FDG concentrations');
 legend('$C_p(t)$','$C_i(t)$');
 saveas(gcf,"cp_ci_vs_time",'pdf')
 
+%% Interpretation of the plot
+% As the FDG is injected into the blood, the concentration of FDG
+% into the brain increases rapidly to reach a peak after 250 minutes or
+% four hours of the initial injection of FDG into the blood and then
+% slowly decreases as the FDG is eliminated from the blood by urination.
+% In order to have the best PET tracing, in this experiment, scanning has 
+% to be performed around 4 hours after the injection of FDG into the blood.
 
-%% get_parameters function
+%% get_parameters
 function [ts, cp, alpha_1, alpha_2, A, B] = get_parameters(workbook, worksheet)
 % Description
 % Set the parameters needed to determine Ci(t).
@@ -89,7 +98,7 @@ B = (k1 * (alpha_2 -k3 -k4)) / (alpha_2 - alpha_1);
 
 end
 
-%% convolution_by_integration function
+%% convolution_by_integration
 function conv_res = convolution_by_integration(cp, ts, alpha)
 % Description
 % Performs a convolution between the exponential function
@@ -132,7 +141,7 @@ for i=1: n
 end
 end
 
-%% alpha_function function
+%% alpha_function
 function f_value = alpha_function(t1, t2, alpha, cp, ts)
 % Description
 % Compute the value of exp(-alpha * (t2-t1)) * Cp(t2)
@@ -149,7 +158,7 @@ function f_value = alpha_function(t1, t2, alpha, cp, ts)
     f_value = exp_f * cp(t2);
 end
       
-%% import_data function
+%% import_data
 function project1extendeddata = import_data(workbookFile, sheetName, dataLines)
 % import_data Import data from a spreadsheet
 %  data = import_data(FILE) reads data from the first
