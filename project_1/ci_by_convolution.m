@@ -12,7 +12,7 @@ data = import_data(workbook, worksheet) ;
 
 cp = data.Concentration(2:end);
 ts = data.Time(2:end);
-k1 = 0.102; 
+k1 = 0.102;
 k2 = 0.130;
 k3 = 0.062;
 k4 = .0068;
@@ -28,13 +28,14 @@ B_2 = (k1 * k2)  / (k2 + k3)
 %%
 dx = diff(ts);
 trapint = dot(dx,(cp(1:end-1) + cp(2:end))/2)
-trapz(ts,cp)
+trapzv = trapz(ts,cp);
+
 %%
 clc;
 n = size(cp, 1);
 ci = zeros(n, 1);
 
-for i = 2: n
+for i = 2: 2
     i;
     ts_i = ts(1:i);
     cp_i = cp(1:i);
@@ -46,6 +47,33 @@ for i = 2: n
     v(2:end) = (f_value(1:end-1) + f_value(2:end))/2;
     ci(i) = dot(dt, v);
 end
-ci = A .* ci;
+%%
+ts_i
+exp_f
+
+exp(-alpha_1 * 1.08)
 %%
 ci
+trapzv
+
+%%
+size(cp)
+size(exp_f)
+conv(exp_f, cp)
+
+%%
+u = [1 1 1];
+v = [1 1 0];
+w = conv(u,v)
+%%
+trapzv = trapz(ts(1:3),cp(1:3))
+
+%%
+clc;
+n = size(ts,1);
+display("ts")
+ts(1:3)
+display("cp")
+cp(1:3)
+ct = convolution(ts(1:3), cp(1:3), alpha_1);
+ct
