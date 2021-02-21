@@ -152,3 +152,34 @@ pretty(S)
 %%
 syms x n
 pretty(int(exp(x) .* x^n))
+
+%%
+clear all;
+close all;
+clc;
+b = [0 0 1 0];
+a = [1 0 5 4];
+[r,p,k] = residue(b, a)
+
+%%
+clc
+clear all
+syms x
+pretty(solve(-2 .* x^2 + x + 1, x))
+%%
+clc
+syms x c1 c2 
+y = (1/(x+1)) * (c1 + c2 * log(x+1)) + (x+1)^2/9 - (x+1)/2 + 1;
+d1 = diff(y);
+pretty(d1)
+d1 = 3 * (x+1) * d1;
+d2 = diff(y,2);
+pretty(d2)
+d2 = (x+1)^2 * d2;
+simplify(d1 + d2 + y)
+
+
+
+
+
+
