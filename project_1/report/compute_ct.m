@@ -15,9 +15,10 @@
 % The full expression of Ci(t) and values for 
 % alpha_1, alpha_1, Ci(t), A, and B are given in Brooks paper:
 %       equation (3), (4), (5) and (6).
-% We then perform a numerical integration to compute the two sums above
-% to finally obtain Ci.
-% With Ci(t), we then plot Cp(t) and Ci(t) versus time.
+% Next we perform a numerical integration to compute the two sums above
+% to obtain Ci.
+% Finally with Ci(t), we plot Cp(t) and Ci(t) versus time, and  make 
+% observations related to the plot.
 
 % Clean environment
 clear all;
@@ -79,8 +80,8 @@ data = import_data(workbook, worksheet);
 
 % Cp(t) is given from an experiment running from 0 to 94 minutes
 % It is then extended pass 94 minutes with a least-square regression
-% using the the samples starting with 58 minutes upt to 584 minutes
-% when the concentration Cp(t) is alomost zero.
+% using the the samples starting at 58 minutes up to 584 minutes
+% when the "extended" concentration Cp(t) is almost zero.
 
 cp = data.Concentration(2:end);
 ts = data.Time(2:end);
