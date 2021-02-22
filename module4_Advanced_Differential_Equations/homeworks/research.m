@@ -122,7 +122,7 @@ clc
 clear all
 syms y(x)
 eqn = (x+1)^2 * diff(y,2) + 3 * (x+1) * diff(y,1) + y == x^2;
-S = dsolve(eqn);
+S = dsolve(eqn)
 pretty(S)
 
 %%
@@ -181,5 +181,24 @@ simplify(d1 + d2 + y)
 
 
 
+%%
 
+clc
+clear all
+syms y(t) 
+eqn = diff(y,2) + 5 * diff(y) +  6 * y == 0;
+Dy = diff(y,t);
+cond = [y(0)==1, Dy(0) == -4];
+S = dsolve(eqn, cond);
+pretty(S)
 
+%%
+
+clc
+clear all
+syms y(t) 
+eqn = diff(y,2) + 2 * diff(y) +  5 * y == 0;
+Dy = diff(y,t);
+cond = [y(0)==1, Dy(0) == 0];
+S = dsolve(eqn, cond);
+pretty(S)
