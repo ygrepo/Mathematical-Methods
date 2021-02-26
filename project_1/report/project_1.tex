@@ -1,41 +1,9 @@
-\documentclass[11pt]{article}
-
-\usepackage{times}
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage[psamsfonts]{amssymb}
-\usepackage{latexsym}
-\usepackage{color}
-\usepackage{graphics}
-\usepackage{enumerate}
-\usepackage{amstext}
-\usepackage{url}
-\usepackage{epsfig}
-\def\Kset{\mathbb{K}}
-\def\Nset{\mathbb{N}}
-\def\Qset{\mathbb{Q}}
-\def\Rset{\mathbb{R}}
-\def\Sset{\mathbb{S}}
-\def\Zset{\mathbb{Z}}
-\def\squareforqed{\hbox{\rlap{$\sqcap$}$\sqcup$}}
-\def\qed{\ifmmode\squareforqed\else{\unskip\nobreak\hfil
-\penalty50\hskip1em\null\nobreak\hfil\squareforqed
-\parfillskip=0pt\finalhyphendemerits=0\endgraf}\fi}
-
-\DeclareMathOperator*{\E}{\rm E}
-\def\vcdim{\textnormal{VCdim}}
-
-%\newcommand{\ignore}[1]{}
-\newenvironment{solution}{\vspace{.25cm}\noindent{\it Solution:}}{}
-
-
-
+\documentclass[12pt,twoside]{article}
 \usepackage[dvipsnames]{xcolor}
-\usepackage{tikz,graphicx,amsmath,amsfonts,amscd,amssymb,bm,cite,epsfig,epsf,url}
+\usepackage{tikz,graphicx,amsmath,amsfonts,amscd,amssymb,mathrsfs, bm,cite,epsfig,epsf,url}
 \usepackage[hang,flushmargin]{footmisc}
 \usepackage[colorlinks=true,urlcolor=blue,citecolor=blue]{hyperref}
 \usepackage{amsthm,multirow,wasysym,appendix}
-\usepackage{mathrsfs}
 \usepackage{array,subcaption} 
 % \usepackage[small,bf]{caption}
 \usepackage{bbm}
@@ -183,6 +151,7 @@ from $(1)$ we have $B = 1 - A$ and substituting back into $(2)$:
 \end{align*}
 
 Plugging back these values for A and B in $\rnd{C}_e(s)$:
+\noindent
 \begin{align*}
   \rnd{C}_e(s) 	&= k_1  \frac{\rnd{C}_p(s)} {r_1 - r_2}  \bigg[   \frac{k_4 + r_1} {s - r_1}  -    \frac{k_4 + r_2} {s - r_2}  \bigg ]\\ 
   			&= k_1 \frac{k_4 + r_1}  {r_1 - r_2}  \frac{\rnd{C}_p(s)} {s - r_1} - k_1 \frac{k_4 + r_2}  {r_1 - r_2}  \frac{\rnd{C}_p(s)} {s - r_2} \\
@@ -193,7 +162,7 @@ The Laplace transform of the convolution between two functions is the product of
 \mathscr{L} \{ \int_0^t f(t') g(t-t') dt' \}  = \rnd{f}(s) \rnd{g}(s)
 \end{equation*}
 
-Let $\rnd{f}(s) = \rnd{C}_p(s)$ and $\rnd{g}(s) = \frac{1} {s-r_1}$, and we have:
+Let $\rnd{f}(s) = \rnd{C}_p(s)$ and $\rnd{g}(s) = \frac{1} {s-r_1}$, we have:
 \begin{align*}
 &	\mathscr{L}^{-1} \{ \rnd{f}(s) \} = \mathscr{L}^{-1} \{ \rnd{C}_p(s) \} = C_p(t) \\
 &	\mathscr{L}^{-1} \{ \rnd{g}(s) \} = \mathscr{L}^{-1} \{  \frac{1} {s-r_1} \} = e^{r_1 t} \\
@@ -203,5 +172,65 @@ Therefore:
 \begin{equation*}
 \mathscr{L} \{ \int_0^t  C_p(t')  e^{r_1 (t-t')} dt' \}  = \frac{\rnd{C}_p(s)} {s-r_1} 
 \end{equation*}
+
+Taking the inverse Laplace transform on both side of the previous equation yields:
+\begin{equation*}
+	\int_0^t  C_p(t')  e^{r_1 (t-t')} dt'  = \mathscr{L}^{-1} \{  \frac{\rnd{C}_p(s)} {s-r_1} \}
+\end{equation*}
+Similarly, we have:
+\begin{equation*}
+	\int_0^t  C_p(t')  e^{r_2 (t-t')} dt'  = \mathscr{L}^{-1} \{  \frac{\rnd{C}_p(s)} {s-r_2} \}
+\end{equation*}
+
+We now take the inverse Laplace transform of $\rnd{C}_e(s)$ using the two previous expressions:
+\begin{align*}
+&	\mathscr{L}^{-1} \{ \rnd{C}_e(s) \} \\
+& 	= C_e(t) \\
+& 	= k_1 \frac{k_4 + r_1}  {r_1 - r_2}  \mathscr{L}^{-1} \{\frac{\rnd{C}_p(s)} {s - r_1} \} - k_1 \frac{k_4 + r_2}  {r_1 - r_2} \mathscr{L}^{-1} \{ \frac{\rnd{C}_p(s)} {s - r_2} \} \\
+&	= k_1 \frac{k_4 + r_1}  {r_1 - r_2}   \int_0^t  C_p(t')  e^{r_1 (t-t')} dt' - k_1 \frac{k_4 + r_2}  {r_1 - r_2} \int_0^t  C_p(t')  e^{r_2 (t-t')} dt'  \\
+\end{align*}
+
+Next, we follow the same steps for $C_m(t)$:
+\noindent
+\begin{align*}
+  \rnd{C}_m(s) 	&= k_1 k_3 \frac { \rnd{C}_p(s) } {(s-r_1) (s-r_2) }  \\
+  			&= k_1 k_3   \frac { \rnd{C}_p(s) } {(r_1 - r_2) }  \bigg[ \frac{1} {s - r_1} - \frac{1} {s - r_2}  \bigg]\\
+\mathscr{L}^{-1} \{ \rnd{C}_m(s) \} &= C_m(t) \\			
+&= \frac{k_1 k_3} {r_1 - r_2} \bigg[ \frac{ \rnd{C}_p(s) } {s - r_1} - \frac{ \rnd{C}_p(s) } {s - r_2}  \bigg]\\
+&=  \frac{k_1 k_3} {r_1 - r_2}    \int_0^t  C_p(t')  e^{r_1 (t-t')} dt' -  \frac{k_1 k_3} {r_1 - r_2}   \int_0^t  C_p(t')  e^{r_2 (t-t')} dt'  \\
+\end{align*}
+
+Putting all together:
+\begin{align*}
+	C_i(t)	&= C_e(t) + C_m(t) \\
+			&= - ( \frac{ k_1 (k_4 + r_2)  + k_1 k_3  } { r_1 - r_2 } )  \int_0^t  C_p(t')  e^{r_2 (t-t')} dt'  + 
+			\frac{ k_1 (k_4 + r_1)  + k_1 k_3  } { r_1 - r_2 } \int_0^t  C_p(t')  e^{r_1 (t-t')} dt' \\
+			&= - (\frac{ k_1 } { r_1 - r_2 }) (k_3 + k_4 + r_2)  \int_0^t  C_p(t')  e^{r_2 (t-t')} dt'  + 
+			 (\frac{ k_1 } { r_1 - r_2 }) (k_3 + k_4 + r_1)  \int_0^t  C_p(t')  e^{r_1 (t-t')} dt' \\
+\end{align*}
+ In the associated paper by Brooks:
+\begin{equation*}
+	\alpha_{1,2} = \frac{1}{2} \bigg [ k_2 + k_3 + k_4 \stackrel{-}{+} \sqrt{ (k_2 + k_3 + k_4)^2 - 4 k_2 k_4} \bigg ]
+\end{equation*}
+Thus
+\begin{align*}
+	r_1 &= - \alpha_2  \\
+	r_2 &= - \alpha_1 \\
+\end{align*}
+Substituting $\alpha_1$ and $\alpha_2$ into the expression we just obtained for $C_i(t)$ yields:
+\begin{align*}
+C_i(t)	&= \frac{ k_1 (k_3 + k_4 - \alpha_1) } { \alpha_1 - \alpha_2 }  \int_0^t e^{-\alpha_1 (t-t')}  C_p(t')   dt'  + 
+		\frac{ k_1  ( \alpha_2 - k_3 - k_4) } { \alpha_1 - \alpha_2 }  \int_0^t e^{-\alpha_2 (t-t')}  C_p(t')   dt'  \\
+		&= A  \int_0^t e^{-\alpha_1 (t-t')}  C_p(t')   dt'  + B \int_0^t e^{-\alpha_2 (t-t')}  C_p(t')   dt'  \\
+		\text{with:} \\
+&		A =  k_1 (k_3 + k_4 - \alpha_1) / (\alpha_1 - \alpha_2 )\\
+&		B =  k_1 ( \alpha_2 - k_3 - k_4) / (\alpha_1 - \alpha_2) \\
+\end{align*}
+ We just have reproduced formula ($\textbf{4}$) in the associated paper by Brooks. Note that when $k_4 << k_2+k_3$, A and B reduce to:
+\begin{align*}
+& A \approx k_1 k_3 / (k_2 + k_3) \\
+& B \approx k_1 k_2 / (k_2 + k_3) \\
+\end{align*}
+
 
 \end{document}
