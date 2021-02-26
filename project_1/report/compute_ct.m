@@ -1,23 +1,29 @@
 % Description
+
 % Compute the total concentration
 % of FDG in the brain over time, Ci(t), by performing a
 % numerical integration.
+% From the first question of the project and Brooks paper:
 %   Ci(t) = Ce(t) + Cm(t)
 % where
 %   - Ce(t): "free" FDG in the brain tissue
 %   - Cm(t): FDG concentration "trapped" in brain tissue
-% However in the first part of the project, we showed that the
+% -------------------------------------------------------------------------
+% In the first part of the project, we showed that the
 % Ci(t) can be expressed as a sum of two convolutions:
 %   => A * conv(exp(-alpha_1* t), Cp(t))
 %   => B * conv(exp(-alpha_2* t), Cp(t))
 % where Cp(t) is the FDG concentration in the arterial system.
-
+% and conv is the convolution operator.
+% -------------------------------------------------------------------------
 % The full expression of Ci(t) and values for
-% alpha_1, alpha_1, Ci(t), A, and B are given in Brooks paper:
+% alpha_1, alpha_1, Ci(t), A, and B are given in Brooks paper in:
 %       equation (3), (4), (5) and (6).
-% Next we perform a numerical integration to compute the two sums above
-% to obtain Ci.
-% Finally with Ci(t), we plot Cp(t) and Ci(t) versus time, and  make
+%
+% To compute the convolution, we perform a numerical integration 
+% of the two sums above and we finally obtain Ci.
+% -------------------------------------------------------------------------
+% Lastly we plot Cp(t) and Ci(t) versus time, and  make some
 % observations related to the plot.
 
 % Clean environment
@@ -60,11 +66,14 @@ function [ts, cp, alpha_1, alpha_2, A, B] = get_parameters(workbook, worksheet)
 % Description
 % Set the parameters needed to determine Ci(t).
 % The parameters are given in PET Scan Brooks paper.
-% Inputs:
+%
+% Parameters:
+% ----------
 % workbook: Excel workbook with the values points for Cp(t)
 % extended pass 94 minutes.
 % worksheet: Excel worksheet where the data is
 % Outputs:
+% -------
 % ts: time in minutes when Cp data is sampled.
 % Cp: FDG concentration in arterial system.
 % alpha_1: computed value in equation (3) of Brooks paper.
@@ -80,8 +89,8 @@ data = import_data(workbook, worksheet);
 
 % Cp(t) is given from an experiment running from 0 to 94 minutes
 % It is then extended pass 94 minutes with a least-square regression
-% using the the samples starting at 58 minutes up to 584 minutes
-% when the "extended" concentration Cp(t) is almost zero.
+% using the the samples starting at 58 minutes and extended up to 584 minutes
+% when the concentration Cp(t) is almost zero.
 
 cp = data.Concentration(2:end);
 ts = data.Time(2:end);
@@ -104,25 +113,31 @@ function conv_res = convolution_by_integration(cp, ts, alpha)
 % Description
 % Performs a convolution between the exponential function
 % parametrized by alpha with concentration Cp over time.
-% Inputs:
+%
+% Parameters:
+% ----------
 % Cp: FDG concentration in arterial system.
 % ts: time in minutes when Cp data is sampled.
 % alpha: one of the computed values in equation (3) of Brooks paper.
-% Ouput:
-% conv_res: convolution between exp(-alpha t) and Cp(t).
+% Output:
+% ------
+% conv_res: convolution between exp(-alpha * t) and Cp(t).
 
 % To compute the integral, we use the trapezoidal method as described here:
 % https://www.mathworks.com/help/matlab/ref/trapz.html
 % We use two loops:
 %  - first loop is indexed by i, and use the time ts(i)
-% for which we want to determine the value of the convolution
+%    for which we want to determine the value of the convolution
 % conv_res(ts(i))
 %  - second loop concerns the "running" or integration variable,
-% indexed by ts(j).
+%   indexed by ts(j).
+
+% Algorithm is:
 % For each ts(i)
 %       total_area = 0
 %       For each ts(j)
-%           area = compute integral  between ts(j), ts(j-1)
+%           area = compute integral  between ts(j), ts(j-1) using
+%           trapezoid method.
 %           total_area = total_area + area
 %       End
 % End
@@ -152,7 +167,7 @@ function f_value = alpha_function(t1, t2, alpha, cp, ts)
 %   alpha: one of the computed values in equation (3) of Brooks paper.
 %   Cp: FDG concentration in arterial system.
 %   ts: time in minutes when Cp data is sampled.
-% Ouput:
+% Output:
 %   exp(-alpha * (ts(t1)-ts(t2))) * Cp(t2)
 diff_t = ts(t1) - ts(t2);
 exp_f = exp(-alpha * diff_t);
