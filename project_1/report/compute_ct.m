@@ -58,8 +58,9 @@ saveas(gcf,"cp_ci_vs_time",'pdf')
 % into the brain increases rapidly to reach a peak after 250 minutes or
 % four hours of the initial injection of FDG into the blood and then
 % slowly decreases as the FDG is eliminated from the blood by urination.
-% In order to have the best PET tracing, in this experiment, scanning has
-% to be performed around 4 hours after the injection of FDG into the blood.
+% In order to have the best PET tracing (quality of the scanning),
+% in this experiment, scanning has to be performed around 4 hours after 
+% the injection of FDG into the blood.
 
 %% get_parameters
 function [ts, cp, alpha_1, alpha_2, A, B] = get_parameters(workbook, worksheet)
@@ -129,7 +130,7 @@ function conv_res = convolution_by_integration(cp, ts, alpha)
 %  - first loop is indexed by i, and use the time ts(i)
 %    for which we want to determine the value of the convolution
 % conv_res(ts(i))
-%  - second loop concerns the "running" or integration variable,
+%  - second loop uses the "running" or integration variable,
 %   indexed by ts(j).
 
 % Algorithm is:
@@ -160,7 +161,7 @@ end
 %% alpha_function
 function f_value = alpha_function(t1, t2, alpha, cp, ts)
 % Description
-% Compute the value of exp(-alpha * (t2-t1)) * Cp(t2)
+% Compute the value of exp(-alpha * (t1-t2)) * Cp(t2)
 % Inputs:
 %   t1: index of time of sampling.
 %   t2: index of "running "or integration time variable .

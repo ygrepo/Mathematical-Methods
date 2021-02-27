@@ -54,7 +54,8 @@ Take Home Project 1\\
 Johns Hopkins University\\
 Student: Yves Greatti\\\
 
-\section{Question 1}
+\section*{Question 1}
+
 The rates of change of $C_e$ (free), $F^{18}DG$,  and $C_m$ (trapped), $F^{18}DG$-$6$-$P$
 in brain tissue  are given by the system of differential equations:
 \begin{align*}
@@ -67,11 +68,11 @@ Rearranging the terms of the differential equations gives:
 \begin{align*}
 	\begin{cases}
 		\frac{d}{dt} \, C_e  + (k_2 + k_3) C_e - k_4 C_m  &= k_1 C_p \\
-		k_3 C_e + \frac{d}{dt} \, C_m + k_4 C_m  &= 0\\
+		- k_3 C_e + \frac{d}{dt} \, C_m + k_4 C_m  &= 0\\
 	\end{cases}
 \end{align*}
 
-First, since initial concentrations are assumed to be $0$: $C_e(0) = C_m(0) = 0$ and thus:
+First, since initial concentrations are assumed to be zero: $C_e(0) = C_m(0) = 0$ and thus:
 \begin{align*}
 \mathscr{L}\{ \frac{d}{dt} \, C_e  \} &= s \rnd{C}_e(s) - \rnd{C}_e(0) = s \rnd{C}_e(s) - 0 = s \rnd{C}_e(s) \\
 \mathscr{L}\{ \frac{d}{dt} \, C_m  \} &= s \rnd{C}_m(s) - \rnd{C}_m(0) = s \rnd{C}_m(s) - 0 = s \rnd{C}_m(s) \\
@@ -136,7 +137,7 @@ We will now determine the partial fraction expansion of $\rnd{C}_e(s)$:
 								&= \frac{A (s - r_2) + B (s - r_1)} { (s - r_1) (s - r_2) } \\
 								&= \frac{ (A + B) s - A r_2 - B r_1} { (s - r_1) (s - r_2) } \\
 \end{align*}
-Equating on each side powers of s in the numerator:
+Equating on each side, coefficients for the same powers of s in the numerator:
 
 \begin{flalign}
 s^1 &: A + B = 1 \\
@@ -157,9 +158,9 @@ Plugging back these values for A and B in $\rnd{C}_e(s)$:
   			&= k_1 \frac{k_4 + r_1}  {r_1 - r_2}  \frac{\rnd{C}_p(s)} {s - r_1} - k_1 \frac{k_4 + r_2}  {r_1 - r_2}  \frac{\rnd{C}_p(s)} {s - r_2} \\
 \end{align*}
 
-The Laplace transform of the convolution between two functions is the product of the Laplace transform of these functions (p 226 equation 5.58 Riley book):
+The Laplace transform of the convolution between two functions is the product of the Laplace transform of these functions (p 227, equation 5.58 Riley book):
 \begin{equation*}
-\mathscr{L} \{ \int_0^t f(t') g(t-t') dt' \}  = \rnd{f}(s) \rnd{g}(s)
+  \mathscr{L}\{ (f * g) (t) \} = \mathscr{L} \{ \int_0^t f(t') g(t-t') dt' \}  = \rnd{f}(s) \rnd{g}(s)
 \end{equation*}
 
 Let $\rnd{f}(s) = \rnd{C}_p(s)$ and $\rnd{g}(s) = \frac{1} {s-r_1}$, we have:
@@ -196,7 +197,7 @@ Next, we follow the same steps for $C_m(t)$:
   \rnd{C}_m(s) 	&= k_1 k_3 \frac { \rnd{C}_p(s) } {(s-r_1) (s-r_2) }  \\
   			&= k_1 k_3   \frac { \rnd{C}_p(s) } {(r_1 - r_2) }  \bigg[ \frac{1} {s - r_1} - \frac{1} {s - r_2}  \bigg]\\
 \mathscr{L}^{-1} \{ \rnd{C}_m(s) \} &= C_m(t) \\			
-&= \frac{k_1 k_3} {r_1 - r_2} \bigg[ \frac{ \rnd{C}_p(s) } {s - r_1} - \frac{ \rnd{C}_p(s) } {s - r_2}  \bigg]\\
+&= \frac{k_1 k_3} {r_1 - r_2} \bigg[ \mathscr{L}^{-1} \{  \frac{ \rnd{C}_p(s) } {s - r_1} \} - \mathscr{L}^{-1} \{  \frac{ \rnd{C}_p(s) } {s - r_2}  \} \bigg]\\
 &=  \frac{k_1 k_3} {r_1 - r_2}    \int_0^t  C_p(t')  e^{r_1 (t-t')} dt' -  \frac{k_1 k_3} {r_1 - r_2}   \int_0^t  C_p(t')  e^{r_2 (t-t')} dt'  \\
 \end{align*}
 
@@ -212,7 +213,7 @@ Putting all together:
 \begin{equation*}
 	\alpha_{1,2} = \frac{1}{2} \bigg [ k_2 + k_3 + k_4 \stackrel{-}{+} \sqrt{ (k_2 + k_3 + k_4)^2 - 4 k_2 k_4} \bigg ]
 \end{equation*}
-Thus
+Thus:
 \begin{align*}
 	r_1 &= - \alpha_2  \\
 	r_2 &= - \alpha_1 \\
@@ -226,11 +227,16 @@ C_i(t)	&= \frac{ k_1 (k_3 + k_4 - \alpha_1) } { \alpha_1 - \alpha_2 }  \int_0^t 
 &		A =  k_1 (k_3 + k_4 - \alpha_1) / (\alpha_1 - \alpha_2 )\\
 &		B =  k_1 ( \alpha_2 - k_3 - k_4) / (\alpha_1 - \alpha_2) \\
 \end{align*}
- We just have reproduced formula ($\textbf{4}$) in the associated paper by Brooks. Note that when $k_4 << k_2+k_3$, A and B reduce to:
+ We just have reproduced formula ($\textbf{4}$) in the associated paper by Brooks. Note that when $k_4 << k_2+k_3$, A and B reduces to:
 \begin{align*}
 & A \approx k_1 k_3 / (k_2 + k_3) \\
 & B \approx k_1 k_2 / (k_2 + k_3) \\
 \end{align*}
 
+We can express the same expression of $C_i(t)$ in terms of convolutions (with definition of the convolution defined in p.227 equation 5.58 in Riley book):
+
+\begin{equation*}
+	C_i (t) = A (C_p(t) * e^{-\alpha_1 t}) + B  (C_p(t) * e^{-\alpha_2 t}) 
+\end{equation*}
 
 \end{document}
