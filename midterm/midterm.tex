@@ -1,0 +1,242 @@
+\documentclass[12pt,twoside]{article}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz,graphicx,amsmath,amsfonts,amscd,amssymb,mathrsfs, bm,cite,epsfig,epsf,url}
+\usepackage[hang,flushmargin]{footmisc}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue]{hyperref}
+\usepackage{amsthm,multirow,wasysym,appendix}
+\usepackage{array,subcaption} 
+% \usepackage[small,bf]{caption}
+\usepackage{bbm}
+\usepackage{pgfplots}
+\usetikzlibrary{spy}
+\usepgfplotslibrary{external}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{arrows,automata}
+\usepackage{thmtools}
+\usepackage{blkarray} 
+\usepackage{textcomp}
+\usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+
+
+\usepackage{times}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{color}
+\usepackage{graphics}
+\usepackage{enumerate}
+\usepackage{amstext}
+\usepackage{blkarray}
+\usepackage{url}
+\usepackage{epsfig}
+\usepackage{bm}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\usepackage{textcomp}
+\usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+\usepackage{mathtools}
+\usepackage{minted}
+
+
+
+\input{macros}
+
+\begin{document}
+
+\noindent Professor Rio\\
+EN.585.615.81.SP21 Mathematical Methods\\
+Take Home Project 1\\
+Johns Hopkins University\\
+Student: Yves Greatti\\\
+
+\section*{Question 1}
+
+The rates of change of $C_e$ (free), $F^{18}DG$,  and $C_m$ (trapped), $F^{18}DG$-$6$-$P$
+in brain tissue  are given by the system of differential equations:
+\begin{align*}
+	\begin{cases}
+		\frac{d}{dt} \, C_e  = k_1 C_p - (k_2 + k_3) C_e + k_4 C_m \\
+		\frac{d}{dt} \, C_m = k_3 C_e -  k_4 C_m \\
+	\end{cases}
+\end{align*}
+Rearranging the terms of the differential equations gives:
+\begin{align*}
+	\begin{cases}
+		\frac{d}{dt} \, C_e  + (k_2 + k_3) C_e - k_4 C_m  &= k_1 C_p \\
+		- k_3 C_e + \frac{d}{dt} \, C_m + k_4 C_m  &= 0\\
+	\end{cases}
+\end{align*}
+
+First, since initial concentrations are assumed to be zero: $C_e(0) = C_m(0) = 0$ and thus:
+\begin{align*}
+\mathscr{L}\{ \frac{d}{dt} \, C_e  \} &= s \rnd{C}_e(s) - \rnd{C}_e(0) = s \rnd{C}_e(s) - 0 = s \rnd{C}_e(s) \\
+\mathscr{L}\{ \frac{d}{dt} \, C_m  \} &= s \rnd{C}_m(s) - \rnd{C}_m(0) = s \rnd{C}_m(s) - 0 = s \rnd{C}_m(s) \\
+\end{align*}
+
+Next, we take the Laplace transform on both sides of the ODEs which gives:
+
+\begin{align*}
+	\begin{cases}
+		(s + k_2 + k_3)  \rnd{C}_e(s)  - k_4 \rnd{C}_m(s) &= k_1 \rnd{C}_p(s) \\
+		-k_3  \rnd{C}_e(s)  + (s + k_4) \rnd{C}_m(s) &=  0
+	\end{cases}
+\end{align*}
+ In matrix form, we have:
+\begin{align*}
+ \MAT{s + k_2 + k_3 & -k_4 \\ -k_3 & s + k_4} \MAT{ \rnd{C}_e(s) \\  \rnd{C}_m(s)} &= \MAT{k_1 \rnd{C}_p(s)  \\ 0}
+\end{align*}
+Solving for $\rnd{C}_e(s)$ and $\rnd{C}_m(s)$, Cramer's rule gives us:
+
+\begin{align*}
+  \rnd{C}_e(s) &= \frac { \begin{vmatrix}
+        k_1  \rnd{C}_p(s) & - k_4  \\
+        0 & s + k_4  \\
+      \end{vmatrix} } {D} ~
+  \rnd{C}_m(s) = \frac { \begin{vmatrix}
+        s + k_2 + k_3  & k_1 \rnd{C}_p(s)\\
+        -k_3 & 0  \\
+      \end{vmatrix} } {D} \\
+\end{align*}
+
+where D is the determinant:
+
+\begin{align*}
+\begin{vmatrix}
+        s + k_2 + k_3  & - k_4  \\
+        - k_3 & s + k_4  \\
+      \end{vmatrix} &= (s + k_2 + k_3) (s+ k_4) - k_3 k_4 \\
+      &= s^2 + (k_2 + k_3 + k_4 ) s + (k_2 + k_3) k_4 - k_3 k_4 \\
+      &= s^2 + (k_2 + k_3 + k_4) s + k_2 k_4
+\end{align*}
+
+The roots of this quadratic expression are:
+\begin{align*}
+& r_1 = \frac{1}{2} \bigg [ - (k_2 + k_3 + k_4) - \sqrt{ (k_2 + k_3 + k_4)^2 - 4 k_2 k_4} \bigg] \\
+& r_2 = \frac{1}{2} \bigg [ - (k_2 + k_3 + k_4) + \sqrt{ (k_2 + k_3 + k_4)^2 - 4 k_2 k_4} \bigg]
+\end{align*}
+And thus $D = (s - r_1) (s - r_2)$. We have an expression for $C_i$ as $\rnd{C}_i(s)= \rnd{C}_e(s) + \rnd{C}_m(s)$ in s-space, but we want an expression of $C_i$ in t-space.
+Therefore we take the inverse Laplace transform of $\rnd{C}_i(s)$. But first, we need a nice form for $\rnd{C}_e(s)$ and $\rnd{C}_m(s)$ so we can
+find their inverse Laplace transforms in a table.
+
+\begin{align*}
+  \rnd{C}_e(s) &= \frac { \begin{vmatrix}
+        k_1  \rnd{C}_p(s) & - k_4  \\
+        0 & s + k_4  \\
+      \end{vmatrix} } {D} \\ 
+  \rnd{C}_e(s) &= k_1  \rnd{C}_p(s) \frac { s + k_4 }  { (s-r_1) (s-r_2)} \\ 
+\end{align*}
+
+We will now determine the partial fraction expansion of $\rnd{C}_e(s)$:
+\begin{align*}
+	\frac { s + k_4 }  { (s - r_1) (s - r_2)} 	&= \frac{A} {s - r_1} + \frac{B} {s - r_2} \\
+								&= \frac{A (s - r_2) + B (s - r_1)} { (s - r_1) (s - r_2) } \\
+								&= \frac{ (A + B) s - A r_2 - B r_1} { (s - r_1) (s - r_2) } \\
+\end{align*}
+Equating on each side, coefficients for the same powers of s in the numerator:
+
+\begin{flalign}
+s^1 &: A + B = 1 \\
+s^0 &: - A r_2 - B r_1 = k_4
+\end{flalign}
+from $(1)$ we have $B = 1 - A$ and substituting back into $(2)$:
+
+\begin{align*}
+& A (r_1 - r_2) - r_1 = k_4 \\
+& A = \frac{k_4 + r_1} {r_1 - r_2} \\
+& B = 1 - A = 1 -  \frac{k_4 + r_1} {r_1 - r_2} = - \frac{k_4 + r_2} { r_1 - r_2} \\
+\end{align*}
+
+Plugging back these values for A and B in $\rnd{C}_e(s)$:
+\noindent
+\begin{align*}
+  \rnd{C}_e(s) 	&= k_1  \frac{\rnd{C}_p(s)} {r_1 - r_2}  \bigg[   \frac{k_4 + r_1} {s - r_1}  -    \frac{k_4 + r_2} {s - r_2}  \bigg ]\\ 
+  			&= k_1 \frac{k_4 + r_1}  {r_1 - r_2}  \frac{\rnd{C}_p(s)} {s - r_1} - k_1 \frac{k_4 + r_2}  {r_1 - r_2}  \frac{\rnd{C}_p(s)} {s - r_2} \\
+\end{align*}
+
+The Laplace transform of the convolution between two functions is the product of the Laplace transform of these functions (p 227, equation 5.58 Riley book):
+\begin{equation*}
+  \mathscr{L}\{ (f * g) (t) \} = \mathscr{L} \{ \int_0^t f(t') g(t-t') dt' \}  = \rnd{f}(s) \rnd{g}(s)
+\end{equation*}
+
+Let $\rnd{f}(s) = \rnd{C}_p(s)$ and $\rnd{g}(s) = \frac{1} {s-r_1}$, we have:
+\begin{align*}
+&	\mathscr{L}^{-1} \{ \rnd{f}(s) \} = \mathscr{L}^{-1} \{ \rnd{C}_p(s) \} = C_p(t) \\
+&	\mathscr{L}^{-1} \{ \rnd{g}(s) \} = \mathscr{L}^{-1} \{  \frac{1} {s-r_1} \} = e^{r_1 t} \\
+\end{align*}
+
+Therefore:
+\begin{equation*}
+\mathscr{L} \{ \int_0^t  C_p(t')  e^{r_1 (t-t')} dt' \}  = \frac{\rnd{C}_p(s)} {s-r_1} 
+\end{equation*}
+
+Taking the inverse Laplace transform on both side of the previous equation yields:
+\begin{equation*}
+	\int_0^t  C_p(t')  e^{r_1 (t-t')} dt'  = \mathscr{L}^{-1} \{  \frac{\rnd{C}_p(s)} {s-r_1} \}
+\end{equation*}
+Similarly, we have:
+\begin{equation*}
+	\int_0^t  C_p(t')  e^{r_2 (t-t')} dt'  = \mathscr{L}^{-1} \{  \frac{\rnd{C}_p(s)} {s-r_2} \}
+\end{equation*}
+
+We now take the inverse Laplace transform of $\rnd{C}_e(s)$ using the two previous expressions:
+\begin{align*}
+&	\mathscr{L}^{-1} \{ \rnd{C}_e(s) \} \\
+& 	= C_e(t) \\
+& 	= k_1 \frac{k_4 + r_1}  {r_1 - r_2}  \mathscr{L}^{-1} \{\frac{\rnd{C}_p(s)} {s - r_1} \} - k_1 \frac{k_4 + r_2}  {r_1 - r_2} \mathscr{L}^{-1} \{ \frac{\rnd{C}_p(s)} {s - r_2} \} \\
+&	= k_1 \frac{k_4 + r_1}  {r_1 - r_2}   \int_0^t  C_p(t')  e^{r_1 (t-t')} dt' - k_1 \frac{k_4 + r_2}  {r_1 - r_2} \int_0^t  C_p(t')  e^{r_2 (t-t')} dt'  \\
+\end{align*}
+
+Next, we follow the same steps for $C_m(t)$:
+\noindent
+\begin{align*}
+  \rnd{C}_m(s) 	&= k_1 k_3 \frac { \rnd{C}_p(s) } {(s-r_1) (s-r_2) }  \\
+  			&= k_1 k_3   \frac { \rnd{C}_p(s) } {(r_1 - r_2) }  \bigg[ \frac{1} {s - r_1} - \frac{1} {s - r_2}  \bigg]\\
+\mathscr{L}^{-1} \{ \rnd{C}_m(s) \} &= C_m(t) \\			
+&= \frac{k_1 k_3} {r_1 - r_2} \bigg[ \mathscr{L}^{-1} \{  \frac{ \rnd{C}_p(s) } {s - r_1} \} - \mathscr{L}^{-1} \{  \frac{ \rnd{C}_p(s) } {s - r_2}  \} \bigg]\\
+&=  \frac{k_1 k_3} {r_1 - r_2}    \int_0^t  C_p(t')  e^{r_1 (t-t')} dt' -  \frac{k_1 k_3} {r_1 - r_2}   \int_0^t  C_p(t')  e^{r_2 (t-t')} dt'  \\
+\end{align*}
+
+Putting all together:
+\begin{align*}
+	C_i(t)	&= C_e(t) + C_m(t) \\
+			&= - ( \frac{ k_1 (k_4 + r_2)  + k_1 k_3  } { r_1 - r_2 } )  \int_0^t  C_p(t')  e^{r_2 (t-t')} dt'  + 
+			\frac{ k_1 (k_4 + r_1)  + k_1 k_3  } { r_1 - r_2 } \int_0^t  C_p(t')  e^{r_1 (t-t')} dt' \\
+			&= - (\frac{ k_1 } { r_1 - r_2 }) (k_3 + k_4 + r_2)  \int_0^t  C_p(t')  e^{r_2 (t-t')} dt'  + 
+			 (\frac{ k_1 } { r_1 - r_2 }) (k_3 + k_4 + r_1)  \int_0^t  C_p(t')  e^{r_1 (t-t')} dt' \\
+\end{align*}
+ In the associated paper by Brooks:
+\begin{equation*}
+	\alpha_{1,2} = \frac{1}{2} \bigg [ k_2 + k_3 + k_4 \stackrel{-}{+} \sqrt{ (k_2 + k_3 + k_4)^2 - 4 k_2 k_4} \bigg ]
+\end{equation*}
+Thus:
+\begin{align*}
+	r_1 &= - \alpha_2  \\
+	r_2 &= - \alpha_1 \\
+\end{align*}
+Substituting $\alpha_1$ and $\alpha_2$ into the expression we just obtained for $C_i(t)$ yields:
+\begin{align*}
+C_i(t)	&= \frac{ k_1 (k_3 + k_4 - \alpha_1) } { \alpha_1 - \alpha_2 }  \int_0^t e^{-\alpha_1 (t-t')}  C_p(t')   dt'  + 
+		\frac{ k_1  ( \alpha_2 - k_3 - k_4) } { \alpha_1 - \alpha_2 }  \int_0^t e^{-\alpha_2 (t-t')}  C_p(t')   dt'  \\
+		&= A  \int_0^t e^{-\alpha_1 (t-t')}  C_p(t')   dt'  + B \int_0^t e^{-\alpha_2 (t-t')}  C_p(t')   dt'  \\
+		\text{with:} \\
+&		A =  k_1 (k_3 + k_4 - \alpha_1) / (\alpha_1 - \alpha_2 )\\
+&		B =  k_1 ( \alpha_2 - k_3 - k_4) / (\alpha_1 - \alpha_2) \\
+\end{align*}
+ We just have reproduced formula ($\textbf{4}$) in the associated paper by Brooks. Note that when $k_4 << k_2+k_3$, A and B reduces to:
+\begin{align*}
+& A \approx k_1 k_3 / (k_2 + k_3) \\
+& B \approx k_1 k_2 / (k_2 + k_3) \\
+\end{align*}
+
+We can express the same expression of $C_i(t)$ in terms of convolutions (with definition of the convolution defined in p.227 equation 5.58 in Riley book):
+
+\begin{equation*}
+	C_i (t) = A (C_p(t) * e^{-\alpha_1 t}) + B  (C_p(t) * e^{-\alpha_2 t}) 
+\end{equation*}
+
+\end{document}
