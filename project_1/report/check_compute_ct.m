@@ -36,9 +36,11 @@ format long g
 [ts, cp, alpha_1, alpha_2, A, B] = get_parameters();
 
 %% Compute first convolution between exp(-alpha_1 t) and Cp(t)
-conv_alpha_1 = convolution_by_integration(cp, ts, alpha_1);
+Y=get_alpha_function_values(ts, cp, alpha_1);
+conv_alpha_1 = trapz_integration(ts, Y);
 %% Compute second convolution between exp(-alpha_2 t) and Cp(t)
-conv_alpha_2 = convolution_by_integration(cp, ts, alpha_2);
+Y=get_alpha_function_values(ts, cp, alpha_2);
+conv_alpha_2 = trapz_integration(ts, Y);
 ci = A .* conv_alpha_1 + B .* conv_alpha_2;
 
 %% Plot Cp and Ct versus time.
@@ -58,9 +60,8 @@ saveas(gcf,"cp_ci_vs_time",'pdf')
 % into the brain increases rapidly to reach a peak after 250 minutes or
 % four hours of the initial injection of FDG into the blood and then
 % slowly decreases as the FDG is eliminated from the blood by urination.
-% In order to have the best PET tracing (most positrons emitted),
-% in this experiment, scanning has to be performed slightly before the peak
-% of the FDG concentration in the brain or around 2.5 or 3 hours after 
+% In order to have the best PET tracing (quality of the scanning),
+% in this experiment, scanning has to be performed around 4 hours after 
 % the injection of FDG into the blood.
 
 %% get_parameters
@@ -110,8 +111,8 @@ B = (k1 * (alpha_2 -k3 -k4)) / (alpha_2 - alpha_1);
 
 end
 
-%% convolution_by_integration
-function conv_res = convolution_by_integration(cp, ts, alpha)
+%% integration using trapezoid rule
+function res = trapz_integration(X,Y)
 % Description
 % Performs a convolution between the exponential function
 % parametrized by alpha with concentration Cp over time.
@@ -123,13 +124,13 @@ function conv_res = convolution_by_integration(cp, ts, alpha)
 % alpha: one of the computed values in equation (3) of Brooks paper.
 % Output:
 % ------
-% conv_res: convolution between exp(-alpha * t) and Cp(t).
+% res: convolution between exp(-alpha * t) and Cp(t).
 
 % To compute the integral, we use the trapezoidal method as described here:
 % https://www.mathworks.com/help/matlab/ref/trapz.html
 % We use two loops:
 %  - first loop is indexed by i, and use the time ts(i)
-%    for which we want to determine the value of the convolution
+%    for which we want to determine the value of the integral 
 %  - second loop uses the "running" or integration variable,
 %   indexed by ts(j).
 
@@ -143,18 +144,43 @@ function conv_res = convolution_by_integration(cp, ts, alpha)
 %       End
 % End
 
-n = size(ts,1);
-conv_res = zeros(n,1);
+
+n = size(X,1);
+res = zeros(n,1);
 for i=1: n
     total_area = 0;
     for j=2: i
-        f_value_j_1 = alpha_function(i, j-1, alpha, cp, ts);
-        f_value_j = alpha_function(i, j, alpha, cp, ts);
-        dt = ts(j) - ts(j-1);
-        area = dt * ((f_value_j_1 + f_value_j)/2);
+        f_value_j_1 = Y(i, j-1);
+        f_value_j = Y(i, j);
+        dX = X(j) - X(j-1);
+        area = dX * ((f_value_j_1 + f_value_j)/2);
         total_area = total_area + area;
     end
-    conv_res(i) = total_area;
+    res(i) = total_area;
+end
+end
+
+%% compute values of the function parametrized by "alpha" 
+function Y=get_alpha_function_values(ts, cp, alpha)
+% Description
+% Compute the product between the exponential function
+% parametrized by alpha with concentration Cp over time.
+%
+% Parameters:
+% ----------
+% ts: time in minutes when Cp data is sampled.
+% Cp: FDG concentration in arterial system.
+% alpha: one of the computed values in equation (3) of Brooks paper.
+% Output:
+% ------
+% Y: product obetween exp(-alpha * (t-t') and Cp(t').
+
+n = size(ts,1);
+Y = zeros(2, n);
+for i=1: n
+    for j=2: i
+         Y(i, j) = alpha_function(i, j, alpha, cp, ts);
+    end
 end
 end
 

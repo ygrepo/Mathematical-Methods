@@ -1,0 +1,631 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>check_compute_ct</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-03-05"><meta name="DC.source" content="check_compute_ct.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Read the data and parameters</a></li><li><a href="#3">Compute first convolution between exp(-alpha_1 t) and Cp(t)</a></li><li><a href="#4">Compute second convolution between exp(-alpha_2 t) and Cp(t)</a></li><li><a href="#5">Plot Cp and Ct versus time.</a></li><li><a href="#6">Interpretation of the plot</a></li><li><a href="#7">get_parameters</a></li><li><a href="#8">integration using trapezoid rule</a></li><li><a href="#9">compute values of the function parametrized by "alpha"</a></li><li><a href="#10">alpha_function</a></li><li><a href="#11">import_data</a></li></ul></div><pre class="codeinput"><span class="comment">% Description</span>
+
+<span class="comment">% Compute the total concentration</span>
+<span class="comment">% of FDG in the brain over time, Ci(t), by performing a</span>
+<span class="comment">% numerical integration.</span>
+<span class="comment">% From the first question of the project and Brooks paper:</span>
+<span class="comment">%   Ci(t) = Ce(t) + Cm(t)</span>
+<span class="comment">% where</span>
+<span class="comment">%   - Ce(t): "free" FDG in the brain tissue</span>
+<span class="comment">%   - Cm(t): FDG concentration "trapped" in brain tissue</span>
+<span class="comment">% -------------------------------------------------------------------------</span>
+<span class="comment">% In the first part of the project, we showed that the</span>
+<span class="comment">% Ci(t) can be expressed as a sum of two convolutions:</span>
+<span class="comment">%   =&gt; A * conv(exp(-alpha_1* t), Cp(t))</span>
+<span class="comment">%   =&gt; B * conv(exp(-alpha_2* t), Cp(t))</span>
+<span class="comment">% where Cp(t) is the FDG concentration in the arterial system.</span>
+<span class="comment">% and conv is the convolution operator.</span>
+<span class="comment">% -------------------------------------------------------------------------</span>
+<span class="comment">% The full expression of Ci(t) and values for</span>
+<span class="comment">% alpha_1, alpha_1, Ci(t), A, and B are given in Brooks paper in:</span>
+<span class="comment">%       equation (3), (4), (5) and (6).</span>
+<span class="comment">%</span>
+<span class="comment">% To compute the convolution, we perform a numerical integration</span>
+<span class="comment">% of the two sums above and we finally obtain Ci.</span>
+<span class="comment">% -------------------------------------------------------------------------</span>
+<span class="comment">% Lastly we plot Cp(t) and Ci(t) versus time, and  make some</span>
+<span class="comment">% observations related to the plot.</span>
+
+<span class="comment">% Clean environment</span>
+clear <span class="string">all</span>;
+close <span class="string">all</span>;
+clc;
+format <span class="string">long</span> <span class="string">g</span>
+</pre><h2 id="2">Read the data and parameters</h2><pre class="codeinput">[ts, cp, alpha_1, alpha_2, A, B] = get_parameters();
+</pre><h2 id="3">Compute first convolution between exp(-alpha_1 t) and Cp(t)</h2><pre class="codeinput">Y=get_alpha_function_values(ts, cp, alpha_1);
+conv_alpha_1 = trapz_integration(ts, Y)
+</pre><h2 id="4">Compute second convolution between exp(-alpha_2 t) and Cp(t)</h2><pre class="codeinput">Y=get_alpha_function_values(ts, cp, alpha_2);
+conv_alpha_2 = trapz_integration(ts, Y);
+ci = A .* conv_alpha_1 + B .* conv_alpha_2;
+</pre><h2 id="5">Plot Cp and Ct versus time.</h2><pre class="codeinput">figure, hold <span class="string">on</span>, grid <span class="string">on</span>
+
+plot(ts, cp, <span class="string">"b-o"</span>, <span class="string">'LineWidth'</span>,1,<span class="string">'MarkerSize'</span>,3);
+plot(ts, ci, <span class="string">"r-^"</span>, <span class="string">'LineWidth'</span>,1,<span class="string">'MarkerSize'</span>,3);
+
+title(<span class="string">'$C_p$ and $C_i$ vs. Time'</span>,<span class="string">'FontSize'</span>, 14);
+xlabel(<span class="string">'Time in minutes'</span>);
+ylabel(<span class="string">'FDG concentrations'</span>);
+legend(<span class="string">'$C_p(t)$'</span>,<span class="string">'$C_i(t)$'</span>);
+saveas(gcf,<span class="string">"cp_ci_vs_time"</span>,<span class="string">'pdf'</span>)
+</pre><img vspace="5" hspace="5" src="check_compute_ct_01.png" alt=""> <h2 id="6">Interpretation of the plot</h2><p>As the FDG is injected into the blood, the concentration of FDG into the brain increases rapidly to reach a peak after 250 minutes or four hours of the initial injection of FDG into the blood and then slowly decreases as the FDG is eliminated from the blood by urination. In order to have the best PET tracing (quality of the scanning), in this experiment, scanning has to be performed around 4 hours after the injection of FDG into the blood.</p><h2 id="7">get_parameters</h2><pre class="codeinput"><span class="keyword">function</span> [ts, cp, alpha_1, alpha_2, A, B] = get_parameters(workbook, worksheet)
+<span class="comment">% Description</span>
+<span class="comment">% Set the parameters needed to determine Ci(t).</span>
+<span class="comment">% The parameters are given in PET Scan Brooks paper.</span>
+<span class="comment">%</span>
+<span class="comment">% Parameters:</span>
+<span class="comment">% ----------</span>
+<span class="comment">% workbook: Excel workbook with the values points for Cp(t)</span>
+<span class="comment">% extended pass 94 minutes.</span>
+<span class="comment">% worksheet: Excel worksheet where the data is</span>
+<span class="comment">% Outputs:</span>
+<span class="comment">% -------</span>
+<span class="comment">% ts: time in minutes when Cp data is sampled.</span>
+<span class="comment">% Cp: FDG concentration in arterial system.</span>
+<span class="comment">% alpha_1: computed value in equation (3) of Brooks paper.</span>
+<span class="comment">% alpha_2: computed value in equation (3) of Brooks paper.</span>
+<span class="comment">% A: computed value in equation (3) of Brooks paper.</span>
+<span class="comment">% B: computed value in equation (3) of Brooks paper.</span>
+
+<span class="keyword">if</span> ~exist(<span class="string">'workbook'</span>,<span class="string">'var'</span>)
+    workbook = <span class="string">"./project_1_extended_data.xlsx"</span>;
+    worksheet = <span class="string">"Sheet1"</span>;
+<span class="keyword">end</span>
+data = import_data(workbook, worksheet);
+
+<span class="comment">% Cp(t) is given from an experiment running from 0 to 94 minutes</span>
+<span class="comment">% It is then extended pass 94 minutes with a least-square regression</span>
+<span class="comment">% using the the samples starting at 58 minutes and extended up to 584 minutes</span>
+<span class="comment">% when the concentration Cp(t) is almost zero.</span>
+
+cp = data.Concentration(2:end);
+ts = data.Time(2:end);
+<span class="comment">% k1, k2 ,k3 , k4 rate constants</span>
+k1 = 0.102;
+k2 = 0.130;
+k3 = 0.062;
+k4 = .0068;
+d = sqrt((k2 + k3 + k4)^2 -4 * k2 *k4);
+<span class="comment">% Alpha_1, Alpha_2, A, B</span>
+alpha_1 = 0.5 * (k2 + k3 + k4  - d);
+alpha_2 = 0.5 * (k2 + k3 + k4  + d);
+A = (k1 * (k3 + k4 - alpha_1)) / (alpha_2 - alpha_1);
+B = (k1 * (alpha_2 -k3 -k4)) / (alpha_2 - alpha_1);
+
+<span class="keyword">end</span>
+</pre><h2 id="8">integration using trapezoid rule</h2><pre class="codeinput"><span class="keyword">function</span> res = trapz_integration(X,Y)
+<span class="comment">% Description</span>
+<span class="comment">% Performs a convolution between the exponential function</span>
+<span class="comment">% parametrized by alpha with concentration Cp over time.</span>
+<span class="comment">%</span>
+<span class="comment">% Parameters:</span>
+<span class="comment">% ----------</span>
+<span class="comment">% Cp: FDG concentration in arterial system.</span>
+<span class="comment">% ts: time in minutes when Cp data is sampled.</span>
+<span class="comment">% alpha: one of the computed values in equation (3) of Brooks paper.</span>
+<span class="comment">% Output:</span>
+<span class="comment">% ------</span>
+<span class="comment">% res: convolution between exp(-alpha * t) and Cp(t).</span>
+
+<span class="comment">% To compute the integral, we use the trapezoidal method as described here:</span>
+<span class="comment">% https://www.mathworks.com/help/matlab/ref/trapz.html</span>
+<span class="comment">% We use two loops:</span>
+<span class="comment">%  - first loop is indexed by i, and use the time ts(i)</span>
+<span class="comment">%    for which we want to determine the value of the integral</span>
+<span class="comment">%  - second loop uses the "running" or integration variable,</span>
+<span class="comment">%   indexed by ts(j).</span>
+
+<span class="comment">% Algorithm is:</span>
+<span class="comment">% For each ts(i)</span>
+<span class="comment">%       total_area = 0</span>
+<span class="comment">%       For each ts(j)</span>
+<span class="comment">%           area = compute integral  between ts(j), ts(j-1) using</span>
+<span class="comment">%           trapezoid method.</span>
+<span class="comment">%           total_area = total_area + area</span>
+<span class="comment">%       End</span>
+<span class="comment">% End</span>
+
+
+n = size(X,1);
+res = zeros(n,1);
+<span class="keyword">for</span> i=1: n
+    total_area = 0;
+    <span class="keyword">for</span> j=2: i
+        f_value_j_1 = Y(i, j-1);
+        f_value_j = Y(i, j);
+        dX = X(j) - X(j-1);
+        area = dX * ((f_value_j_1 + f_value_j)/2);
+        total_area = total_area + area;
+    <span class="keyword">end</span>
+    res(i) = total_area;
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">
+conv_alpha_1 =
+
+                         0
+                    45.846
+          158.970675897499
+          281.168048175195
+          382.410586855829
+          506.813380669596
+          630.660173192659
+          747.862514225952
+          855.982210066906
+          971.523137913138
+             1160.45429585
+          1275.45443263582
+          1481.71957897321
+          2222.46468191413
+          3600.77880641565
+          4379.90001309079
+           6090.1497434465
+          7824.67103523821
+          10196.9844432435
+          11756.0987014782
+          13454.4583345968
+           14236.515154991
+           14941.554075277
+          15587.3968404104
+          16176.6770034269
+          16711.9109543209
+          17195.5031324623
+          17629.7510071218
+          18016.8498364189
+          18358.8972145508
+          18657.8974167221
+          18915.7655507747
+          19134.3315241168
+          19315.3438341702
+          19460.4731901844
+          19571.3159739228
+          19649.3975463868
+           19696.175407429
+          19713.0422147994
+          19701.3286688788
+          19662.3062690743
+          19597.1899475864
+          19507.1405860044
+          19393.2674199408
+          19256.6303366885
+          19098.2420706565
+          18919.0703011358
+          18720.0396567373
+          18502.0336306555
+          18265.8964107251
+          18012.4346280605
+          17742.4190279013
+          17456.5860661237
+          17155.6394347261
+          16840.2515194471
+           16511.064792537
+          16168.6931435662
+          15813.7231510284
+          15446.7152973716
+          15068.2051299739
+          14678.7043704699
+          14278.7019747239
+          13868.6651456469
+          13449.0403009546
+          13020.2539978712
+          12582.7138166948
+          12136.8092050536
+           11682.912284603
+          11221.3786218333
+          10752.5479645856
+
+</pre><h2 id="9">compute values of the function parametrized by "alpha"</h2><pre class="codeinput"><span class="keyword">function</span> Y=get_alpha_function_values(ts, cp, alpha)
+<span class="comment">% Description</span>
+<span class="comment">% Compute the product between the exponential function</span>
+<span class="comment">% parametrized by alpha with concentration Cp over time.</span>
+<span class="comment">%</span>
+<span class="comment">% Parameters:</span>
+<span class="comment">% ----------</span>
+<span class="comment">% ts: time in minutes when Cp data is sampled.</span>
+<span class="comment">% Cp: FDG concentration in arterial system.</span>
+<span class="comment">% alpha: one of the computed values in equation (3) of Brooks paper.</span>
+<span class="comment">% Output:</span>
+<span class="comment">% ------</span>
+<span class="comment">% Y: product obetween exp(-alpha * (t-t') and Cp(t').</span>
+
+n = size(ts,1);
+Y = zeros(2, n);
+<span class="keyword">for</span> i=1: n
+    <span class="keyword">for</span> j=2: i
+         Y(i, j) = alpha_function(i, j, alpha, cp, ts);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><h2 id="10">alpha_function</h2><pre class="codeinput"><span class="keyword">function</span> f_value = alpha_function(t1, t2, alpha, cp, ts)
+<span class="comment">% Description</span>
+<span class="comment">% Compute the value of exp(-alpha * (t1-t2)) * Cp(t2)</span>
+<span class="comment">% Inputs:</span>
+<span class="comment">%   t1: index of time of sampling.</span>
+<span class="comment">%   t2: index of "running "or integration time variable .</span>
+<span class="comment">%   alpha: one of the computed values in equation (3) of Brooks paper.</span>
+<span class="comment">%   Cp: FDG concentration in arterial system.</span>
+<span class="comment">%   ts: time in minutes when Cp data is sampled.</span>
+<span class="comment">% Output:</span>
+<span class="comment">%   exp(-alpha * (ts(t1)-ts(t2))) * Cp(t2)</span>
+diff_t = ts(t1) - ts(t2);
+exp_f = exp(-alpha * diff_t);
+f_value = exp_f * cp(t2);
+<span class="keyword">end</span>
+</pre><h2 id="11">import_data</h2><pre class="codeinput"><span class="keyword">function</span> project1extendeddata = import_data(workbookFile, sheetName, dataLines)
+<span class="comment">% import_data Import data from a spreadsheet</span>
+<span class="comment">%  data = import_data(FILE) reads data from the first</span>
+<span class="comment">%  worksheet in the Microsoft Excel spreadsheet file named workbookFile.</span>
+<span class="comment">%  Returns the data as a table.</span>
+<span class="comment">%</span>
+<span class="comment">%  data = import_data(FILE, SHEET) reads from the</span>
+<span class="comment">%  specified worksheet.</span>
+<span class="comment">%</span>
+<span class="comment">%  data = import_data(FILE, SHEET, DATALINES) reads from</span>
+<span class="comment">%  the specified worksheet for the specified row interval(s). Specify</span>
+<span class="comment">%  DATALINES as a positive scalar integer or a N-by-2 array of positive</span>
+<span class="comment">%  scalar integers for dis-contiguous row intervals.</span>
+<span class="comment">%</span>
+<span class="comment">%  Example:</span>
+<span class="comment">%  data = importfile("./project_1_extended_data.xlsx", "Sheet1", [1, 71]);</span>
+<span class="comment">%</span>
+
+<span class="comment">% Input handling</span>
+
+<span class="comment">% If no sheet is specified, read first sheet</span>
+<span class="keyword">if</span> nargin == 1 || isempty(sheetName)
+    sheetName = 1;
+<span class="keyword">end</span>
+
+<span class="comment">% If row start and end points are not specified, define defaults</span>
+<span class="keyword">if</span> nargin &lt;= 2
+    dataLines = [1, 71];
+<span class="keyword">end</span>
+
+<span class="comment">% Set up the Import Options and import the data</span>
+opts = spreadsheetImportOptions(<span class="string">"NumVariables"</span>, 3);
+
+<span class="comment">% Specify sheet and range</span>
+opts.Sheet = sheetName;
+opts.DataRange = <span class="string">"A"</span> + dataLines(1, 1) + <span class="string">":C"</span> + dataLines(1, 2);
+
+<span class="comment">% Specify column names and types</span>
+opts.VariableNames = [<span class="string">"VarName1"</span>, <span class="string">"Time"</span>, <span class="string">"Concentration"</span>];
+opts.VariableTypes = [<span class="string">"double"</span>, <span class="string">"double"</span>, <span class="string">"double"</span>];
+
+<span class="comment">% Import the data</span>
+project1extendeddata = readtable(workbookFile, opts, <span class="string">"UseExcel"</span>, false);
+
+<span class="keyword">for</span> idx = 2:size(dataLines, 1)
+    opts.DataRange = <span class="string">"A"</span> + dataLines(idx, 1) + <span class="string">":C"</span> + dataLines(idx, 2);
+    tb = readtable(workbookFile, opts, <span class="string">"UseExcel"</span>, false);
+    project1extendeddata = [project1extendeddata; tb]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+<span class="keyword">end</span>
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+% Description
+
+% Compute the total concentration
+% of FDG in the brain over time, Ci(t), by performing a
+% numerical integration.
+% From the first question of the project and Brooks paper:
+%   Ci(t) = Ce(t) + Cm(t)
+% where
+%   - Ce(t): "free" FDG in the brain tissue
+%   - Cm(t): FDG concentration "trapped" in brain tissue
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+% In the first part of the project, we showed that the
+% Ci(t) can be expressed as a sum of two convolutions:
+%   => A * conv(exp(-alpha_1* t), Cp(t))
+%   => B * conv(exp(-alpha_2* t), Cp(t))
+% where Cp(t) is the FDG concentration in the arterial system.
+% and conv is the convolution operator.
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+% The full expression of Ci(t) and values for
+% alpha_1, alpha_1, Ci(t), A, and B are given in Brooks paper in:
+%       equation (3), (4), (5) and (6).
+%
+% To compute the convolution, we perform a numerical integration 
+% of the two sums above and we finally obtain Ci.
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+% Lastly we plot Cp(t) and Ci(t) versus time, and  make some
+% observations related to the plot.
+
+% Clean environment
+clear all;
+close all;
+clc;
+format long g
+
+%% Read the data and parameters
+[ts, cp, alpha_1, alpha_2, A, B] = get_parameters();
+
+%% Compute first convolution between exp(-alpha_1 t) and Cp(t)
+Y=get_alpha_function_values(ts, cp, alpha_1);
+conv_alpha_1 = trapz_integration(ts, Y)
+%% Compute second convolution between exp(-alpha_2 t) and Cp(t)
+Y=get_alpha_function_values(ts, cp, alpha_2);
+conv_alpha_2 = trapz_integration(ts, Y);
+ci = A .* conv_alpha_1 + B .* conv_alpha_2;
+
+%% Plot Cp and Ct versus time.
+figure, hold on, grid on
+
+plot(ts, cp, "b-o", 'LineWidth',1,'MarkerSize',3);
+plot(ts, ci, "r-^", 'LineWidth',1,'MarkerSize',3);
+
+title('$C_p$ and $C_i$ vs. Time','FontSize', 14);
+xlabel('Time in minutes');
+ylabel('FDG concentrations');
+legend('$C_p(t)$','$C_i(t)$');
+saveas(gcf,"cp_ci_vs_time",'pdf')
+
+%% Interpretation of the plot
+% As the FDG is injected into the blood, the concentration of FDG
+% into the brain increases rapidly to reach a peak after 250 minutes or
+% four hours of the initial injection of FDG into the blood and then
+% slowly decreases as the FDG is eliminated from the blood by urination.
+% In order to have the best PET tracing (quality of the scanning),
+% in this experiment, scanning has to be performed around 4 hours after 
+% the injection of FDG into the blood.
+
+%% get_parameters
+function [ts, cp, alpha_1, alpha_2, A, B] = get_parameters(workbook, worksheet)
+% Description
+% Set the parameters needed to determine Ci(t).
+% The parameters are given in PET Scan Brooks paper.
+%
+% Parameters:
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% workbook: Excel workbook with the values points for Cp(t)
+% extended pass 94 minutes.
+% worksheet: Excel worksheet where the data is
+% Outputs:
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+% ts: time in minutes when Cp data is sampled.
+% Cp: FDG concentration in arterial system.
+% alpha_1: computed value in equation (3) of Brooks paper.
+% alpha_2: computed value in equation (3) of Brooks paper.
+% A: computed value in equation (3) of Brooks paper.
+% B: computed value in equation (3) of Brooks paper.
+
+if ~exist('workbook','var')
+    workbook = "./project_1_extended_data.xlsx";
+    worksheet = "Sheet1";
+end
+data = import_data(workbook, worksheet);
+
+% Cp(t) is given from an experiment running from 0 to 94 minutes
+% It is then extended pass 94 minutes with a least-square regression
+% using the the samples starting at 58 minutes and extended up to 584 minutes
+% when the concentration Cp(t) is almost zero.
+
+cp = data.Concentration(2:end);
+ts = data.Time(2:end);
+% k1, k2 ,k3 , k4 rate constants
+k1 = 0.102;
+k2 = 0.130;
+k3 = 0.062;
+k4 = .0068;
+d = sqrt((k2 + k3 + k4)^2 -4 * k2 *k4);
+% Alpha_1, Alpha_2, A, B
+alpha_1 = 0.5 * (k2 + k3 + k4  - d);
+alpha_2 = 0.5 * (k2 + k3 + k4  + d);
+A = (k1 * (k3 + k4 - alpha_1)) / (alpha_2 - alpha_1);
+B = (k1 * (alpha_2 -k3 -k4)) / (alpha_2 - alpha_1);
+
+end
+
+%% integration using trapezoid rule
+function res = trapz_integration(X,Y)
+% Description
+% Performs a convolution between the exponential function
+% parametrized by alpha with concentration Cp over time.
+%
+% Parameters:
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Cp: FDG concentration in arterial system.
+% ts: time in minutes when Cp data is sampled.
+% alpha: one of the computed values in equation (3) of Brooks paper.
+% Output:
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% res: convolution between exp(-alpha * t) and Cp(t).
+
+% To compute the integral, we use the trapezoidal method as described here:
+% https://www.mathworks.com/help/matlab/ref/trapz.html
+% We use two loops:
+%  - first loop is indexed by i, and use the time ts(i)
+%    for which we want to determine the value of the integral 
+%  - second loop uses the "running" or integration variable,
+%   indexed by ts(j).
+
+% Algorithm is:
+% For each ts(i)
+%       total_area = 0
+%       For each ts(j)
+%           area = compute integral  between ts(j), ts(j-1) using
+%           trapezoid method.
+%           total_area = total_area + area
+%       End
+% End
+
+
+n = size(X,1);
+res = zeros(n,1);
+for i=1: n
+    total_area = 0;
+    for j=2: i
+        f_value_j_1 = Y(i, j-1);
+        f_value_j = Y(i, j);
+        dX = X(j) - X(j-1);
+        area = dX * ((f_value_j_1 + f_value_j)/2);
+        total_area = total_area + area;
+    end
+    res(i) = total_area;
+end
+end
+
+%% compute values of the function parametrized by "alpha" 
+function Y=get_alpha_function_values(ts, cp, alpha)
+% Description
+% Compute the product between the exponential function
+% parametrized by alpha with concentration Cp over time.
+%
+% Parameters:
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% ts: time in minutes when Cp data is sampled.
+% Cp: FDG concentration in arterial system.
+% alpha: one of the computed values in equation (3) of Brooks paper.
+% Output:
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Y: product obetween exp(-alpha * (t-t') and Cp(t').
+
+n = size(ts,1);
+Y = zeros(2, n);
+for i=1: n
+    for j=2: i
+         Y(i, j) = alpha_function(i, j, alpha, cp, ts);
+    end
+end
+end
+
+%% alpha_function
+function f_value = alpha_function(t1, t2, alpha, cp, ts)
+% Description
+% Compute the value of exp(-alpha * (t1-t2)) * Cp(t2)
+% Inputs:
+%   t1: index of time of sampling.
+%   t2: index of "running "or integration time variable .
+%   alpha: one of the computed values in equation (3) of Brooks paper.
+%   Cp: FDG concentration in arterial system.
+%   ts: time in minutes when Cp data is sampled.
+% Output:
+%   exp(-alpha * (ts(t1)-ts(t2))) * Cp(t2)
+diff_t = ts(t1) - ts(t2);
+exp_f = exp(-alpha * diff_t);
+f_value = exp_f * cp(t2);
+end
+
+%% import_data
+function project1extendeddata = import_data(workbookFile, sheetName, dataLines)
+% import_data Import data from a spreadsheet
+%  data = import_data(FILE) reads data from the first
+%  worksheet in the Microsoft Excel spreadsheet file named workbookFile.
+%  Returns the data as a table.
+%
+%  data = import_data(FILE, SHEET) reads from the
+%  specified worksheet.
+%
+%  data = import_data(FILE, SHEET, DATALINES) reads from
+%  the specified worksheet for the specified row interval(s). Specify
+%  DATALINES as a positive scalar integer or a N-by-2 array of positive
+%  scalar integers for dis-contiguous row intervals.
+%
+%  Example:
+%  data = importfile("./project_1_extended_data.xlsx", "Sheet1", [1, 71]);
+%
+
+% Input handling
+
+% If no sheet is specified, read first sheet
+if nargin == 1 || isempty(sheetName)
+    sheetName = 1;
+end
+
+% If row start and end points are not specified, define defaults
+if nargin <= 2
+    dataLines = [1, 71];
+end
+
+% Set up the Import Options and import the data
+opts = spreadsheetImportOptions("NumVariables", 3);
+
+% Specify sheet and range
+opts.Sheet = sheetName;
+opts.DataRange = "A" + dataLines(1, 1) + ":C" + dataLines(1, 2);
+
+% Specify column names and types
+opts.VariableNames = ["VarName1", "Time", "Concentration"];
+opts.VariableTypes = ["double", "double", "double"];
+
+% Import the data
+project1extendeddata = readtable(workbookFile, opts, "UseExcel", false);
+
+for idx = 2:size(dataLines, 1)
+    opts.DataRange = "A" + dataLines(idx, 1) + ":C" + dataLines(idx, 2);
+    tb = readtable(workbookFile, opts, "UseExcel", false);
+    project1extendeddata = [project1extendeddata; tb]; %#ok<AGROW>
+end
+
+end
+##### SOURCE END #####
+--></body></html>
