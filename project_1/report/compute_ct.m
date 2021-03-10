@@ -147,10 +147,10 @@ n = size(ts,1);
 conv_res = zeros(n,1);
 for i=1: n
     total_area = 0;
-    for j=2: i
-        f_value_j_1 = alpha_function(i, j-1, alpha, cp, ts);
-        f_value_j = alpha_function(i, j, alpha, cp, ts);
-        dt = ts(j) - ts(j-1);
+    for j=1: i-1
+        f_value_j_1 = alpha_function(i, j, alpha, cp, ts);
+        f_value_j = alpha_function(i, j+1, alpha, cp, ts);
+        dt = ts(j+1) - ts(j);
         area = dt * ((f_value_j_1 + f_value_j)/2);
         total_area = total_area + area;
     end
