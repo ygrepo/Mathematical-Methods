@@ -4,6 +4,7 @@ clear all;
 
 
 X = 0:2;
+X = linspace(0, 2, 100);
 X = X';
 fun = @(x)x^2;
 Y = get_Y(fun, X);
