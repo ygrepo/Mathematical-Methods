@@ -1,0 +1,185 @@
+\documentclass[12pt,twoside]{article}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz,graphicx,amsmath,amsfonts,amscd,amssymb,bm,cite,epsfig,epsf,url}
+\usepackage[hang,flushmargin]{footmisc}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue]{hyperref}
+\usepackage{amsthm,multirow,wasysym,appendix}
+\usepackage{array,subcaption} 
+% \usepackage[small,bf]{caption}
+\usepackage{bbm}
+\usepackage{pgfplots}
+\usetikzlibrary{spy}
+\usepgfplotslibrary{external}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{arrows,automata}
+\usepackage{thmtools}
+\usepackage{blkarray} 
+\usepackage{textcomp}
+\usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+
+\usepackage{times}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{color}
+\usepackage{graphics}
+\usepackage{enumerate}
+\usepackage{amstext}
+\usepackage{blkarray}
+\usepackage{url}
+\usepackage{epsfig}
+\usepackage{bm}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\usepackage{textcomp}
+\usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+\usepackage{mathtools}
+\usepackage{minted}
+
+\input{macros}
+\title{Notes Modules 1-7}
+
+\begin{document}
+%\maketitle
+
+\section{Fourier Series}
+
+Fourier series representation
+
+\[
+	f(x) = \frac{a_0}{2} + \sum_{r=1}^{\infty} \bigg [  a_r \cos ( \frac{2 \pi r x}{L} ) + b_r \sin ( \frac{2 \pi r x}{L} ) \bigg ]
+\]
+with
+\ba
+	a_0 &= \frac{2}{L} \int_{x_0}^{x_0+L} f(x) dx \\
+	a_r &= \frac{2}{L} \int_{x_0}^{x_0+L} f(x) \cos \bigg (  \frac{2 \pi r x}{L}  \bigg) dx \\
+	b_r &= \frac{2}{L} \int_{x_0}^{x_0+L} f(x) \sin \bigg (  \frac{2 \pi r x}{L}  \bigg) dx \\
+\ea
+For an even function, we have:
+\[
+	a_0 = \frac{4}{T} \int_{0}^{\frac{L}{2}} f(x) dx \;\; a_r = \frac{4}{T} \int_{0}^{\frac{L}{2}} f(x)   \cos \bigg (  \frac{2 \pi r x}{L}  \bigg)  dx \;\; b_r = 0
+\]
+For an odd function, we have:
+\[
+	a_0 = 0 \;\; b_r = \frac{4}{T} \int_{0}^{\frac{L}{2}} f(x)   \sin \bigg (  \frac{2 \pi r x}{L}  \bigg)  dx
+\]
+
+Complex Fourier series
+
+\[
+	f(x) = \sum_{r=-\infty}^{r=\infty} c_r e^{ \frac{i 2 \pi r x} {L}}
+\]
+where 
+\ba
+	c_r &= \frac{1}{L} \int_{x_0}^{x_0 + L} f(x) e^{- \frac{i 2 \pi r x} {L}} dx \\
+	c_r &= \frac{1}{2} (a_r - i b_r)
+\ea
+Parseval Identity
+
+\[
+	\frac{1}{L}  \int_{x_0}^{x_0 + L} |f(x)|^2 dx = \sum_{r=-\infty}^{r=\infty} |c_r|^2 
+\]
+\section{Fourier transforms}
+
+Fourier transform of $f(t)$:
+\[	
+	\tilde{f}(w) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} f(t) e^{-i w t} \, dt
+\]
+And its inverse defined by:
+\[	
+	f(t) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \tilde{f}(w) e^{i w t} \, dw
+\]
+
+\section{The Dirac $\delta$-Function}
+
+$\delta(t) = 0$ for $t = 0$.
+Provided the range of integration includes the point $t=a$:
+\[
+	\int f(t) \delta(t-a) \, dt = f(a)
+\] otherwise the integral equals $0$.
+This leads to:
+
+\ba
+	\int_{-\infty}^{\infty} \delta(t) f(t) dt &= f(0) \\
+	\int_{-a}^b \delta(t) \, dt &= 1  ~ \text{ for all } a, b > 0 \\
+	\int \delta(t-a) \, dt &= 1 ~ \text{if range of integration includes a}\\	
+	\delta(t) &= \delta(-t) \\
+	\delta(b t) &= \frac{1}{|b|} \delta(t) \\
+	t \delta(t) &= 0 \\
+	\delta(h(t)) &= \sum_i \frac{\delta(t - t_i)} {|h'(t_i)|} ~ \text{where the $t_i$ are the zeros of $h(t)$}
+\ea
+
+The derivatives $\delta^n(t)$ are defined by: 
+\[
+	\int_{-\infty}^{\infty} f(t) \delta^n (t) \, dt = (-1)^n f^n (0)
+\]
+
+
+Integral representation:
+\[
+\delta(t - u) = \frac{1}{2 \pi} \int_{-\infty}^{\infty}  e^{i w (t - u)} \, dw
+\]
+
+Dirac function's relation to the sinc function:
+\[
+	\delta(t) = \lim_{\Omega \rightarrow \infty} \frac{ \sin{(\Omega t) }} { \pi t}
+\]
+
+\section{The Heaviside function}
+
+\[
+ H(t) = 
+  \begin{cases} 
+   1 & \text{if } t > 0 \\
+   0       & \text{if } t < 0
+  \end{cases}
+\]
+
+$H'(t) = \delta(t)$.
+
+
+\section{Properties of Fourier transforms}
+
+\bi
+	\item $L \{ {t^n} \} = \frac{n!}{s^{n+1}}$
+	\item $F \{e^{\alpha t} f(t)  \} =  \tilde{f}(w + \alpha t)$
+	\item $F \{ f(t + a) \} = e^{i w a} \tilde{f}(w)$
+	\item $F \{ f(a t) \} = \frac{1}{a} \tilde{f}(\frac{w}{a})$	
+	\item $\ml{F} \big[ f^n(t) \big] = (i)^n w^n \tilde{f}(w)$
+	\item $\ml{F} \big[ \int^t f(s) ds \big] = \frac{1}{i w} \tilde{f(w)} + 2 \pi c \delta(w)$
+\ei
+
+The Fourier sine transform: $ \tilde{f_s}(w) = \sqrt{\frac{2}{\pi}} \int_0^\infty f(t) \sin(w t) dt$
+
+\section{Parseval's theorem}
+
+\[
+	\int_{-\infty}^{\infty} |f(x)|^2 \, dx = \int_{-\infty}^{\infty} |\tilde{f}(k)|^2 dk 
+\]
+
+\section{Laplace transform}
+By definition:
+\[
+	\bar{f}(s) = \int_{0}^{\infty} f(t) e^{-st} \, dt
+\]
+And
+\[
+	\ml{L} [t^n f(t)] = (-1)^n \frac{d^n \bar{f}(s)} {ds^n} %~ \text{for} n =1 ,2 ,3,...
+\]
+
+Laplace transform properties:
+\bi
+	\item $L \{ e^{a t} f(t)  \} = \bar{f} (s-a)$ or $L^{-1} \{ \bar{f} (s-a)\} = e^{a t} f(t) $
+	\item  $L \{ f(t-b) H(t-b) \} = e^{-b s} \bar{f} (s)$ or $(t-b) H(t-b) = L^{-1}\{e^{-bs} \bar{f}(s)\}$
+	\item $L\{f'(t)\} = -f(0) + s \tilde{f}(s)$
+	\item $L\{f''(t)\} = -s f(0) -f'(0) + s^2 \tilde{f}(s)$
+	\item $L\{ \int_0^t f(x) dx \} = \frac{1}{s} \tilde{f}(s)$
+\ei
+
+
+\end{document}
