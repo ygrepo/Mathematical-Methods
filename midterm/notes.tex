@@ -21,6 +21,7 @@
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{latexsym}
+\usepackage{commath}
 \usepackage{color}
 \usepackage{graphics}
 \usepackage{enumerate}
@@ -181,5 +182,140 @@ Laplace transform properties:
 	\item $L\{ \int_0^t f(x) dx \} = \frac{1}{s} \tilde{f}(s)$
 \ei
 
+\section{Convolution}
+
+\[
+	h(z) = \int_{-\infty}^{\infty} f(x) g(z-x) dx
+\]
+
+Fourier transform of a convolution: $\tilde{h}(k) = \sqrt{2\pi} \tilde{f}(k) \tilde{g}(k)$\\
+Laplace transform of a convolution: $\ml{L}\big[\int_0^t f(u) g(t-u) du \big] = \bar{f}(s) \bar{g}(s)$
+
+\section{Legendre Linear differential equations}
+
+\[
+	a_n (\alpha x + \beta)^n \frac{d^n \, y}{dx^n} + \cdots + a_1 (\alpha x + \beta) \frac{d \, y}{dx} + a_0 y = f(x)
+\]
+Change of variable: $\alpha x + \beta = e^t$ or $x=(e^t - \beta) / \alpha$ or $t=\ln(\alpha x + \beta)$.
+Relations:
+
+\bi
+	\item $(\alpha x + \beta)  \frac{dy}{dx} = \alpha \frac{dy}{dt}$
+	\item $(\alpha x + \beta)^2  \frac{d^2y}{dx^2} = \alpha^2 \frac{d}{dt} \bigg( \frac{d}{dt} - 1 \bigg) y$
+\ei
+
+\section{Variation of parameters}
+Used to find a complementary solution to the homogeneous equation: $y_p(x) = k_1(x) y_1(x) + k_2(x) y_2(x) + \cdots + k_n(x) y_n(x)$
+\ba
+	k'_1(x) y_1(x) + k'_2(x) y_2(x) + \cdots + k'_n(x) y_n(x) &= 0 \\
+	k'_1(x) y'_1(x) + k'_2(x) y'_2(x) + \cdots + k'_n(x) y'_n(x) &= 0 \\
+	\vdots \\
+	k'_1(x) y^{n-1}_1(x) + k'_2(x) y^{n-1}_2(x) + \cdots + k'_n(x) y^{n-1}_n(x) &= \frac{f(x)}{a_n(x)}
+\ea
+
+\section{Green function}
+Looking for a solution of a differential equation with some boundary conditions on some interval $(a,b)$, e.g. $y(a) = y(b) = 0$ of the form: $y(x) = \int_a^b G(x,z) f(z) dz$.
+\ba
+	\ml{L} y(x) &= \ml{L} \int_a^b G(x,z) f(z) dz = \int_a^b \ml{L}G(x,z) f(z) dz = f(x) = \int_a^b \delta(x-z) f(z) dz \\
+	\ml{L}G(x,z) &=  \delta(x-z) \\
+\ea
+
+Green's function properties for an nth-order linear ODE
+\bi
+\item Obeys the boundary conditions on $y(x)$: $G(a,z) = G(b, z) = 0$
+\item The derivatives of $G(x,z)$ w.r.t. $x$ up to order $n-2$ are continuous a $x = z$
+\item But the $n-1$th-order derivatives has a discontinuity of $\frac{1}{a_n}$ at this point.
+\ei
+  
+\section{Wronskian}
+Consider the linear ODE in standard form:  $y'' + p(x) y' + q(x) y = 0$.
+Two solutions $y_1(x)$ and $y_2(x)$ for the solution $y(x) = c_1 y_1(x) + c_2 y_2(x)$ of the differential homogeneous equation are independant if
+the Wronskian is non zero:
+\ba
+	W &= \begin{vmatrix} y_1(x) & y_2(x) \\  y'_1(x) & y'_2(x)  \end{vmatrix} \neq 0 \\
+	W &= C e^{- \int^x p(u) du} \\
+\ea
+
+\section{Singular point}
+
+$p(z)$ and $q(z)$ diverge at $z=z_0$, $z_0$ is a regular singular point if $(z-z_0) p(z)$ and $(z-z_0)^2 q(z)$ are both analytic.
+For $\pm \infty$, make the change of variable $z = \frac{1}{w}$ and investigate if $p(z)$ and $q(z)$ are defined at $w=0$.
+
+\section{Series solution of ODE at ordinary point}
+The second order ODE solution includes two arbitrary constants and the series solution method generates two linearly independent solutions.
+Solution can be represented as: $y(z) = \sum_{n=0}^\infty a_n z^n$
+\ba
+	y'(z) &=  \sum_{n=0}^\infty n a_n z^{n-1} =  \sum_{n=1}^\infty n a_n z^{n-1}  = \sum_{n=0}^\infty (n+1) a_{n+1} z^n\\
+	y''(z) &=  \sum_{n=0}^\infty n (n-1) a_n z^{n-2} =  \sum_{n=2}^\infty n (n-1) a_n z^{n-2}  = \sum_{n=0}^\infty (n+2) (n+1) a_{n+2} z^n \\
+\ea
+
+\section{Series solution of ODE at regular singular point}
+
+We look for a solution of the form: $y(z) = z^\sigma \sum_{n=0}^\infty a_n z^n$ where the $a_n$ and $\sigma$ are constants.
+
+\ba
+	y(z) &= \sum_{n=0}^\infty a_n z^{\sigma + n} \\
+	y'(z) &= \sum_{n=0}^\infty (\sigma + n) a_n z^{\sigma + n - 1} \\
+	y(z) &= \sum_{n=0}^\infty (\sigma + n-1) (\sigma + n) a_n z^{\sigma + n - 2} \\
+\ea
+Find the roots of the indicial equation $\sigma_1 \ge \sigma_2$:
+\bi
+	\item the indicial equation has two different roots where their difference is not an integer, find recurrence relation
+	\bi
+		\item calculation of $y(z, \sigma_2)$
+		\item second solution of the form: $y_2(z) = z^{\sigma_2} \sum_{n=0}^{\infty} a_n z^n$
+	\ei
+	\item double root: derivative or Wronskian method: 
+	\bi
+		\item calculation of $\bigg [ \frac{\partial y(z,\sigma)}{ \partial \sigma} \bigg ]_{\sigma=\sigma_1} \Rightarrow y_2(z) = y_1(z) \ln z +  z^{\sigma_1} \sum_{n=0}^{\infty} b_n z^n$
+		\item or Wronskian method and $y_2(z) = y_1(z) \int^z \frac{g(u)} {y_1^2(u)} du$ where $g(u) = \exp \big \{  - \int^u p(v) dv \big \}$
+	\ei
+	\item two roots where their difference is an integer: 
+	\bi
+		\item $\bigg [ \frac{\partial [ (\sigma - \sigma_2) y(z,\sigma) ]}{ \partial \sigma} \bigg ]_{\sigma=\sigma_2} \Rightarrow y_2(z) = c y_1(z) \ln z +  z^{\sigma_2} \sum_{n=0}^{\infty} b_n z^n $
+		\item or Wronskian method and $y_2(z) = y_1(z) \int^z \frac{g(u)} {y_1^2(u)} du$ where $g(u) = \exp \big \{  - \int^u p(v) dv \big \}$
+	\ei
+\ei
+
+\section{Series solution of an ODE at ordinary poit with arbitrary coefficient in its no-differential term}
+Polynomial solutions of ODEs
+\[
+	y'' -2 z y' + \lambda y = 0
+\]
+
+\section{Strum-Liouville differential equations}
+The standard form for a Strum-Liouville differential equation:
+\[
+	p(x) \frac{d^2y}{dx^2} + r(x) \frac{dy}{dx} + q(x) y + \lambda \rho(x) y = 0 \; r(x) = \frac{dp(x)}{dx}
+\]
+In case $r(x) \neq \frac{dp(x)}{dx}$, compute $F(x) = e^{\int^x \frac{r(u) -p'(u)}{p(u)}} du$ and multiple the differential equation by it.
+
+\section{Legendree Functions}
+
+Legendre's defining differential equation:
+\[
+	(1-x^2) y'' - 2 x y' + l (l+1) y = 0
+\]
+
+Solution of Legendre's differential equation:
+\[
+	y(x) = c_1 P_l(x) + c_2 Q_l(x)
+\]
+
+Rodrigues' formula:
+\[
+	p_l(x) = \frac{1}{l!2^l} \frac{d^l}{dx^l} (x^2-1)^l
+\]
+
+\section{Some results}
+
+\ba
+	\frac{1}{1-z} &= \sum_{n=0}^\infty z^n \\
+	\frac{z}{(1-z)^2} &= \sum_{n=0}^\infty n z^n \\
+	\sin z &=  \sum_{n=0}^\infty  \frac{(-1)^n}{(2n+1)!} z^{2n+1} \\
+	\cos z &=  \sum_{n=0}^\infty  \frac{(-1)^n}{(2n)!} z^{2n} \\
+\ea
 
 \end{document}
+
+
