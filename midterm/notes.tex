@@ -78,13 +78,21 @@ Complex Fourier series
 where 
 \ba
 	c_r &= \frac{1}{L} \int_{x_0}^{x_0 + L} f(x) e^{- \frac{i 2 \pi r x} {L}} dx \\
-	c_r &= \frac{1}{2} (a_r - i b_r)
+	c_r &= \frac{1}{2} (a_r - i b_r) \\
+	c_{-r} &= c_r^* \\
 \ea
 Parseval Identity
 
+if 
 \[
-	\frac{1}{L}  \int_{x_0}^{x_0 + L} |f(x)|^2 dx = \sum_{r=-\infty}^{r=\infty} |c_r|^2 
+	f(x) =  \sum_{r=-\infty}^{r=\infty} c_r e^{ \frac{i 2 \pi r x} {L}} ~ \text{and } g(x) =  \sum_{r=-\infty}^{r=\infty} \gamma_r e^{ \frac{i 2 \pi r x} {L}}
 \]
+then
+\ba
+	\frac{1}{L}  \int_{x_0}^{x_0 + L} f(x) g^*(x) dx = \sum_{r=-\infty}^{r=\infty} c_r \gamma^*_r \\
+	\frac{1}{L}  \int_{x_0}^{x_0 + L} |f(x)|^2 dx = \sum_{r=-\infty}^{r=\infty} |c_r|^2 
+\ea
+
 \section{Fourier transforms}
 
 Fourier transform of $f(t)$:
@@ -310,30 +318,12 @@ Rodrigues' formula:
 \section{Some results}
 
 \ba
-	L\{t H(t) \} &= e^{-s \cdot 0} \frac{1}{s^2} \\
+	L\{t H(t) \} &= e^{-s \cdot 0} \frac{1}{s^2} = \frac{1}{s^2}\\
 	L\{(t-a) H(t-a) \} &= e^{-as} \frac{1}{s^2} \\
 	\frac{1}{1-z} &= \sum_{n=0}^\infty z^n \\
 	\frac{z}{(1-z)^2} &= \sum_{n=0}^\infty n z^n \\
 	\sin z &=  \sum_{n=0}^\infty  \frac{(-1)^n}{(2n+1)!} z^{2n+1} \\
 	\cos z &=  \sum_{n=0}^\infty  \frac{(-1)^n}{(2n)!} z^{2n} \\
-\ea
-
-From 
-\[
-	\sum_{l=0}^\infty a_l [ b - l (l+1)] P_l(x) = f(x)
-\]
-\ba
-	\sum_{l=0}^\infty a_l [ b - l (l+1)] P_k(x) P_l(x) &= P_k(x) f(x) dx \\
-	\int_{-1}^1 \sum_{l=0}^\infty a_l [ b - l (l+1)] P_k(x) P_l(x) &=\int_{-1}^1 \ P_k(x) f(x) dx ~ \text{integrating each side}\\
-	\text{swap integral and infinite sum}\\
-	\sum_{l=0}^\infty a_l [ b - l (l+1)] \int_{-1}^1 P_k(x) P_l(x) &=\int_{-1}^1 \ P_k(x) f(x) dx \\
-\ea
-For each term in $l$, we apply orthogonalization and normalization property (see proof in example just before generating function chapter, for me page 346).
-Each term for which $l \neq k$ the term is zero, which leaves the only term for which $l=k$:
-\ba
-	a_k  [ b - l (l+1)]   \int_{-1}^1 P_k(x) P_k(x) &=\int_{-1}^1 \ P_k(x) f(x) dx \\
-	a_k  [ b - l (l+1)]   \frac{2}{2k+1} &= \int_{-1}^1 \ P_k(x) f(x) dx \\
-	a_k &=  \frac{2k+1}{2 (b - l (l+1))} \int_{-1}^1 \ P_k(x) f(x) dx \\
 \ea
 
 \end{document}
