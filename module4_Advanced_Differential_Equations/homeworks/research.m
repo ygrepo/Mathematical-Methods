@@ -202,3 +202,11 @@ Dy = diff(y,t);
 cond = [y(0)==1, Dy(0) == 0];
 S = dsolve(eqn, cond);
 pretty(S)
+
+%%
+clc
+clear all
+syms y(t) t
+Dy = diff(y)
+eqn = diff(y,2) + 4*diff(y) - 5*y;
+S = dsolve(eqn,y(0)==0,Dy(0)==1)
