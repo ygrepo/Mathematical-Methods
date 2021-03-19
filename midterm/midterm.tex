@@ -248,6 +248,75 @@ Therefore
 			&=  	e^{-t} + t - 1 \\
 \ea
 
+\section*{Question 4}
+\[
+	y'' + 4 y' - 5 y= \delta(t-1) \: y(0) = 0 \: y'(0) = 3
+\]
+
+\be
+\item [a.]
+Taking the Laplace transform on both sides of the equation gives:
+\ba
+	s^2 \tilde{y}(s) -s y(0) - y'(0) + 4 [ s  \tilde{y}(s) - y(0) ] -5  \tilde{y}(s) &= e^{-s} \\
+	s^2 \tilde{y}(s) -s \cdot 0 -3 + 4 [ s  \tilde{y}(s) - 0] -5  \tilde{y}(s) &= e^{-s} \\
+	s^2 \tilde{y}(s) + 4 s  \tilde{y}(s) -5  \tilde{y}(s) &= e^{-s} + 3
+\ea
+Combining the terms: $ (s^2 + 4 s  -5) \tilde{y}(s) = 3 +  e^{-s}$.
+Therefore
+\[
+	  \tilde{y}(s) = \frac{3 + e^{-s}} {s^2 + 4 s  -5}
+\]
+
+\item [b.]
+The roots of $s^2 + 4 s  -5 = 0$ are $-5$ and $1$, so we can rewrite $\tilde{y}(s)$ as $ \tilde{y}(s) = \frac{3}{(s-1) (s+5)} + \frac{e^{-s}} {(s-1) (s+5)}$
+Computing the fraction expansion:
+\ba
+	 \frac{1}{(s-1) (s+5)}	&= \frac{A}{s-1} + \frac{B}{s+5} \\
+	 				&= \frac{(A+B) s + 5A - B}{(s-1) (s+5)} \\
+\ea
+Equating the powers of $s$ on each side of the previous equation:
+\ba
+	s^1: A + B &= 0 \\
+	s^0 : 5 A - B &= 1 \\
+\ea
+gives $A=\frac{1}{6}$ and $B=-\frac{1}{6}$.
+Thus
+\[
+	\frac{1}{(s-1) (s+5)} = \frac{1}{6} \bigg (\frac{1}{s-1} - \frac{1}{s+5} \bigg )
+\]
+
+So
+\ba
+	\tilde{y}(s)	&= 3 \bigg [  \frac{1}{6} (\frac{1}{s-1} - \frac{1}{s+5})  \bigg ] +  \frac{1}{6} (\frac{e^{-s}}{s-1} - \frac{e^{-s}}{s+5})  \\
+			&= \frac{1}{2}  (\frac{1}{s-1} - \frac{1}{s+5}) +  \frac{1}{6} (\frac{e^{-s}}{s-1} - \frac{e^{-s}}{s+5})  \\
+\ea
+
+\item [c.]
+
+$y(t) = L^{-1} \{ \tilde{y}(s)	\}$ and from part b:
+
+
+\[
+	y(t) = \frac{1}{2} \bigg [ L^{-1} \{ \frac{1}{s-1} \} - L^{-1} \{ \frac{1}{s+5} \}   \bigg ] +  \frac{1}{6}  \bigg  [ L^{-1} \{ \frac{e^{-s}}{s-1} \} - L^{-1} \{ \frac{e^{-s}}{s+5} \}   \bigg ] 
+\]
+ $ L^{-1} \{ \frac{1}{s-1} \} = e^t$, $ L^{-1} \{ \frac{1}{s+5}\} = e^{-5t}$, and using the shift theorem:
+ \[
+ 	L\{ f(t-t_0) H(t-t_0) \} = e^{-st_0} F(s) \: \:  f(t-t_0) H(t-t_0)= L^{-1} \{ e^{-st_0} F(s) \}
+ \]
+So for $t_0=1$
+\ba
+	 L^{-1} \{ \frac{e^{-s}}{s-1} \}	&= e^{(t-1)} H(t-1) \\
+	 L^{-1} \{ \frac{e^{-s}}{s+5} \}	&= e^{-5 (t-1)} H(t-1) \\
+\ea
+Plugging back these into $y(t)$ yields:
+\ba
+	y(t)	&= \frac{1}{2} \bigg [ e^t - e^{-5t}  \bigg ] +  \frac{1}{6}  \bigg  [  e^{(t-1)} H(t-1) -  e^{-5 (t-1)} H(t-1)  \bigg ] \\
+		&= \frac{1}{2} \bigg [ e^t - e^{-5t}  \bigg ] +  \frac{1}{6}  \bigg (  e^{(t-1)} -  e^{-5 (t-1)}  \bigg ) H(t-1)  \\
+		&= \frac{e^t}{2}   \bigg (  1 + \frac{1}{3e} H(t-1)  \bigg ) - \frac{e^{-5t}}{2} (1 + \frac{1}{3 } e^5 H(t-1)  \bigg ) \\
+\ea
+
+\ee
+
 \section*{Question 7}
 \[
 	x^2 \frac{d^2 y}{dx^2} + x \frac{dy}{d} - y = x \, , y(e) = 0 \, , y'(e) = 2
