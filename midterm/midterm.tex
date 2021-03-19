@@ -164,6 +164,90 @@ Therefore
 The Fourier transform of $f(t)$ as $\tau  \rightarrow 0$ is the Fourier transform of a $\delta$-function as we can expect as we "transform" the rectangular function $f(t)$ to a Dirac impulse.
 \ee
 
+\section*{Question 3}
+
+\be
+
+\item [a.]
+By definition, the Laplace transform of $g(t) = \sin(5t)$ is:
+\[
+	\bar{g}(s) = L\{g(t)\} = \int_0^\infty \sin(5t) e^{-st} dt = \lim_{L  \rightarrow \infty}  \int_0^L \sin(5t) e^{-st} dt
+\]
+
+First compute $\int e^{-st} \sin at \, dt$, using integration by parts with $u=\sin at$, $u' = a \cos at$, $v'=e^{-st}$, $v=-\frac{1}{s} e^{-st}$:
+\begin{equation}
+ \int e^{-st} \sin(at) \, dt = -\frac{1}{s} e^{-st} \sin(at) + \frac{a}{s} \int e^{-st} \cos(at) dt 
+\end{equation}
+
+Next compute $\int e^{-st} \cos(at) \, dt$, again, using integration by parts with $u=\cos at$, $u' = -a \sin at$, $v'=e^{-st}$, $v=-\frac{1}{s} e^{-st}$:
+\[
+	\int e^{-st} \cos(at) \, dt =  -\frac{1}{s} e^{-st} \cos(at) - \frac{a}{s} \int e^{-st} \sin(at) \, dt 
+\]
+Substituting into (1):
+\ba
+	 \int e^{-st} \sin(at) \, dt 	&= -\frac{1}{s} e^{-st} \sin(at) + \frac{a}{s} \bigg (  -\frac{1}{s} e^{-st} \cos(at) - \frac{a}{s} \int e^{-st} \sin(at) \, dt \bigg ) \\
+	 					&= -\frac{1}{s} e^{-st} \sin(at) - \frac{a}{s^2} e^{-st} \cos(at) + \frac{a}{s^2} \int e^{-st} \sin(at) \, dt \\
+\ea
+thus
+\[
+	(1 + \frac{a^2}{s^2})  \int e^{-st} \sin(at) \, dt = - e^{-st} ( \frac{1}{s} \sin(at) + \frac{a}{s^2} \cos(at))
+\]
+Evaluating at $t=0$ and $t \rightarrow \infty$:
+\ba
+	(1 + \frac{a^2}{s^2}) L\{ \sin(at)\}	&= \lim_{L \rightarrow \infty} \bigg [ - e^{-st} ( \frac{1}{s} \sin(at) + \frac{a}{s^2} \cos(at)) \bigg ]_0^L \\
+							&= 0 - (-1 (\frac{1}{s} \cdot 0 + \frac{a}{s^2} \cdot 1)) \\
+							&= \frac{a}{s^2} 
+\ea
+Therefore
+\ba
+	L\{ \sin(at)\}	&= \frac{a}{s^2}  (1 + \frac{a^2}{s^2})^{-1} \\
+				&= \frac{a}{a^2 + s^2} \\
+\ea
+Set $a=5$ and 
+\[
+	L\{g(t)\} = L\{ \sin(5t)\} = \frac{5}{s^2 + 25}
+\]
+
+\item [b.]
+ From the book, one property of the Laplace transform is $L[t^n f(t)] = (-1)^n \frac{d^n \bar{f}(s)}{ds^n}$ for $n=1,2,3,\cdots$,
+take $n=1$, $L[t  f(t)] = - \frac{d\bar{f}(s)}{ds}$.
+Set $f(t) = t \sin(5t)$ and from part b, $L\{ \sin(5t)\} = \frac{5}{s^2 + 25}$, therefore:
+\ba
+	L\{t \sin(5t)\}	&=  - \frac{d}{ds} \bigg( \frac{5}{s^2 + 25} \bigg ) \\
+				&= -5 \frac{d}{ds} \bigg( \frac{1}{s^2 + 25} \bigg ) \\
+				&= -5 \bigg ( \frac{-2s} {(s^2+25)^2} \bigg ) \\
+				&= \frac{10 s}  {(s^2+25)^2} \\
+\ea
+
+\item [c.]
+By definition $(f*g)(t) = \int_0^t \tau e^{-(t-\tau)} d\tau = e^{-t} \int_0^t \tau e^\tau d\tau$. Using integration by parts:
+\ba
+	\int_0^t \tau e^\tau d\tau 	&=  [\tau e^\tau]_0^t - \int_0^t e^\tau d\tau \\
+						&= t e^t -  [e^\tau]_0^t  \\
+						&= t e^t - (e^t - 1) \\
+						&= e^t (t-1) + 1
+\ea
+And 
+\[
+	(f*g)(t) = e^{-t} \bigg[  e^{-t} (t-1) + 1 \bigg ] = e^{-t} + t - 1
+\]
+
+\ee
+
+From $L\{(f*g)(t)\} = \bar{f}(s) \cdot \bar{g}(s)$, we have:
+\ba
+	\bar{f}(s) \cdot \bar{g}(s)	&=	\frac{1}{s^2} \cdot \frac{1}{s+1} \\
+						&= 	\frac{1-s}{s^2+1} + \frac{1}{s+1} \\
+						&= 	\frac{1}{s^2} - \frac{1}{s} + \frac{1}{s+1} \\
+\ea
+Therefore
+\ba
+	(f*g)(t) 	&=	L^{-1}\{L\{(f*g)(t)\}\} = L^{-1} \{ \frac{1}{s^2} - \frac{1}{s} + \frac{1}{s+1} \} \\
+			&=	L^{-1}\{\frac{1}{s^2} \} - L^{-1}\{\ \frac{1}{s} \}  + L^{-1}\{\ \frac{1}{s+1} \} \\
+			&= 	t -1 + e^{-t} \\
+			&=  	e^{-t} + t - 1 \\
+\ea
+
 \section*{Question 7}
 \[
 	x^2 \frac{d^2 y}{dx^2} + x \frac{dy}{d} - y = x \, , y(e) = 0 \, , y'(e) = 2
@@ -179,7 +263,7 @@ Then
 \ea
 And since this is a Legendre ODE with $\alpha=1$ and $\beta=0$, we can use the expression for the second derivative 
 $(\alpha x + \beta)^2 \frac{d^2y}{dx^2} = \alpha^2 \frac{d}{d t} [\frac{d}{dt} - 1] y$.
-With $\alpha=1$ and $\beta=0$, we have: $ \frac{d^2y}{dx^2} =  \frac{d^2y}{ t^2} - \frac{dy}{dt}$. \\ \hfill \break
+With $\alpha=1$ and $\beta=0$, we have: $ \frac{d^2y}{dx^2} =  \frac{d^2y}{dt^2} - \frac{dy}{dt}$. \\ \hfill \break
 
 Substitute into the above equation yields:
 \ba
