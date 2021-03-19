@@ -67,24 +67,7 @@ pretty(S)
 clc
 clear all
 syms x y(x)
-eqn = x^2 * diff(y,2) +x * diff(y,1) - y == x;
+eqn = diff(y,2) - y == exp(t);
 S = dsolve(eqn);
 pretty(S)
 
-
-%%
-clc
-clear all
-syms x y(x)
-eqn = x^2 * diff(y,2) + x * diff(y,1) - y == x;
-Dy = diff(y,x);
-cond = [y(exp(1))==0, Dy(exp(1)) == 2];
-S = dsolve(eqn, cond)
-pretty(S)
-
-%%
-clc
-clear all
-syms x y
-y = 1/4 * x - (3/4) * exp(2) * 1/x + (x * log(x))/2
-simplify(y)
