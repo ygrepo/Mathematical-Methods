@@ -459,8 +459,35 @@ when t goes to infinity.
 \ee
 
 \section*{Question 6}
+\[
+	L_0(x) = 1 ~ \text{ and } L_n(x) = \frac{e^x}{n!} \frac{d^n}{dx^n}(x^n e^{-x}) ~ n = 1,2,\cdots
+\]
+
 \be
 \item [a.]
+Applying the recurrence relationship
+
+$n=1$
+\ba
+	L_1(x) 				&= \frac{e^x}{1!}  \frac{d}{dx} (x e^{-x}) \\
+	 \frac{d}{dx} (x e^{-x})	&= e^{-x} + x (-1)  e^{-x}  =  e^{-x} (1-x) \\
+	L_1(x) 				&= e^x e^{-x} (1-x)  \\	 
+	L_1(x) 				&=1-x \\	 
+\ea
+
+$n=2$
+\ba
+	L_2(x) 					&= \frac{e^x}{2!}  \frac{d^2}{dx^2} (x^2 e^{-x}) \\
+	\frac{d}{dx} (x^2 e^{-x})		&= \frac{d}{dx}  (x (x e^{-x}))\\
+							&= 1 (x e^{-x}) + x e^{-x} (1-x) \\
+							&= x e^{-x} (2-x) \\
+	\frac{d^2}{dx^2} (x^2 e^{-x})	&= \frac{d}{dx}(x e^{-x}) (2-x) + x e^{-x} \frac{d}{dx}  (2-x) \\
+							&= e^{-x} (1-x) (2-x) + x e^{-x} (-1) \\
+							&= e^{-x} [(1-x) (2-x) - x ] \\
+							&=  e^{-x} (x^2 -4 x + 2) \\
+	L_2(x) 					&= \frac{e^x}{2 \,1} e^{-x}  (x^2 -4 x + 2) \\
+							&= 1 - 2 x + \frac{x^2}{2} \\							
+\ea
 
 \ee
 
