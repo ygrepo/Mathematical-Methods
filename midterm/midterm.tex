@@ -510,6 +510,43 @@ $n=3$
 							&= 1 -3x + \frac{3x^2}{2} - \frac{x^3}{6} \\
 \ea
 
+Show that the Laguerre polynomials are orthogonal on the positive axis ($0 \le x < \infty$) w.r.t. the weight function $e^{-x}$.
+We want to show
+\[
+	\int_0^\infty L_n(x) L_k(x) e^{-x} dx = 0 ~ \text{ if } n \neq k
+\]
+From the expression of the Laguerre polynomial, $L_n(x) = \frac{e^x}{n!} \frac{d^n}{dx^n}(x^n e^{-x})$, 
+a Laguerre polynomial $L_n(x)$ is a polynomial of degree $n$. Without loss of generality, let assume
+in the previous equation that $k<n$. By multiplying two polynomials of degree $M$ and $N$, the result is a polynomial of degree at most $M + N$.
+Therefore to prove orthogonality, suffices to prove the following equation:
+\[
+	\int_0^\infty  e^{-x} x^k L_n(x) dx = 0 ~ \text{ for all } k<n
+\]
+First we show that
+\[
+	\int_0^\infty   \frac{d^n}{dx^n} (x^m  e^{-x}) = 0 ~ \text{ for } m < n
+\]
+
+We are applying $n$th derivative rules:
+\ba
+	 \frac{d^n}{dx^n} (x^m  e^{-x}) 	&= 	\frac{d^m}{dx^m} (x^m  e^{-x})  ~ \text{ terms with derivatives greater than m are } 0\\
+	 						&=	\sum_{r=0}^m C_r^m \frac{d^r}{dx^r} x^m  \frac{d^{m-r}}{dx^{m-r}} e^{-x} \\
+							&=	\sum_{r=0}^m \frac{m!}{r! (m-r)!} \frac{m!}{(m-r)!} x^{m-r} (-1)^{m-r}  e^{-x} \\
+\ea
+reindexing with $l=m-r$, we obtain
+\[
+	 \frac{d^n}{dx^n} (x^m  e^{-x}) 	= 	\sum_{l=0}^m (-1)^l \frac{(m!)^2}{(l!)^2 (m-l)!} x^l e^{-x}
+\]
+
+Next
+\[
+	\int_0^\infty  \frac{d^n}{dx^n} (x^m  e^{-x}) 	= 	\sum_{l=0}^m (-1)^l \frac{(m!)^2}{(l!)^2 (m-l)!}  \int_0^\infty x^l e^{-x} dx
+\]
+Integration by parts l times gives:
+\[
+	\int_0^\infty x^l e^{-x} dx = (-1)^l l! \int_0^\infty e^{-x} dx =  (-1)^l l! [e^{-x}]_0^\infty = 0
+\]
+
 
 \section*{Question 7}
 \[
