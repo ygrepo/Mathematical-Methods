@@ -466,7 +466,7 @@ when t goes to infinity.
 \be
 \item [a.]
 Applying the recurrence relationship
-
+\newpage
 $n=1$
 \ba
 	L_1(x) 				&= \frac{e^x}{1!}  \frac{d}{dx} (x e^{-x}) \\
@@ -488,8 +488,31 @@ $n=2$
 	L_2(x) 					&= \frac{e^x}{2 \,1} e^{-x}  (x^2 -4 x + 2) \\
 							&= 1 - 2 x + \frac{x^2}{2} \\							
 \ea
+\newpage
+$n=3$
+\ba
+	L_3(x) 					&= \frac{e^x}{3!}  \frac{d^3}{dx^3} (x^3 e^{-x}) \\
+	\frac{d}{dx} (x^3 e^{-x})		&= \frac{d}{dx}  (x (x^2 e^{-x}))\\
+							&= 1 (x^2 e^{-x}) + x x e^{-x} (2-x) \\
+							&= x^2  e^{-x} (3-x) \\
+	\frac{d^2}{dx^2} (x^3 e^{-x})	&= \frac{d}{dx} \big( \frac{d}{dx}	(x^3 e^{-x}) \big )\\	
+							&= \frac{d}{dx} \big ( x^2  e^{-x} (3-x) \big ) \\ 	
+							&= \frac{d}{dx}  (x^2  e^{-x}) (3-x) +  ( x^2  e^{-x}) \frac{d}{dx} (3-x) \\ 	
+							&=  x e^{-x} (2-x) (3-x) +  ( x^2  e^{-x}) (-1) \\	
+							&=  x e^{-x} [ (2-x) (3-x) - x ] \\
+							&=   x e^{-x} (x^2 -6 x + 6)\\	
+	\frac{d^3}{dx^3} (x^3 e^{-x})	&= \frac{d}{dx} \big( \frac{d^2}{dx^2} (x^3 e^{-x}) \big )\\							
+							&= \frac{d}{dx} \big( x e^{-x} (x^2 -6 x + 6)  \big )\\
+							&=  \frac{d}{dx}  (x e^{-x}) (x^2 -6 x + 6) + x e^{-x}  \frac{d}{dx} (x^2 -6 x + 6) \\
+							&= e^{-x} (1-x)  (x^2 -6 x + 6) + x e^{-x}  (2x-6) \\
+							&= e^{-x}  (x^2-6x + 6 - x^3 + 6x^2 -6 x + 2 x^2 -6 x) \\
+							&= e^{-x}  (-x^3 + 9 x^2 -18 x + 6)\\
+	L_3(x)					&= \frac{e^x}{6}  e^{-x}  (-x^3 + 9 x^2 -18 x + 6)\\
+							&= 1 -3x + \frac{3x^2}{2} - \frac{x^3}{6} \\
+\ea
 
 \ee
+
 
 \section*{Question 7}
 \[
