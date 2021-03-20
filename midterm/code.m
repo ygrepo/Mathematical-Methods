@@ -11,7 +11,7 @@ S = dsolve(eqn,y(0)==0,Dy(0)==1)
 clc
 clear all
 syms s
-M = [s+20 -10 -10; 10 -(s+20) 10; 10 10 -(s+20)];
+M = [s+20 20 -10; 10 0 10; 10 10 -(s+20)];
 B = det(M);
 simplify(B)
 
@@ -88,3 +88,28 @@ clear all
 syms x y
 y = 1/4 * x - (3/4) * exp(2) * 1/x + (x * log(x))/2
 simplify(y)
+
+%%
+clc
+clear all
+syms
+syms x y z s
+eqn1 = (s+20)*x -10 * y -10 * z == 20;
+eqn2 = 10 * x - (s+20) * y +10 * z == 0;
+eqn3 = 10 * x + 10 * y - (s+20)  * z == 0;
+[A,B] = equationsToMatrix([eqn1, eqn2, eqn3], [x, y, z])
+X = linsolve(A,B)
+
+
+%%
+clc
+clear all
+syms x y(x)
+eqn = x^2 * diff(y,2) + x * diff(y,2) - y == x;
+Dy = diff(y,x);
+cond = [y(exp(1))==0, Dy(exp(1)) == 2];
+S = dsolve(eqn, cond);
+pretty(S)
+
+
+

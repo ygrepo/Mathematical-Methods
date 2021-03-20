@@ -58,7 +58,7 @@ Student: Yves Greatti\\\
 
 \be
 \item [a.]
-Graph of the function attached as a separate pdf.
+Graph of the function attached in a separate pdf.
 
 \item [b.]
 Since we have made the function $f(x)$ even using an even extension, all the $b_k$ coefficients in its Fourier series are zero.
@@ -114,7 +114,7 @@ Therefore
 \section*{Question 2}
 \be 
 \item [a.]
-Graph of the function attached as a separate pdf.
+Graph of the function attached in a separate pdf.
 
 \item [b.]
 \[
@@ -161,7 +161,8 @@ Therefore
 \]
 
 \item [e.]
-The Fourier transform of $f(t)$ as $\tau  \rightarrow 0$ is the Fourier transform of a $\delta$-function as we can expect as we "transform" the rectangular function $f(t)$ to a Dirac impulse.
+The Fourier transform of $f(t)$ as $\tau  \rightarrow 0$ is the Fourier transform of a $\delta$-function as we can expect since 
+as   $\tau  \rightarrow 0$  the rectangular function $f(t)$  $\rightarrow$ a  $\delta$-function.
 \ee
 
 \section*{Question 3}
@@ -314,6 +315,7 @@ Plugging back these into $y(t)$ yields:
 	y(t)	&= \frac{1}{2} \bigg [ e^t - e^{-5t}  \bigg ] +  \frac{1}{6}  \bigg  [  e^{(t-1)} H(t-1) -  e^{-5 (t-1)} H(t-1)  \bigg ] \\
 		&= \frac{1}{2} \bigg [ e^t - e^{-5t}  \bigg ] +  \frac{1}{6}  \bigg (  e^{(t-1)} -  e^{-5 (t-1)}  \bigg ) H(t-1)  \\
 		&= \frac{e^t}{2}   \bigg (  1 + \frac{1}{3e} H(t-1)  \bigg ) - \frac{e^{-5t}}{2} (1 + \frac{1}{3 } e^5 H(t-1)  \bigg ) \\
+		&= \frac{1}{2} (e^t-e^{-5t}) + \frac{1}{6} (e^{t-1}-e^{-5(t-1)})  H(t-1) \\
 \ea
 
 \ee
@@ -455,7 +457,7 @@ From part c:
 
 \item [e.]
 $\lim_{t \rightarrow \infty} e^{-30t} = 0$ therefore as $t \rightarrow \infty$, $\lim_{t \rightarrow \infty}  A(t) = \lim_{t \rightarrow \infty}  B(t)  = \lim_{t \rightarrow \infty}  C(t) = \frac{20}{3}$ which is the equilibrium state of this system
-when t goes to infinity.
+when t goes to infinity. The water has spread out uniformly among the three reservoirs.
 
 \ee
 
@@ -560,7 +562,7 @@ The first term is $0$ as it is a sum of terms $[x^{l+k} e^{-x}]_0^\infty = 0$ an
 
 \section*{Question 7}
 \[
-	x^2 \frac{d^2 y}{dx^2} + x \frac{dy}{d} - y = x \, , y(e) = 0 \, , y'(e) = 2
+	x^2 \frac{d^2 y}{dx^2} + x \frac{dy}{dx} - y = x \, , y(e) = 0 \, , y'(e) = 2
 \]
 
 \be 
@@ -573,7 +575,7 @@ Then
 \ea
 And since this is a Legendre ODE with $\alpha=1$ and $\beta=0$, we can use the expression for the second derivative 
 $(\alpha x + \beta)^2 \frac{d^2y}{dx^2} = \alpha^2 \frac{d}{d t} [\frac{d}{dt} - 1] y$.
-With $\alpha=1$ and $\beta=0$, we have: $ \frac{d^2y}{dx^2} =  \frac{d^2y}{dt^2} - \frac{dy}{dt}$. \\ \hfill \break
+With $\alpha=1$ and $\beta=0$, we have: $ x^2 \frac{d^2y}{dx^2} =  \frac{d^2y}{dt^2} - \frac{dy}{dt}$. \\ \hfill \break
 
 Substitute into the above equation yields:
 \ba
@@ -689,7 +691,7 @@ Plugging back $x=e^t$ or $t=\ln(x)$ gives
 The total solution is
 \ba
 	y(x) 	&= c_1 x + \frac{c_2}{x} + \frac{x \ln x}{2} \\
-	y'(x) 	&= c_1 x - \frac{c_2}{x^2} + \frac{1}{2} (1 + \ln x) \\
+	y'(x) 	&= c_1 - \frac{c_2}{x^2} + \frac{1}{2} (1 + \ln x) \\
 \ea
 And the initial conditions are $y(e) = 0 \, , y'(e) = 2$, plugging back these into the previous equations gives 
 \ba
@@ -709,10 +711,11 @@ And the initial conditions are $y(e) = 0 \, , y'(e) = 2$, plugging back these in
 	\Rightarrow 
 	\begin{cases}
 	c_1 e^2 + c_2  = - \frac{e^2}{2} \\
-	c_1 - c_2 e^{-2} = 1 \\
+	c_1 e^2 - c_2  = e^2 \\
 	\end{cases} \\	
 \ea
-Adding equation (1) to equation (2) leads to $2 c_1 = e^2 - \frac{e^2}{2} =  \frac{e^2}{2}$,  $c_1=\frac{1}{4}$,$c_2 = e^2 (c_1-1) = \frac{3}{4} e^2$. 
+
+Adding the first equation to the second equation leads to $2 e^2 c_1 = e^2 - \frac{e^2}{2} =  \frac{e^2}{2}$,  $c_1=\frac{1}{4}$,$c_2 = e^2 (c_1-1) = \frac{3}{4} e^2$. 
 Reporting these constants into the expression of the total solution gives:
 \[
 	y(x) = \frac{1}{4} x -  \frac{3}{4} e^2 \frac{1}{x} + \frac{x \ln x}{2} 
