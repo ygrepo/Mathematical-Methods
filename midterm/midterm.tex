@@ -210,7 +210,7 @@ Set $a=5$ and
 \]
 
 \item [b.]
- From the book, one property of the Laplace transform is $L[t^n f(t)] = (-1)^n \frac{d^n \bar{f}(s)}{ds^n}$ for $n=1,2,3,\cdots$,
+One property of the Laplace transform is $L[t^n f(t)] = (-1)^n \frac{d^n \bar{f}(s)}{ds^n}$ for $n=1,2,3,\cdots$,
 take $n=1$, $L[t  f(t)] = - \frac{d\bar{f}(s)}{ds}$.
 Set $f(t) = t \sin(5t)$ and from part b, $L\{ \sin(5t)\} = \frac{5}{s^2 + 25}$, therefore:
 \ba
@@ -263,13 +263,14 @@ Taking the Laplace transform on both sides of the equation gives:
 	s^2 \tilde{y}(s) -s \cdot 0 -3 + 4 [ s  \tilde{y}(s) - 0] -5  \tilde{y}(s) &= e^{-s} \\
 	s^2 \tilde{y}(s) + 4 s  \tilde{y}(s) -5  \tilde{y}(s) &= e^{-s} + 3
 \ea
+
+\item [b.]
 Combining the terms: $ (s^2 + 4 s  -5) \tilde{y}(s) = 3 +  e^{-s}$.
 Therefore
 \[
 	  \tilde{y}(s) = \frac{3 + e^{-s}} {s^2 + 4 s  -5}
 \]
 
-\item [b.]
 The roots of $s^2 + 4 s  -5 = 0$ are $-5$ and $1$, so we can rewrite $\tilde{y}(s)$ as $ \tilde{y}(s) = \frac{3}{(s-1) (s+5)} + \frac{e^{-s}} {(s-1) (s+5)}$
 Computing the fraction expansion:
 \ba
@@ -519,7 +520,7 @@ We want to show
 \]
 From the expression of the Laguerre polynomial, $L_n(x) = \frac{e^x}{n!} \frac{d^n}{dx^n}(x^n e^{-x})$, 
 a Laguerre polynomial $L_n(x)$ is a polynomial of degree $n$. Without loss of generality, let assume
-in the previous equation that $k<n$. By multiplying two polynomials of degree $M$ and $N$, the result is a polynomial of degree at most $M + N$.
+in the previous equation that $k<n$. By multiplying two polynomials of degree $M$ and $N$, the result is a polynomial of degree $M + N$.
 Therefore to prove orthogonality, suffices to prove the following equation:
 \[
 	\int_0^\infty  e^{-x} x^k L_n(x) dx = 0 ~ \text{ for all } k<n
@@ -548,13 +549,12 @@ Integration by parts l times gives:
 \[
 	\int_0^\infty x^l e^{-x} dx = (-1)^l l! \int_0^\infty e^{-x} dx =  (-1)^l l! [-e^{-x}]_0^\infty = 0
 \]
-
-Going back to our initial equation of interest, and applying integration by parts $k$ times:
+Going back to our initial equation of interest:
 \ba
 	\int_0^\infty  e^{-x} x^k L_n(x) dx 	&= \int_0^\infty x^k  \frac{d^n}{dx^n}(x^n e^{-x}) dx \\
 								&= [x^k \frac{d^{n-1}}{dx^{n-1}}(x^n e^{-x})]_0^\infty  - k \int_0^\infty x^{k-1}   \frac{d^{n-1}}{dx^{n-1}}(x^n e^{-x}) dx  \\
 \ea
-The first term is $0$ as it is a sum of terms $[x^{l+k} e^{-x}]_0^\infty = 0$ and after k iterations we are left with
+The first term is $0$ as it is a sum of terms $[x^{l+k} e^{-x}]_0^\infty = 0$ and after applying integration by parts $k$ times, we are left with
 \[
 		\int_0^\infty  e^{-x} x^k L_n(x) dx  =(-1)^k k!  \int_0^\infty \frac{d^{n-k}}{dx^{n-k}}(x^n e^{-x}) dx  = 0
 \]
