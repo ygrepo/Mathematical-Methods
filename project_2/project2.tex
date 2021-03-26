@@ -41,7 +41,7 @@
 \usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
 \usepackage{mathtools}
 \usepackage{minted}
-
+\usepackage{gensymb}
 
 
 \input{macros}
@@ -117,6 +117,26 @@ For $k \ge 1$
 		&= \frac{1}{2} 4 C_0^2  (\frac{\tau} {T})^2  \frac{1} {(1 + (\frac{2 k \pi \tau}{T})^2)^2}   \bigg [ 1 + 4  (\frac{\tau} {T})^2  \pi^2 k^2 \bigg ] \\			
 		&= 2 C_0^2  (\frac{\tau} {T})^2  \frac{1} {(1 + (\frac{2 k \pi \tau}{T})^2)^2}   \bigg [ 1 + 4  (\frac{\tau} {T})^2  \pi^2 k^2 \bigg ] \\			
 \ea
+
+\item [(d)]
+
+\item [(e)]
+
+\item [(f)]
+ We have
+ \ba
+ 	a_k \cos(\frac{k 2 \pi t}{T}) + b_k \sin(\frac{k 2 \pi t}{T}) 	&= \cos(\phi_k) \cos(\frac{k 2 \pi t}{T}) + \sin(\phi_k) \sin(\frac{k 2 \pi t}{T}) \\
+												&= \cos(\frac{k 2 \pi t}{T} - \phi_k) \\
+ \ea
+ where
+ \ba
+ 	\tan(\phi_k) = \frac{\sin(\phi_k)} {\cos(\phi_k)} = \frac{b_k}{a_k}	&= 4 C_0 (\frac{\tau} {T})^2  \frac{1} {1 + (\frac{2 k \pi \tau}{T})^2}  \pi k  (2 C_0 \frac{\tau} {T} \frac{1} {1 + (\frac{2 k \pi \tau}{T})^2})^{-1} \\
+													&= 2 \frac{\tau}{T} \pi k \\
+											\phi_k	&= \arctan(2 \frac{\tau}{T} \pi k) \\
+ \ea
+ For $\frac{\tau}{T} = .1$, $\phi_1 \approx 32.14^{\circ}$  and $\phi_2 \approx 51.48^{\circ}$
+ and for $\frac{\tau}{T} = .01$, $\phi_1 \approx 3.59^{\circ}$  and $\phi_2 \approx 7.16^{\circ}$
+
 
 \ee
 

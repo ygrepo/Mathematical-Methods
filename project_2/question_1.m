@@ -88,6 +88,11 @@ for i=1:n
 end    
 
 %%
+clear all;
+close all;
+clc;
+format long g
+
 tau_T = [.1, 0.01];
 k = [1,2];
 tan_value = zeros(2,2);
@@ -98,5 +103,4 @@ for i=1:2
         phi_k(i,j) = atand(tan_value(i, j));
     end
 end
-tan_value
 phi_k
