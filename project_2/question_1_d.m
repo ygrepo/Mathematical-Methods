@@ -1,0 +1,31 @@
+%%
+clear all;
+close all;
+clc;
+format long g
+
+tau_T = [.1, 0.01];
+k = [1, 10, 100];
+y = zeros(2,3);
+
+for i=1:2
+    tau_T_value = tau_T(i)
+    for j =1:3
+        freq = k(j);
+        v = 1 + (2 * freq * pi * tau_T_value)^2;
+        v = v^2;
+        y(i,j) = tau_T_value^2 * (1/v) * (1 + 4 * pi^2 * tau_T_value^2 * freq^2);
+    end
+end
+
+figure
+
+loglog(y(1, :), "r-", 'LineWidth',1,'MarkerSize',3);
+hold on
+loglog(y(2, :), "k-", 'LineWidth',1,'MarkerSize',3);
+xlabel("$log(k)$ - log of frequency value", "Interpreter","latex", 'FontSize', 14);
+ylabel("Log value of Pk/(2 * C0**2)", "Interpreter","latex", 'FontSize', 14);
+title("Log value of $\frac{p_k}{2 C_0^2}$","Interpreter","latex", 'FontSize', 14); 
+legend('$\frac{\tau}{T} = .1$','$\frac{\tau}{T} = .01$', 'Interpreter', 'latex', 'FontSize', 14);
+grid on
+saveas(gcf,"power_vs_tau_T",'pdf')

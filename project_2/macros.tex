@@ -61,12 +61,12 @@
 
 \newcommand{\op}[1]{\operatorname{#1}}
 \newcommand{\setdef}[2]{ := \keys{ #1 \; | \; #2 } }
-\newcommand{\set}[2]{ \keys{ #1 \; | \; #2 } }
+%\newcommand{\set}[2]{ \keys{ #1 \; | \; #2 } }
 \newcommand{\sign}[1]{\op{sign}\left( #1 \right) }
 \newcommand{\trace}[1]{\op{tr}\left( #1 \right) }
 \newcommand{\tr}[1]{\op{tr}\left( #1 \right) }
 \newcommand{\inv}[1]{\left( #1 \right)^{-1} }
-\newcommand{\abs}[1]{\left| #1 \right|}
+%\newcommand{\abs}[1]{\left| #1 \right|}
 \newcommand{\sabs}[1]{| #1 |}
 \newcommand{\keys}[1]{\left\{ #1 \right\}}
 \newcommand{\sqbr}[1]{\left[ #1 \right]}
@@ -86,7 +86,7 @@
 \newcommand{\ceil}[1]{\lceil #1 \rceil}
 \newcommand{\Imag}[1]{\op{Im}\brac{ #1 }}
 \newcommand{\Real}[1]{\op{Re}\brac{ #1 }}
-\newcommand{\norm}[1]{\left|\left| #1 \right|\right| }
+%\newcommand{\norm}[1]{\left|\left| #1 \right|\right| }
 \newcommand{\norms}[1]{ \| #1 \|  }
 \newcommand{\normProd}[1]{\left|\left| #1 \right|\right| _{\PROD{\cdot}{\cdot}} }
 \newcommand{\normTwo}[1]{\left|\left| #1 \right|\right| _{2} }
@@ -103,6 +103,7 @@
 \newcommand{\normInf}[1]{\left|\left| #1 \right|\right| _{\infty}  }
 \newcommand{\proj}[1]{\mathcal{P}_{#1} \, }
 \newcommand{\diff}[1]{ \, \text{d}#1 }
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
 \newcommand{\vc}[1]{\boldsymbol{\vec{#1}}}
 \newcommand{\rc}[1]{\boldsymbol{#1}}
 \newcommand{\vx}{\vec{x}}
@@ -189,6 +190,8 @@
 \newcommand{\cY}{{\mathcal Y}}
 \newcommand{\cA}{{\mathcal A}}
 \newcommand{\ignore}[1]{}
+\newcommand{\ba}{\[\begin{aligned}}
+\newcommand{\ea}{\end{aligned}\]}
 \newcommand{\bi}{\begin{itemize}}
 \newcommand{\ei}{\end{itemize}}
 \newcommand{\be}{\begin{enumerate}}
