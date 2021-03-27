@@ -160,54 +160,114 @@ So
 \ea
 
 
+\begin{figure}[H]
+		\centering
+		\includegraphics[width=100pt]{pr}
+		\caption{$P(r)$}
+		\label{fig1}
+\end{figure}
+	
+
 \item [(b)]
 
-Since we assume no angular dependence: $\nabla^2 C = \frac {1}{r^2} \frac{d}{d r}(r^2 \frac{d C}{d r})$,  and the differential equation is now:
+Since we assume no angular dependence: $\nabla^2 C = \frac {1}{r^2} \frac{d}{d r}(r^2 \frac{d C}{d r})$,  the differential equation is now:
 \ba
-	\frac{D}{r^2} \frac{d}{d r}(r^2 \frac{d C(r)}{d r}) +P(r)	&= 0 ~ \text{ for } 0 \le r \le R \\
+	\frac{D}{r^2} \frac{d}{d r}(r^2 \frac{d C(r)}{d r}) +P(r)	&= 0 \\
 	\frac{d}{d r}(r^2 \frac{d C(r)}{d r})				&= - \frac{r^2}{D} P(r) \\
-											&=  - \frac{r^2}{D} Q (1 -\frac{r}{R}) \\
+\ea
+
+\item [(c)]
+Inside the cell $P(r) = Q (1 -\frac{r}{R})$, so we have to solve the differential equation
+\ba
+				\frac{d}{d r}(r^2 \frac{d C(r)}{d r})	&=  - \frac{r^2}{D} Q (1 -\frac{r}{R}) \\
 											&=  \frac{Q}{D R } r^2 (r-R) \\
 											&= \frac{Q}{D R } r^3 - \frac{Q}{D} r^2 \\
 \ea
 Integrating once
-
-
-Diving through by $D$:
 \ba
-	\frac{d^2 C}{d r^2} + \frac{2}{r}  \frac{d C }{dr} + \frac{Q}{D} (1 -\frac{r}{R})  &= 0 \\
-	r \frac{d^2 C}{d r^2} + 2  \frac{d C }{dr}	&= r \frac{Q}{D} (\frac{r}{R} - 1) \\
+	r^2 \frac{d C(r)}{d r}	&=  \frac{Q}{4 D R } r^4 - \frac{Q}{3 D} r^3 + A  \\
+	 \frac{d C(r)}{d r}	&=  \frac{Q}{4 D R } r^2 - \frac{Q}{3 D} r + \frac{A}{r^2} \\
+\ea
+Integrating again
+\[
+	 C_i(r)	=  \frac{Q}{12 D R } r^3 - \frac{Q}{6 D} r^2 - \frac{A}{r} + B ~ ~ A,B \text{:constants}, C_i \text{:inside cell concentration}
+\]
+Outside the cell $P(r)=0$ and the we want to solve the differential equation
+\[
+				\frac{d}{d r}(r^2 \frac{d C(r)}{d r}) =  0
+\]
+Which by integration gives
+\ba
+	r^2 \frac{d C(r)}{d r} 		&= C_1 \\
+	\frac{d C(r)}{d r}			&= \frac{C_1}{r^2} \\
+	C_o(r)				&= -\frac{C_1}{r} + C_2 ~ ~ C_1,C_2 \text{:constants}, C_o \text{:outside cell concentration} \\
 \ea
 
-And otherwise for $r > R$
+\item [(d)]
+
+Applying the boundary conditions
+\be
+	\item [(i)]
+	\[
+		\lim_{r \rightarrow 0} C_i(r) = \lim_{r \rightarrow 0} \frac{Q}{12 D R } r^3 - \frac{Q}{6 D} r^2 - \frac{A}{r} + B
+	\]
+	since $\lim_{r \rightarrow 0} C_i(r) = \frac{1}{r} = \infty$ therefore to have finite concentration $C_i(r)$ at $r=0$ we need $A=0$
+	
+	\item [(ii)]
+	\[
+		\lim_{r \rightarrow \infty} C_o(r) = \lim_{r \rightarrow \infty} \bigg ( -\frac{C_1}{r} + C_2 \bigg ) = C_2
+	\]
+	The concentration goes to zero at infinity implies $C_2=0$
+	
+	\item [(iii)]
+	We have now for $C_i(r)$ and $C_o(r)$:
+	\ba
+		C_i(r)	&=  \frac{Q}{12 D R } r^3 - \frac{Q}{6 D} r^2 + B \\
+		C_o(r)	&= -\frac{C_1}{r}
+	\ea
+	$C_i(R) = C_o(R)$ and $\frac{d C_i(r)}{dr} = \frac{d C_o(r)}{dr} |_{r=R}$ yields
+	\ba
+		 \frac{Q}{12 D R } R^3 - \frac{Q}{6 D} R^2 + B 	&= -\frac{C_1}{R}\\
+		 \frac{Q}{4 D} R - \frac{Q}{3 D} R 		&= \frac{C_1}{R^2}\\
+	\ea
+	Rearranging
+	\ba
+		 -\frac{Q}{12 D} R^2 + B 	&= -\frac{C_1}{R}\\
+		 - \frac{Q}{12 D} R 		&= \frac{C_1}{R^2}\\
+	\ea
+	which gives
+	\ba
+		B 	&= \frac{Q}{6 D} R^2 \\
+		C_1  &= -\frac{Q}{12 D} R^3 \\
+	\ea	
+	
+substituting back
+\ba
+	C_i(r)	&=  \frac{Q}{12 D R } r^3 - \frac{Q}{6 D} r^2 +  \frac{Q}{6 D} R^2 \\
+	C_o(r)	&= \frac{Q}{12 D} R^3 \frac{1}{r} \\
+\ea
+	
+\ee
+
+\item [(e)]
+The concentration maximum happens within the cell since $P(r)$ has maximum value $Q$ at $r=0$ and then it is zero for $r>R$.
+We are looking for the value of $r$ for which $\frac{d C_i(r)}{d r}=0$:
 \[
-	r \frac{d^2 C}{d r^2} + 2 \frac{d C }{dr} = 0
+	\frac{d C_i(r)}{d r} = \frac{Q}{4 D R} r^2 - \frac{Q}{3 D} r = \frac{Q}{D} r (\frac{r}{4 R} - \frac{1}{3} )
 \]
-
-\item [(c)]
-
-Inside the cell, the homegeneous differential equation in standard form is:
-\[
-	\frac{d^2 C}{d r^2} + \frac{2}{r}  \frac{d C }{dr}  - \frac{Q}{R D} r  = 0
-\]
-Changing variable notation
-%\[
-%	\frac{d^2 y}{d z^2} + \frac{2}{z}  \frac{d y }{dz}  - \frac{Q}{R D} z  = 0
-%\]
-
-$p(r) = \frac{2}{r}$ and $q(r) =  - \frac{Q}{R D}$
-
-$r=0$ is a regular singular point since $r p(r) = 2$ and $r^2 q(r) = -r^2 \frac{Q}{R D}$ are defined for $r=0$.
-
-Take $y = z^\sigma \sum_{n=0}^\infty a_n z^n$, then  $y'=\sum_{n=0}^\infty (n+\sigma) a_n z^{n+\sigma-1}$, and $y''=\sum_{n=0}^\infty (n+\sigma) (n+\sigma-1) a_n z^{n+\sigma-2}$
-
-Therefore
-%\ba
-%	
-%\ea
-
-
-
+Discarding the solution $r=0$ we are left that  concentration maximum is for $r=\frac{4}{3} R$ and it is
+\ba
+	C_M 	&= \frac{Q}{12 D R }  (\frac{4}{3})^3 R^3 - \frac{Q}{6 D}  (\frac{4}{3})^2 R^2  +  \frac{Q}{6 D} R^2 \\
+			&= \frac{Q}{6D} R^2 \bigg [ \frac{4^3}{2 ~ 3^3} - \frac{4^2}{3^2} + 1 \bigg ] \\
+			&= \frac{11}{162} \frac{Q}{D} R^2 \\
+\ea
+Inside the cell
+\ba
+	C_i(r)			&=  \frac{Q}{6 D} (\frac{1}{2} \frac{r^3}{R} - r^2 + R^2) \\
+	\frac{C_i(r)}{C_M}	&= \frac{Q}{6 D}   \frac{162}{11}  \frac{D}{Q} R^{-2} (\frac{1}{2} \frac{r^3}{R} - r^2 + R^2) \\
+					&= \frac{162}{6 ~ ~ 11} \bigg [ \frac{1}{2}  (\frac{r}{R})^3 -  (\frac{r}{R})^2 + 1 \bigg ] \\
+\ea
+	
 \ee
 
 \end{document}
