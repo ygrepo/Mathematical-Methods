@@ -45,6 +45,10 @@
 
 
 \input{macros}
+\setlength{\intextsep}{2pt} % Vertical space above & below [h] floats
+\setlength{\textfloatsep}{2pt} % Vertical space below (above) [t] ([b]) floats
+\setlength{\abovecaptionskip}{2pt}
+\setlength{\belowcaptionskip}{2pt}
 
 \begin{document}
 
@@ -161,10 +165,10 @@ So
 
 
 \begin{figure}[H]
-		\centering
-		\includegraphics[width=100pt]{pr}
-		\caption{$P(r)$}
-		\label{fig1}
+ \centering
+ \includegraphics[scale=0.5]{pr}
+%  \caption{$P(r)$}
+%		\label{fig1}
 \end{figure}
 	
 
@@ -266,7 +270,15 @@ Inside the cell
 	C_i(r)			&=  \frac{Q}{6 D} (\frac{1}{2} \frac{r^3}{R} - r^2 + R^2) \\
 	\frac{C_i(r)}{C_M}	&= \frac{Q}{6 D}   \frac{162}{11}  \frac{D}{Q} R^{-2} (\frac{1}{2} \frac{r^3}{R} - r^2 + R^2) \\
 					&= \frac{162}{6 ~ ~ 11} \bigg [ \frac{1}{2}  (\frac{r}{R})^3 -  (\frac{r}{R})^2 + 1 \bigg ] \\
+					&= \frac{27}{11} \bigg [ \frac{1}{2}  (\frac{r}{R})^3 -  (\frac{r}{R})^2 + 1 \bigg ] \\
 \ea
+And 
+\ba
+	C_o(r)			&=   \frac{Q}{12 D} R^3 \frac{1}{r} \\
+	\frac{C_o(r)}{C_M}	&=  \frac{Q}{12 D}  \frac{162}{11}  \frac{D}{Q} R^{-2}  R^3 \frac{1}{r}  \\
+					&= \frac{27}{22} \frac{R}{r} \\
+\ea
+
 	
 \ee
 
