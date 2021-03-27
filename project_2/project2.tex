@@ -140,4 +140,74 @@ For $k \ge 1$
 
 \ee
 
+\section*{Question 2}
+
+\be
+\item [(a)]
+One simple way to describe $P(r)$ is to define it as $P(r) = A r + B$ with the conditions:
+\ba
+	A \cdot 0 + B &= Q \\
+	A \cdot R + B &= 0 \\	
+\ea
+which gives $A=-\frac{Q}{R}$ and $B=Q$.
+So
+\ba
+	P(r) =
+	\begin{cases}
+	Q (1 -\frac{r}{R}) ~ \text{ for } 0 \le r \le R\ \\
+	0 ~ \text{ for }  r > R \\
+	\end{cases} \\	
+\ea
+
+
+\item [(b)]
+
+Since we assume no angular dependence: $\nabla^2 C = \frac {1}{r^2} \frac{d}{d r}(r^2 \frac{d C}{d r})$,  and the differential equation is now:
+\ba
+	\frac{D}{r^2} \frac{d}{d r}(r^2 \frac{d C(r)}{d r}) +P(r)	&= 0 ~ \text{ for } 0 \le r \le R \\
+	\frac{d}{d r}(r^2 \frac{d C(r)}{d r})				&= - \frac{r^2}{D} P(r) \\
+											&=  - \frac{r^2}{D} Q (1 -\frac{r}{R}) \\
+											&=  \frac{Q}{D R } r^2 (r-R) \\
+											&= \frac{Q}{D R } r^3 - \frac{Q}{D} r^2 \\
+\ea
+Integrating once
+
+
+Diving through by $D$:
+\ba
+	\frac{d^2 C}{d r^2} + \frac{2}{r}  \frac{d C }{dr} + \frac{Q}{D} (1 -\frac{r}{R})  &= 0 \\
+	r \frac{d^2 C}{d r^2} + 2  \frac{d C }{dr}	&= r \frac{Q}{D} (\frac{r}{R} - 1) \\
+\ea
+
+And otherwise for $r > R$
+\[
+	r \frac{d^2 C}{d r^2} + 2 \frac{d C }{dr} = 0
+\]
+
+\item [(c)]
+
+Inside the cell, the homegeneous differential equation in standard form is:
+\[
+	\frac{d^2 C}{d r^2} + \frac{2}{r}  \frac{d C }{dr}  - \frac{Q}{R D} r  = 0
+\]
+Changing variable notation
+%\[
+%	\frac{d^2 y}{d z^2} + \frac{2}{z}  \frac{d y }{dz}  - \frac{Q}{R D} z  = 0
+%\]
+
+$p(r) = \frac{2}{r}$ and $q(r) =  - \frac{Q}{R D}$
+
+$r=0$ is a regular singular point since $r p(r) = 2$ and $r^2 q(r) = -r^2 \frac{Q}{R D}$ are defined for $r=0$.
+
+Take $y = z^\sigma \sum_{n=0}^\infty a_n z^n$, then  $y'=\sum_{n=0}^\infty (n+\sigma) a_n z^{n+\sigma-1}$, and $y''=\sum_{n=0}^\infty (n+\sigma) (n+\sigma-1) a_n z^{n+\sigma-2}$
+
+Therefore
+%\ba
+%	
+%\ea
+
+
+
+\ee
+
 \end{document}
