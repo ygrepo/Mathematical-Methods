@@ -63,7 +63,11 @@ Student: Yves Greatti\\\
 \be
 
 \item [(a)]
-Please see attached separate pdf.
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.5]{exp_tau}
+\end{figure}
+
 
 \item [(b)]
 
@@ -123,9 +127,23 @@ For $k \ge 1$
 \ea
 
 \item [(d)]
+We have 
+\[
+	\frac{p_k}{2 ~ C_0^2} =  (\frac{\tau} {T})^2  \frac{1} {(1 + (\frac{2 k \pi \tau}{T})^2)^2}   \bigg [ 1 + 4  (\frac{\tau} {T})^2  \pi^2 k^2 \bigg ] 
+\]
 
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.5]{power_vs_tau_T}
+\end{figure}
+
+Looking at the plot as $\frac{\tau}{T}$ decreases, the power $p_k$ decreases. 
+For a greater  $\frac{\tau}{T}$ , the power starts at a higher value  until an inflection point corresponding to frequency of $\approx 100$ ($10^2$).
+Also for a higher $\frac{\tau}{T}$, the steepest the decrease in power. Eventually the two curves combine in one curve around
+a frequency of $\approx 1000$ ($10^3$).
 \item [(e)]
 
+As the pulse $\tau$, becomes narrower, the power decreases linearly.
 \item [(f)]
  We have
  \ba
@@ -272,14 +290,20 @@ Inside the cell
 					&= \frac{162}{6 ~ ~ 11} \bigg [ \frac{1}{2}  (\frac{r}{R})^3 -  (\frac{r}{R})^2 + 1 \bigg ] \\
 					&= \frac{27}{11} \bigg [ \frac{1}{2}  (\frac{r}{R})^3 -  (\frac{r}{R})^2 + 1 \bigg ] \\
 \ea
-And 
+And outside the cell 
 \ba
 	C_o(r)			&=   \frac{Q}{12 D} R^3 \frac{1}{r} \\
 	\frac{C_o(r)}{C_M}	&=  \frac{Q}{12 D}  \frac{162}{11}  \frac{D}{Q} R^{-2}  R^3 \frac{1}{r}  \\
 					&= \frac{27}{22} \frac{R}{r} \\
 \ea
 
-	
+When the diffusion constant is doubled, the curve $\frac{C_i(r)}{C_M}$ stays the same.
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.5]{concentration}
+\end{figure}
+
 \ee
 
 \end{document}

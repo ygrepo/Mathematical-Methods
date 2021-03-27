@@ -5,7 +5,7 @@ clc;
 format long g
 
 tau_T = [.1, 0.01, 0.001, 0.0001];
-k = 100;
+k = 10;
 y = zeros(4,1);
 
 for i=1:4
