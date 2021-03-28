@@ -16,12 +16,16 @@ for i=1:4
 end
 
 figure
+logtaut= log10(tau_T);
+logy = log10(y);
+%plot(logtaut, logy, "r-", 'LineWidth',1,'MarkerSize',3);
+%plot(tau_T, y, "r-", 'LineWidth',1,'MarkerSize',3);
 
 loglog(tau_T, y, "r-", 'LineWidth',1,'MarkerSize',3);
-xlabel("$\frac{\tau}{T}$", "Interpreter","latex", 'FontSize', 14);
-ylabel("Log value of Pk/(2 * C0**2)", "Interpreter","latex", 'FontSize', 14);
-title("Log value of $\frac{p_k}{2 C_0^2}$","Interpreter","latex", 'FontSize', 14); 
-legend('$k=100$', ...
+xlabel("$\log_{10}(\frac{\tau}{T})$", "Interpreter", "latex", 'FontSize', 14);
+ylabel("$\log_{10}(\frac{P_k}{2 * C0^2})$", "Interpreter","latex", 'FontSize', 14);
+title("Loglog plot  $\frac{p_k}{2 C_0^2}$ vs. $\frac{\tau}{T}$","Interpreter","latex", 'FontSize', 14); 
+legend('$k=10$', ...
     'Interpreter', 'latex', 'FontSize', 14);
 grid on
 saveas(gcf,"power_vs_smaller_pulse",'pdf')

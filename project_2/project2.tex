@@ -15,6 +15,7 @@
 \usepackage{thmtools}
 \usepackage{blkarray} 
 \usepackage{textcomp}
+\usepackage{float}
 \usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
 
 
@@ -40,15 +41,11 @@
 \usepackage{textcomp}
 \usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
 \usepackage{mathtools}
-\usepackage{minted}
+%\usepackage{minted}
 \usepackage{gensymb}
 
 
 \input{macros}
-\setlength{\intextsep}{2pt} % Vertical space above & below [h] floats
-\setlength{\textfloatsep}{2pt} % Vertical space below (above) [t] ([b]) floats
-\setlength{\abovecaptionskip}{2pt}
-\setlength{\belowcaptionskip}{2pt}
 
 \begin{document}
 
@@ -62,10 +59,13 @@ Student: Yves Greatti\\\
 
 \be
 
-\item [(a)]
-\begin{figure}[H]
+\item [(a)] See figure 1
+
+\begin{figure}[!h]
  \centering
- \includegraphics[scale=0.5]{exp_tau}
+ \includegraphics[scale=0.3]{exp_tau}
+  \vspace{-5em}
+ \caption{}
 \end{figure}
 
 
@@ -112,7 +112,7 @@ Similarly to compute $b_k$
 		&=   \frac{2 C_0}{T} \frac{2 k \pi \tau}{T} \frac{\tau} {1 + (\frac{2 k \pi \tau}{T})^2}  (1 - e^{-\frac{T}{\tau}} ) \\
 		&=	4 C_0 k \pi \frac{\tau^2} {T^2 + (2 k \pi \tau)^2}  (1 - e^{-\frac{T}{\tau}} ) \\
 \ea
-Once again, since $e^{-\frac{T}{\tau}} \approx 0$ and $b_k \approx  	4 C_0 (\frac{\tau} {T})^2  \frac{1} {1 + (\frac{2 k \pi \tau}{T})^2}  \pi k$
+Once again, since $e^{-\frac{T}{\tau}} \approx 0$ then $b_k \approx  	4 C_0 (\frac{\tau} {T})^2  \frac{1} {1 + (\frac{2 k \pi \tau}{T})^2}  \pi k$
 
 \item [(c)]
 
@@ -132,18 +132,26 @@ We have
 	\frac{p_k}{2 ~ C_0^2} =  (\frac{\tau} {T})^2  \frac{1} {(1 + (\frac{2 k \pi \tau}{T})^2)^2}   \bigg [ 1 + 4  (\frac{\tau} {T})^2  \pi^2 k^2 \bigg ] 
 \]
 
-\begin{figure}[H]
+\begin{figure}[!h]
  \centering
  \includegraphics[scale=0.5]{power_vs_tau_T}
 \end{figure}
+From the plot we can see that the power $\frac{p_k}{2 ~ C_0^2}$ decreases as the frequency increases.
+Power is close to $0$ starting with a frequency of $10$.
 
-Looking at the plot as $\frac{\tau}{T}$ decreases, the power $p_k$ decreases. 
-For a greater  $\frac{\tau}{T}$ , the power starts at a higher value  until an inflection point corresponding to frequency of $\approx 100$ ($10^2$).
-Also for a higher $\frac{\tau}{T}$, the steepest the decrease in power. Eventually the two curves combine in one curve around
-a frequency of $\approx 1000$ ($10^3$).
 \item [(e)]
+Looking at the plot in part (d), as the pulse $\tau$, becomes narrower, the power decreases linearly.
+For a greater  $\frac{\tau}{T}$ , the power starts at a higher value  until an inflection point corresponding to frequency of $10$ ($1 = \log_{10}(10)$ on the graph).
+Also for a higher $\frac{\tau}{T}$, the steepest the decrease in power. Eventually the two curves combine in one curve around
+a frequency of ($2 = \log_{10}(100)$ on the graph).
+The same observations are obtained with a loglog plot  of power  $\frac{p_k}{2 ~ C_0^2}$ vs.  $\frac{\tau}{T}$ for a frequency $k=10$.
 
-As the pulse $\tau$, becomes narrower, the power decreases linearly.
+\begin{figure}[!h]
+ \centering
+ \includegraphics[scale=0.5]{power_vs_smaller_pulse}
+\end{figure}
+
+
 \item [(f)]
  We have
  \ba
@@ -159,6 +167,9 @@ As the pulse $\tau$, becomes narrower, the power decreases linearly.
  For $\frac{\tau}{T} = .1$, $\phi_1 \approx 32.14^{\circ}$  and $\phi_2 \approx 51.48^{\circ}$
  and for $\frac{\tau}{T} = .01$, $\phi_1 \approx 3.59^{\circ}$  and $\phi_2 \approx 7.16^{\circ}$
 
+If we imagine a clock with a hand that turns at constant speed, making a full turn every $T$ seconds, and is pointing straight up at time $t=0$ when
+the plasma rises to $C_0$. The phase $\phi_k$ is then the angle from the $12:00$ position to the current position and indicates how far is the next rise
+in plasma concentration to $C_0$. For the same frequency (either $k=1$ or $k=2$), with a larger pulse we are closer to the next substance release.
 
 \ee
 
@@ -214,7 +225,7 @@ Integrating again
 \[
 	 C_i(r)	=  \frac{Q}{12 D R } r^3 - \frac{Q}{6 D} r^2 - \frac{A}{r} + B ~ ~ A,B \text{:constants}, C_i \text{:inside cell concentration}
 \]
-Outside the cell $P(r)=0$ and the we want to solve the differential equation
+Outside the cell $P(r)=0$ and we want to solve the differential equation
 \[
 				\frac{d}{d r}(r^2 \frac{d C(r)}{d r}) =  0
 \]
@@ -233,7 +244,7 @@ Applying the boundary conditions
 	\[
 		\lim_{r \rightarrow 0} C_i(r) = \lim_{r \rightarrow 0} \frac{Q}{12 D R } r^3 - \frac{Q}{6 D} r^2 - \frac{A}{r} + B
 	\]
-	since $\lim_{r \rightarrow 0} C_i(r) = \frac{1}{r} = \infty$ therefore to have finite concentration $C_i(r)$ at $r=0$ we need $A=0$
+	since $\lim_{r \rightarrow 0} C_i(r) = \lim_{r \rightarrow 0} (- \frac{1}{r} + B) = \infty$ therefore to have finite concentration $C_i(r)$ at $r=0$ we need $A=0$
 	
 	\item [(ii)]
 	\[
@@ -266,13 +277,14 @@ Applying the boundary conditions
 substituting back
 \ba
 	C_i(r)	&=  \frac{Q}{12 D R } r^3 - \frac{Q}{6 D} r^2 +  \frac{Q}{6 D} R^2 \\
+			&=  \frac{Q}{6 D } \bigg [ \frac{r^3}{2 R} - r^2 + R^2 \bigg ] \\
 	C_o(r)	&= \frac{Q}{12 D} R^3 \frac{1}{r} \\
 \ea
 	
 \ee
 
 \item [(e)]
-The concentration maximum happens within the cell since $P(r)$ has maximum value $Q$ at $r=0$ and then it is zero for $r>R$.
+%The concentration maximum happens within the cell since $P(r)$ has maximum value $Q$ at $r=0$ and then it is zero for $r>R$.
 We are looking for the value of $r$ for which $\frac{d C_i(r)}{d r}=0$:
 \[
 	\frac{d C_i(r)}{d r} = \frac{Q}{4 D R} r^2 - \frac{Q}{3 D} r = \frac{Q}{D} r (\frac{r}{4 R} - \frac{1}{3} )
