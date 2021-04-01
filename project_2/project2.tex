@@ -284,11 +284,17 @@ substituting back
 \ee
 
 \item [(e)]
-%The concentration maximum happens within the cell since $P(r)$ has maximum value $Q$ at $r=0$ and then it is zero for $r>R$.
-We are looking for the value of $r$ for which $\frac{d C_i(r)}{d r}=0$:
+Knowing that  within the cell since $P(r)$ has maximum value $Q$ at $r=0$ and then it is zero for $r>R$,
+we are looking for the value of $r$ for which $\frac{d C_i(r)}{d r}=0$:
 \[
 	\frac{d C_i(r)}{d r} = \frac{Q}{4 D R} r^2 - \frac{Q}{3 D} r = \frac{Q}{D} r (\frac{r}{4 R} - \frac{1}{3} )
 \]
+Also note that
+\[
+	\frac{d^2 C_i(r)}{d r^2} = -\frac{Q}{3 D} < 0
+\]
+So finding an $r$ for which $\frac{d C_i(r)}{d r} = 0$ and $\frac{d^2 C_i(r)}{d r^2} < 0$ then this $r$ is a local maximum.
+
 Discarding the solution $r=0$ we are left that  concentration maximum is for $r=\frac{4}{3} R$ and it is
 \ba
 	C_M 	&= \frac{Q}{12 D R }  (\frac{4}{3})^3 R^3 - \frac{Q}{6 D}  (\frac{4}{3})^2 R^2  +  \frac{Q}{6 D} R^2 \\
@@ -309,11 +315,19 @@ And outside the cell
 					&= \frac{27}{22} \frac{R}{r} \\
 \ea
 
-When the diffusion constant is doubled, the curve $\frac{C_i(r)}{C_M}$ stays the same.
+When the diffusion constant is doubled, the curve $\frac{C_i(r)}{C_M}$ stays the same since $\frac{C_i(r)}{C_M}$   does not depend on the diffusion constant $D$.
 
 \begin{figure}[H]
  \centering
  \includegraphics[scale=0.5]{concentration}
+\end{figure}
+
+However for arbitrary values of $Q$, $R$, and $D$ ($Q=2, R=10, D=1$), when the  diffusion constant $D$ is doubled,  the concentration curve is at a lower level
+compared to the same concentration curve related to a diffusion constant $D$ as you can expect based on the expressions of $C_i(r)$ and $C_o(r)$ obtained above:
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.5]{concentration_d_2d}
 \end{figure}
 
 \ee
