@@ -5,12 +5,12 @@ clc;
 format long g
 
 tau_T = [.1, 0.01];
-k = [1, 10, 100];
-y = zeros(2,3);
+k = [1, 10, 20, 40, 50, 80, 100];
+y = zeros(2,7);
 
 for i=1:2
     tau_T_value = tau_T(i);
-    for j =1:3
+    for j =1:7
         freq = k(j);
         v = 1 + (2 * freq * pi * tau_T_value)^2;
         v = v^2;

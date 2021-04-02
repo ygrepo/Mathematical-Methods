@@ -144,7 +144,8 @@ Looking at the plot in part (d), as the pulse $\tau$, becomes narrower, the powe
 For a greater  $\frac{\tau}{T}$ , the power starts at a higher value  until an inflection point corresponding to frequency of $10$ ($1 = \log_{10}(10)$ on the graph).
 Also for a higher $\frac{\tau}{T}$, the steepest the decrease in power. Eventually the two curves combine in one curve around
 a frequency of ($2 = \log_{10}(100)$ on the graph).
-The same observations are obtained with a loglog plot  of power  $\frac{p_k}{2 ~ C_0^2}$ vs.  $\frac{\tau}{T}$ for a frequency $k=10$.
+The same observations are obtained with a loglog plot  of power  $\frac{p_k}{2 ~ C_0^2}$ vs.  $\frac{\tau}{T}$ for a frequency $k=10$. As the
+pulses $\tau$ narrow or decrease the power decreases.
 
 \begin{figure}[!h]
  \centering
@@ -196,8 +197,6 @@ So
 \begin{figure}[H]
  \centering
  \includegraphics[scale=0.5]{pr}
-%  \caption{$P(r)$}
-%		\label{fig1}
 \end{figure}
 	
 
@@ -289,30 +288,21 @@ we are looking for the value of $r$ for which $\frac{d C_i(r)}{d r}=0$:
 \[
 	\frac{d C_i(r)}{d r} = \frac{Q}{4 D R} r^2 - \frac{Q}{3 D} r = \frac{Q}{D} r (\frac{r}{4 R} - \frac{1}{3} )
 \]
-Also note that
+By the nature of the problem, the maximum concentration is at $r=0$:
 \[
-	\frac{d^2 C_i(r)}{d r^2} = -\frac{Q}{3 D} < 0
+	C_M = \frac{Q}{6 D} R^2
 \]
-So finding an $r$ for which $\frac{d C_i(r)}{d r} = 0$ and $\frac{d^2 C_i(r)}{d r^2} < 0$ then this $r$ is a local maximum.
-
-Discarding the solution $r=0$ we are left that  concentration maximum is for $r=\frac{4}{3} R$ and it is
-\ba
-	C_M 	&= \frac{Q}{12 D R }  (\frac{4}{3})^3 R^3 - \frac{Q}{6 D}  (\frac{4}{3})^2 R^2  +  \frac{Q}{6 D} R^2 \\
-			&= \frac{Q}{6D} R^2 \bigg [ \frac{4^3}{2 ~ 3^3} - \frac{4^2}{3^2} + 1 \bigg ] \\
-			&= \frac{11}{162} \frac{Q}{D} R^2 \\
-\ea
 Inside the cell
 \ba
 	C_i(r)			&=  \frac{Q}{6 D} (\frac{1}{2} \frac{r^3}{R} - r^2 + R^2) \\
-	\frac{C_i(r)}{C_M}	&= \frac{Q}{6 D}   \frac{162}{11}  \frac{D}{Q} R^{-2} (\frac{1}{2} \frac{r^3}{R} - r^2 + R^2) \\
-					&= \frac{162}{6 ~ ~ 11} \bigg [ \frac{1}{2}  (\frac{r}{R})^3 -  (\frac{r}{R})^2 + 1 \bigg ] \\
-					&= \frac{27}{11} \bigg [ \frac{1}{2}  (\frac{r}{R})^3 -  (\frac{r}{R})^2 + 1 \bigg ] \\
+	\frac{C_i(r)}{C_M}	&= \frac{6 D}{Q}  R^{-2} \frac{Q}{6 D} (\frac{1}{2} \frac{r^3}{R} - r^2 + R^2) \\
+					&=  \frac{1}{2} (\frac{r}{R})^3 -  (\frac{r}{R})^2 + 1 \\
 \ea
 And outside the cell 
 \ba
 	C_o(r)			&=   \frac{Q}{12 D} R^3 \frac{1}{r} \\
-	\frac{C_o(r)}{C_M}	&=  \frac{Q}{12 D}  \frac{162}{11}  \frac{D}{Q} R^{-2}  R^3 \frac{1}{r}  \\
-					&= \frac{27}{22} \frac{R}{r} \\
+	\frac{C_o(r)}{C_M}	&=  \frac{6 D}{Q}  R^{-2}   \frac{Q}{12 D} R^3 \frac{1}{r}  \\
+					&=  \frac{R}{2 r} \\
 \ea
 
 When the diffusion constant is doubled, the curve $\frac{C_i(r)}{C_M}$ stays the same since $\frac{C_i(r)}{C_M}$   does not depend on the diffusion constant $D$.
@@ -322,7 +312,7 @@ When the diffusion constant is doubled, the curve $\frac{C_i(r)}{C_M}$ stays the
  \includegraphics[scale=0.5]{concentration}
 \end{figure}
 
-However for arbitrary values of $Q$, $R$, and $D$ ($Q=2, R=10, D=1$), when the  diffusion constant $D$ is doubled,  the concentration curve is at a lower level
+However for arbitrary values of $Q$, $R$, and $D$ ($Q=1, R=10, D=1$), when the  diffusion constant $D$ is doubled,  the concentration curve is at a lower level
 compared to the same concentration curve related to a diffusion constant $D$ as you can expect based on the expressions of $C_i(r)$ and $C_o(r)$ obtained above:
 
 \begin{figure}[H]
