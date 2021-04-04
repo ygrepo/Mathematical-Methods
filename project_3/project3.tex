@@ -169,4 +169,50 @@ Therefore
 		&=  \frac{\pi R^2 }{\rho} \frac{A}{i~n}  \bigg [ 1 - \frac{2 \alpha  i^{\frac{3}{2}} } { i^3 \alpha^2}  \frac { J_1(\alpha  i^{\frac{3}{2}}) } {  J_0(\alpha i^{\frac{3}{2}})  }  \bigg ] e^{int}   \\
 \ea
 
+\section*{Question 3}
+
+Using the expression of the differential equation established in question (1) and with $n=0$, we want to solve
+\[
+	r^2 \frac{d^2 u(r)}{d r^2} + r \frac{d u(r)}{d r}  = - \frac{A}{\mu} r^2
+\]
+This is an Euler equation or Legendre ordinary differential equation  $\alpha=1, \beta=0$, so we make the change of variable $e^t= r$ or $\ln{r}= t$.
+Then $r \frac{du}{dr} = \frac{d u}{d t}$ and $r^2 \frac{d^2y}{dr^2} = \frac{d^2u}{dt^2} - \frac{du}{dt}$.
+
+which yields for the ODE
+\ba
+	\frac{d^2 u}{d t^2} - \frac{du}{dt} +  \frac{du}{dt}	&= - \frac{A}{\mu} e^{2t} \\
+	\frac{d^2 u}{d t^2} &= - \frac{A}{\mu} e^{2t} \\
+\ea
+Considering the homegeneous equation and integrating twice gives $u(t) = C_1 t + C_2$ or $u(r) = C_1 \ln(r) + C_2$.
+Take for one particular solution of the ODE:
+$u_p(t) = C_3 e^{2t}, u'_p(t) = 2 C_3 e^{2t}, u''_p(t) = 4 C_3 e^{2t}$, 
+substitute in the ODE gives $4 C_3 e^{2t} =  - \frac{A}{\mu} e^{2t}$ or $C_3 = - \frac{A}{4 \mu}$ 
+thus $u_p(t) =  - \frac{A}{4 \mu} e^{2t}$ or $u_p(r) =  - \frac{A}{4 \mu} r^2$.
+And the total solution is 
+\[
+	u(r) = - \frac{A}{4 \mu} r^2  + C_1 \ln(r) + C_2
+\]
+
+\section*{Question 4}
+For Poiseuille's flow
+\[
+	w = \frac{p_1 - p_2}{4 \mu l} R^2 (1 - y^2)
+\]
+And
+\[
+	Q = 2 \pi \int_0^R w(r,t) r dr
+\]
+
+
+Make the change of variable $y = \frac{r}{R}, dy = \frac{dr}{R}$ and we have
+\ba
+	Q	&= 2 \pi \int_0^1  \frac{p_1 - p_2}{4 \mu l} R^2 (1 - y^2) R ~ y ~ R ~ dy \\
+		&= 2 \pi  \frac{p_1 - p_2}{4 \mu l} R^4  \int_0^1  (1 - y^2) ~ y ~ dy \\
+		&= 2 \pi  \frac{p_1 - p_2}{4 \mu l} R^4  [\frac{y^2}{2} - \frac{y^4}{4} ]_0^1 \\
+		&= 2 \pi  \frac{p_1 - p_2}{4 \mu l} R^4  \frac{1}{4} \\
+		&=  \frac{p_1 - p_2}{8 \mu l} \pi R^4 
+\ea
+
+
+
 \end{document}
