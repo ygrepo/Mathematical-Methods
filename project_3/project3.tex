@@ -183,15 +183,24 @@ which yields for the ODE
 	\frac{d^2 u}{d t^2} - \frac{du}{dt} +  \frac{du}{dt}	&= - \frac{A}{\mu} e^{2t} \\
 	\frac{d^2 u}{d t^2} &= - \frac{A}{\mu} e^{2t} \\
 \ea
-Considering the homegeneous equation and integrating twice gives $u(t) = C_1 t + C_2$ or $u(r) = C_1 \ln(r) + C_2$.
+Considering the homogeneous equation and integrating twice gives $u(t) = C_1 t + C_2$ or $u(r) = C_1 \ln(r) + C_2$.
 Take for one particular solution of the ODE:
 $u_p(t) = C_3 e^{2t}, u'_p(t) = 2 C_3 e^{2t}, u''_p(t) = 4 C_3 e^{2t}$, 
 substitute in the ODE gives $4 C_3 e^{2t} =  - \frac{A}{\mu} e^{2t}$ or $C_3 = - \frac{A}{4 \mu}$ 
 thus $u_p(t) =  - \frac{A}{4 \mu} e^{2t}$ or $u_p(r) =  - \frac{A}{4 \mu} r^2$.
-And the total solution is 
+The total solution is 
 \[
 	u(r) = - \frac{A}{4 \mu} r^2  + C_1 \ln(r) + C_2
 \]
+From this, we write $u'(r) = - \frac{A}{2 \mu} r  + \frac{C_1}{r}$.
+So to have the boundary condition $\frac{\partial w} {\partial r} |_{r=0} = 0$ or $\frac{\partial u} {\partial r} |_{r=0} = 0$, $C_1$ has to be zero.
+The second boundary condition $w(R)=0$, or $u(R)=0$, gives $C_2 = \frac{A}{4 \mu} R^2$.
+Finally
+\[
+	u(r) = -  \frac{A}{4 \mu}(r^2 - R^2) = \frac{A}{4 \mu} R^2 (1 - (\frac{r}{R})^2) =  \frac{A}{4 \mu} R^2 (1 - y^2)
+\]
+which is equation (2) in Wormersley’s paper with $A=\frac{p_1 - p_2}{l}$
+
 
 \section*{Question 4}
 For Poiseuille's flow
