@@ -16,7 +16,7 @@
 \usepackage{blkarray} 
 \usepackage{textcomp}
 \usepackage{float}
-\usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+%\usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
 
 
 \usepackage{times}
@@ -39,13 +39,13 @@
     urlcolor=blue,
 }
 \usepackage{textcomp}
-\usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+%\usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
 \usepackage{mathtools}
 %\usepackage{minted}
 \usepackage{gensymb}
 
-
 \input{macros}
+
 
 \begin{document}
 
@@ -138,16 +138,16 @@ We have
 \end{figure}
 From the plot we can see that the power $\frac{p_k}{2 ~ C_0^2}$ decreases as the frequency increases.
 Power is close to $0$ starting with a frequency of $10$.
-
-\item [(e)]
-Looking at the plot in part (d), as the pulse $\tau$, becomes narrower, the power decreases linearly.
+Looking at the plot, as the pulse $\tau$, becomes narrower, the power decreases linearly.
 For a greater  $\frac{\tau}{T}$ , the power starts at a higher value  until an inflection point corresponding to frequency of $10$ ($1 = \log_{10}(10)$ on the graph).
 Also for a higher $\frac{\tau}{T}$, the steepest the decrease in power. Eventually the two curves combine in one curve around
 a frequency of ($2 = \log_{10}(100)$ on the graph).
-The same observations are obtained with a loglog plot  of power  $\frac{p_k}{2 ~ C_0^2}$ vs.  $\frac{\tau}{T}$ for a frequency $k=10$. As the
-pulses $\tau$ narrow or decrease the power decreases.
 
-\begin{figure}[!h]
+\item [(e)]
+
+As the pulses $\tau$ narrow or decrease the power decreases: see below loglog plot  of power  $\frac{p_k}{2 ~ C_0^2}$ vs.  $\frac{\tau}{T}$ for a frequency $k=10$
+
+\begin{figure}[!ht]
  \centering
  \includegraphics[scale=0.5]{power_vs_smaller_pulse}
 \end{figure}
@@ -305,11 +305,12 @@ And outside the cell
 					&=  \frac{R}{2 r} \\
 \ea
 
-When the diffusion constant is doubled, the curve $\frac{C_i(r)}{C_M}$ stays the same since $\frac{C_i(r)}{C_M}$   does not depend on the diffusion constant $D$.
+When the diffusion constant is doubled, the curve $\{\frac{C_i(r)}{C_M}, \frac{C_0(r)}{C_M}\}$ stays the same since this curve does not depend on the diffusion constant $D$.
+See figure below.
 
 \begin{figure}[H]
  \centering
- \includegraphics[scale=0.5]{concentration}
+ \includegraphics[scale=0.4]{concentration}
 \end{figure}
 
 However for arbitrary values of $Q$, $R$, and $D$ ($Q=1, R=10, D=1$), when the  diffusion constant $D$ is doubled,  the concentration curve is at a lower level
@@ -317,7 +318,7 @@ compared to the same concentration curve related to a diffusion constant $D$ as 
 
 \begin{figure}[H]
  \centering
- \includegraphics[scale=0.5]{concentration_d_2d}
+ \includegraphics[scale=0.4]{concentration_d_2d}
 \end{figure}
 
 \ee
