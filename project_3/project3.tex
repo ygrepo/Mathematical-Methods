@@ -170,6 +170,54 @@ Therefore
 \ea
 
 \section*{Question 3}
+Start with the equation for $w(y,t)$ established in question 1:
+
+\[
+	w(y,t) = \frac{A}{\rho~i~n} \bigg [ 1 - \frac{ J_0(\alpha y  i^{\frac{3}{2}}) } { J_0(\alpha i^{\frac{3}{2}}) } \bigg ] e^{int}
+\]
+Substituting into the previous equation $n$ with $\alpha = R \sqrt{\frac{n}{\nu}}, n = \nu \frac{\alpha}{R}^2$
+
+\[
+	w(y,t) =  \frac{A~R^2}{i \rho \nu} \bigg [  \frac{  J_0(\alpha i^{\frac{3}{2}})  - J_0(\alpha y  i^{\frac{3}{2}}) } { \alpha^2 J_0(\alpha i^{\frac{3}{2}}) } \bigg ] e^{i \frac{\nu~t}{R^2} \alpha^2}	\\
+\]
+
+Let $B=\alpha y  i^{\frac{3}{2}}, C = \alpha i^{\frac{3}{2}}$ and $D=i \frac{\nu~t}{R^2} \alpha^2$, rewrite the previous equation
+\[
+	w(y,t) =  \frac{A~R^2}{i \rho \nu} \bigg [  \frac{  J_0(C)  - J_0(B) } { \alpha^2 J_0(C) } \bigg ] e^D	\\
+\]
+When $n \rightarrow 0, \alpha \rightarrow 0$ and we have the indeterminate form for $w(y,t) =  \frac{A~R^2}{i \rho \nu} ( \frac{ 1 - 1 } {0 \cdot 1} ) \cdot 1 = \frac{0}{0}$.
+Therefore we apply L'Hospital's rule, compute the derivatives of numerator and denominator and taking the limit $\alpha \rightarrow 0$:
+\ba
+	\frac{d}{d \alpha} (J_0(C) - J_0(B)) e^D	&=	\frac{d}{d \alpha} (J_0(C) - J_0(B)) ~ e^D + (J_0(C) - J_0(B)) \frac{d}{d \alpha} e^D \\
+	\frac{d}{d \alpha} (J_0(C) - J_0(B))		&= -i^{\frac{3}{2}} J_1(C) + i^{\frac{3}{2}} y J_1(B) \\
+									&=  i^{\frac{3}{2}}  (y J_1(B) - J_1(C)) e^D \\
+	\frac{d}{d \alpha} e^D				&= \frac{2 i \nu t}{R^2} \alpha e^D \\					
+\ea
+So
+\ba
+	\frac{d}{d \alpha} (J_0(C) - J_0(B)) e^D	&= \bigg ( i^{\frac{3}{2}}  (y J_1(B) - J_1(C)) +  (J_0(C) - J_0(B))  \frac{2 i \nu t}{R^2} \alpha \bigg ) e^D \\
+	\frac{d} {d \alpha} \alpha^2 J_0(C)		&= 2 \alpha J_0(C) +  \alpha^2 i^{\frac{3}{2}} (- ~ J_1(C)) \\
+									&= \alpha (2 J_0(C) - i^{\frac{3}{2}} \alpha J_1(C)) \\
+\ea
+And 
+\ba
+	\lim_{\alpha \rightarrow 0} \frac{d}{d \alpha} (J_0(C) - J_0(B)) e^D	&=  \bigg ( i^{\frac{3}{2}}  (y \cdot 0 - 0 ) + (0 - 0) \frac{2 i \nu t}{R^2} \cdot 0  \bigg ) 1 = 0 \\
+	\lim_{\alpha \rightarrow 0} \frac{d} {d \alpha} \alpha^2 J_0(C)		&= 0 \cdot (2 \cdot 1 - i^{\frac{3}{2}} \cdot 0 \cdot 0) = 0 \\
+\ea
+We still have the indeterminate form $\frac{0}{0}$, so we apply one more time L'Hospital's rule
+\ba
+	\frac{d^2}{d \alpha^2} (J_0(C) - J_0(B)) e^D	&= \bigg (  i^{\frac{3}{2}} (y  \frac{d}{d \alpha}  J_1(B) - \frac{d}{d \alpha} J_1(C)) + ( \frac{d}{d \alpha} J_0(C) 
+										- \frac{d}{d \alpha} J_0(B))  \frac{2 i \nu t}{R^2} \alpha \\
+										& + (J_0(C) - J_0(B))  \frac{2 i \nu t}{R^2} \bigg ) e^D \\
+										& \bigg ( i^{\frac{3}{2}}  (y J_1(B) - J_1(C)) +  (J_0(C) - J_0(B))  \frac{2 i \nu t}{R^2} \alpha \bigg )  \frac{2 i \nu t}{R^2} \alpha e^D \\
+										&=  \bigg (  i^{\frac{3}{2}} (y^2  \\
+	\frac{d^2}{d \alpha^2} \alpha^2 J_0(C)		&= 2 J_0(C) - i^{\frac{3}{2}} \alpha J_1(C)  + \alpha (2 \frac{d}{d \alpha} J_0(C) \\
+										& -  i^{\frac{3}{2}} J_1(C)  - i^{\frac{3}{2}} \alpha \frac{d}{d \alpha} J_1(C))  \\	
+										&= 2 J_0(C) - i^{\frac{3}{2}} \alpha J_1(C)  + \alpha (2 i^{\frac{3}{2}} (-J_1(C)) \\
+										& -  i^{\frac{3}{2}} J_1(C)  - i^3 \alpha \frac{J_0(C) - J_2(C)}{2} ) \\ 	
+										&= 2 J_0(C) - i^{\frac{3}{2}} J_1(C)  - 3 i^{\frac{3}{2}} J_1(C) \alpha  - \frac{i^3}{2} (J_0(C) - J_2(C)) \alpha \\							
+\ea
+
 
 Using the expression of the differential equation established in question (1) and with $n=0$, we want to solve
 \[
