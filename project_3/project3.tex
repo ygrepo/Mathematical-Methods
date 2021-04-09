@@ -62,7 +62,7 @@ The Wormersley equation for blood flow is:
 \]
 Using $\frac{\partial P}{\partial z}  = A e^{int}$ and taking $w(r, t) = u(r) e^{int}$ yields: $\frac{\partial w}{\partial t} = (in) u e^{int}$,  
 $\frac{\partial w}{\partial r} = u'(r) e^{int}$, and $\frac{\partial^2 w}{\partial r^2} = u''(r) e^{int}$, 
-$\frac{\partial}{\partial r}( r \frac{\partial w}{\partial r}) = u'(r) e^{int} + r u''(r) e^{int}$
+$\frac{\partial}{\partial r}( r \frac{\partial w}{\partial r}) = u'(r) e^{int} + r u''(r) e^{int}$.
 Therefore the Wormersley equation becomes:
 \ba
 	\frac{\mu}{r} \bigg [ u'(r) e^{int} + r u''(r) e^{int} \bigg ]	+  A e^{int}		&=	\rho (i~n) u(r) e^{int} \\
@@ -77,7 +77,7 @@ By simple inspection, one particular solution is a constant w.r.t. $r$, such as 
 \[
 	- \frac{i~n~\rho}{\mu} u_p = - \frac{A}{\mu}
 \]
-thus $u_p = \frac{A}{in\rho}$
+thus $u_p = \frac{A}{in\rho}$.
 The homogeneous equation is:
 \[
 	\frac{d^2 u(r)}{d r^2} + \frac{1}{r} \frac{d u(r)}{d r} + \frac{i^3~n}{\nu} u = 0
@@ -208,7 +208,7 @@ We still have the indeterminate form $\frac{0}{0}$, so we apply one more time L'
 \ba
 	\frac{d^2}{d \alpha^2} (J_0(C) - J_0(B)) e^D	&= \bigg (  i^{\frac{3}{2}} (y  \frac{d}{d \alpha}  J_1(B) - \frac{d}{d \alpha} J_1(C)) + ( \frac{d}{d \alpha} J_0(C) 
 										- \frac{d}{d \alpha} J_0(B))  \frac{2 i \nu t}{R^2} \alpha \\
-										& + (J_0(C) - J_0(B))  \frac{2 i \nu t}{R^2} \bigg ) e^D \\
+										& + (J_0(C) - J_0(B))  \frac{2 i \nu t}{R^2} \bigg ) e^D + \\
 										& \bigg ( i^{\frac{3}{2}}  (y J_1(B) - J_1(C)) +  (J_0(C) - J_0(B))  \frac{2 i \nu t}{R^2} \alpha \bigg )  \frac{2 i \nu t}{R^2} \alpha e^D \\
 										&=  \bigg (  i^{\frac{3}{2}} ( i^{\frac{3}{2}} y^2  \frac{J_0(B) - J_2(B)}{2} - i^{\frac{3}{2}} \frac{J_0(C) - J_2(C)}{2}) + \\
 										& ( i^{\frac{3}{2}}  y J_1(B) -  i^{\frac{3}{2}} J_1(C))  \frac{2 i \nu t}{R^2} \alpha + (J_0(C) - J_0(B))  \frac{2 i \nu t}{R^2} \bigg ) e^D  + \\
@@ -222,14 +222,14 @@ We still have the indeterminate form $\frac{0}{0}$, so we apply one more time L'
 										& -  i^{\frac{3}{2}} J_1(C)  - i^3 \alpha \frac{J_0(C) - J_2(C)}{2} ) \\ 	
 										&= 2 J_0(C) - i^{\frac{3}{2}} J_1(C)  - 3 i^{\frac{3}{2}} J_1(C) \alpha  - \frac{i^3}{2} (J_0(C) - J_2(C)) \alpha \\							
 \ea
-Next we are going to take the second derivative of the numerator of our initial expression of $w(y,t)$ when $\alpha \rightarrow 0$ using the expression above:
+Next we take the second derivative of the numerator of $w(y,t)$ when $\alpha \rightarrow 0$ using the expression above:
 \ba
 	\lim_{\alpha \rightarrow 0} \frac{d^2}{d \alpha^2} (J_0(C) - J_0(B)) e^D	&= \bigg ( \frac{i^3 y^2 } {2} (1 -  0) - \frac{ i^3 }{2} (1 - 0) + \\
 															& ( i^{\frac{3}{2}}  y \cdot 0 -  i^{\frac{3}{2}}  \cdot 0) \frac{2 i \nu t}{R^2} \cdot 0 + (1 - 1)  \frac{2 i \nu t}{R^2} \bigg )\cdot 1 + \\
 															& \bigg ( i^{\frac{3}{2}}  (y \cdot 0 - 0) + (1- 1) \frac{2 i \nu t}{R^2}  \cdot 0 \bigg )  \frac{2 i \nu t}{R^2}  \cdot 0 \cdot 1 \\
 															&= \frac{i^3} {2} (y^2 - 1) = \frac{i} {2} (1 - y^2) \\
 \ea
-Similarly for the limit of $\alpha \rightarrow 0$ of the second derivative of the denominator of  $w(y,t)$ 
+Similarly for the limit of $\alpha \rightarrow 0$ of the second derivative of the denominator of  $w(y,t)$, we get
 \ba
 	\lim_{\alpha \rightarrow 0} \frac{d^2}{d \alpha^2}\alpha^2 J_0(C)		&= 2 \cdot 1 - i^{\frac{3}{2}} \cdot 0 - 3 i^{\frac{3}{2}}  \cdot 0 \cdot 0  - \frac{i^3}{2}  (1 - 0) \cdot 0\\
 															&= 2 \\
@@ -238,13 +238,13 @@ Therefore for a constant input pressure, we have
 \[
 	w = \frac{A~R^2}{i \rho \nu} \frac{i}{4}  (1 - y^2) = \frac{A}{4 \mu} R^2 (1 - y^2)
 \]
-which the equation 2 in Wormersley’s paper with $A=\frac{p_1 - p_2}{l}$\\
+which is equation 2 in Wormersley’s paper with $A=\frac{p_1 - p_2}{l}$\\
 
 Using the expression of the differential equation established in question (1) and with $n=0$, we want to solve
 \[
 	r^2 \frac{d^2 u(r)}{d r^2} + r \frac{d u(r)}{d r}  = - \frac{A}{\mu} r^2
 \]
-This is an Euler equation or Legendre ordinary differential equation  $\alpha=1, \beta=0$, so we make the change of variable $e^t= r$ or $\ln{r}= t$.
+This is an Euler equation or a Legendre ordinary differential equation  with $\alpha=1, \beta=0$, so we make the change of variable $e^t= r$ or $\ln{r}= t$.
 Then $r \frac{du}{dr} = \frac{d u}{d t}$ and $r^2 \frac{d^2y}{dr^2} = \frac{d^2u}{dt^2} - \frac{du}{dt}$.
 
 which yields for the ODE
@@ -252,23 +252,23 @@ which yields for the ODE
 	\frac{d^2 u}{d t^2} - \frac{du}{dt} +  \frac{du}{dt}	&= - \frac{A}{\mu} e^{2t} \\
 	\frac{d^2 u}{d t^2} &= - \frac{A}{\mu} e^{2t} \\
 \ea
-Considering the homogeneous equation and integrating twice gives $u(t) = C_1 t + C_2$ or $u(r) = C_1 \ln(r) + C_2$.
+For the homogeneous equation integrating twice gives $u(t) = C_1 t + C_2$ or $u(r) = C_1 \ln(r) + C_2$.
 Take for one particular solution of the ODE:
 $u_p(t) = C_3 e^{2t}, u'_p(t) = 2 C_3 e^{2t}, u''_p(t) = 4 C_3 e^{2t}$, 
-substitute in the ODE gives $4 C_3 e^{2t} =  - \frac{A}{\mu} e^{2t}$ or $C_3 = - \frac{A}{4 \mu}$ 
+substitute into the ODE gives $4 C_3 e^{2t} =  - \frac{A}{\mu} e^{2t}$ or $C_3 = - \frac{A}{4 \mu}$ 
 thus $u_p(t) =  - \frac{A}{4 \mu} e^{2t}$ or $u_p(r) =  - \frac{A}{4 \mu} r^2$.
-The total solution is 
+Therefore the total solution is 
 \[
 	u(r) = - \frac{A}{4 \mu} r^2  + C_1 \ln(r) + C_2
 \]
 From this, we write $u'(r) = - \frac{A}{2 \mu} r  + \frac{C_1}{r}$.
-So to have the boundary condition $\frac{\partial w} {\partial r} |_{r=0} = 0$ or $\frac{\partial u} {\partial r} |_{r=0} = 0$, $C_1$ has to be zero.
+So to have the boundary condition $\frac{\partial w} {\partial r} |_{r=0} = 0$ or $\frac{\partial u} {\partial r} |_{r=0} = 0$, $C_1$ has to be zero so $u'(0)$ is finite and equal to $0$.
 The second boundary condition $w(R)=0$, or $u(R)=0$, gives $C_2 = \frac{A}{4 \mu} R^2$.
 Finally
 \[
 	u(r) = -  \frac{A}{4 \mu}(r^2 - R^2) = \frac{A}{4 \mu} R^2 (1 - (\frac{r}{R})^2) =  \frac{A}{4 \mu} R^2 (1 - y^2)
 \]
-which is equation (2) in Wormersley’s paper with $A=\frac{p_1 - p_2}{l}$
+which is equation (2) in Wormersley’s paper with $n=0, A=\frac{p_1 - p_2}{l}$ and which is the expression of $w$ we just found in question 3.
 
 
 \section*{Question 4}
@@ -290,7 +290,7 @@ Make the change of variable $y = \frac{r}{R}, dy = \frac{dr}{R}$ and we have
 		&= 2 \pi  \frac{p_1 - p_2}{4 \mu l} R^4  \frac{1}{4} \\
 		&=  \frac{p_1 - p_2}{8 \mu l} \pi R^4 
 \ea
-
+$=$ equation 20 in Wormersley’s paper.
 
 
 \end{document}
