@@ -210,14 +210,35 @@ We still have the indeterminate form $\frac{0}{0}$, so we apply one more time L'
 										- \frac{d}{d \alpha} J_0(B))  \frac{2 i \nu t}{R^2} \alpha \\
 										& + (J_0(C) - J_0(B))  \frac{2 i \nu t}{R^2} \bigg ) e^D \\
 										& \bigg ( i^{\frac{3}{2}}  (y J_1(B) - J_1(C)) +  (J_0(C) - J_0(B))  \frac{2 i \nu t}{R^2} \alpha \bigg )  \frac{2 i \nu t}{R^2} \alpha e^D \\
-										&=  \bigg (  i^{\frac{3}{2}} (y^2  \\
+										&=  \bigg (  i^{\frac{3}{2}} ( i^{\frac{3}{2}} y^2  \frac{J_0(B) - J_2(B)}{2} - i^{\frac{3}{2}} \frac{J_0(C) - J_2(C)}{2}) + \\
+										& ( i^{\frac{3}{2}}  y J_1(B) -  i^{\frac{3}{2}} J_1(C))  \frac{2 i \nu t}{R^2} \alpha + (J_0(C) - J_0(B))  \frac{2 i \nu t}{R^2} \bigg ) e^D  + \\
+										& \bigg ( i^{\frac{3}{2}}  (y J_1(B) - J_1(C)) +  (J_0(C) - J_0(B))  \frac{2 i \nu t}{R^2} \alpha \bigg )  \frac{2 i \nu t}{R^2} \alpha e^D \\
+										&= \bigg ( \frac{i^3  y^2 } {2} (J_0(B) - J_2(B)) - \frac{ i^3}{2} (J_0(C) - J_2(C)) + \\
+										& ( i^{\frac{3}{2}}  y J_1(B) -  i^{\frac{3}{2}} J_1(C))  \frac{2 i \nu t}{R^2} \alpha + (J_0(C) - J_0(B))  \frac{2 i \nu t}{R^2} \bigg ) e^D  + \\
+										& \bigg ( i^{\frac{3}{2}}  (y J_1(B) - J_1(C)) +  (J_0(C) - J_0(B))  \frac{2 i \nu t}{R^2} \alpha \bigg )  \frac{2 i \nu t}{R^2} \alpha e^D \\
 	\frac{d^2}{d \alpha^2} \alpha^2 J_0(C)		&= 2 J_0(C) - i^{\frac{3}{2}} \alpha J_1(C)  + \alpha (2 \frac{d}{d \alpha} J_0(C) \\
 										& -  i^{\frac{3}{2}} J_1(C)  - i^{\frac{3}{2}} \alpha \frac{d}{d \alpha} J_1(C))  \\	
 										&= 2 J_0(C) - i^{\frac{3}{2}} \alpha J_1(C)  + \alpha (2 i^{\frac{3}{2}} (-J_1(C)) \\
 										& -  i^{\frac{3}{2}} J_1(C)  - i^3 \alpha \frac{J_0(C) - J_2(C)}{2} ) \\ 	
 										&= 2 J_0(C) - i^{\frac{3}{2}} J_1(C)  - 3 i^{\frac{3}{2}} J_1(C) \alpha  - \frac{i^3}{2} (J_0(C) - J_2(C)) \alpha \\							
 \ea
-
+Next we are going to take the second derivative of the numerator of our initial expression of $w(y,t)$ when $\alpha \rightarrow 0$ using the expression above:
+\ba
+	\lim_{\alpha \rightarrow 0} \frac{d^2}{d \alpha^2} (J_0(C) - J_0(B)) e^D	&= \bigg ( \frac{i^3 y^2 } {2} (1 -  0) - \frac{ i^3 }{2} (1 - 0) + \\
+															& ( i^{\frac{3}{2}}  y \cdot 0 -  i^{\frac{3}{2}}  \cdot 0) \frac{2 i \nu t}{R^2} \cdot 0 + (1 - 1)  \frac{2 i \nu t}{R^2} \bigg )\cdot 1 + \\
+															& \bigg ( i^{\frac{3}{2}}  (y \cdot 0 - 0) + (1- 1) \frac{2 i \nu t}{R^2}  \cdot 0 \bigg )  \frac{2 i \nu t}{R^2}  \cdot 0 \cdot 1 \\
+															&= \frac{i^3} {2} (y^2 - 1) = \frac{i} {2} (1 - y^2) \\
+\ea
+Similarly for the limit of $\alpha \rightarrow 0$ of the second derivative of the denominator of  $w(y,t)$ 
+\ba
+	\lim_{\alpha \rightarrow 0} \frac{d^2}{d \alpha^2}\alpha^2 J_0(C)		&= 2 \cdot 1 - i^{\frac{3}{2}} \cdot 0 - 3 i^{\frac{3}{2}}  \cdot 0 \cdot 0  - \frac{i^3}{2}  (1 - 0) \cdot 0\\
+															&= 2 \\
+\ea
+Therefore for a constant input pressure, we have
+\[
+	w = \frac{A~R^2}{i \rho \nu} \frac{i}{4}  (1 - y^2) = \frac{A}{4 \mu} R^2 (1 - y^2)
+\]
+which the equation 2 in Wormersley’s paper with $A=\frac{p_1 - p_2}{l}$\\
 
 Using the expression of the differential equation established in question (1) and with $n=0$, we want to solve
 \[
