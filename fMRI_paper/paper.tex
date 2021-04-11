@@ -1,0 +1,142 @@
+\documentclass[12pt,twoside]{article}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz,graphicx,amsmath,amsfonts,amscd,amssymb,mathrsfs, bm,cite,epsfig,epsf,url}
+\usepackage[hang,flushmargin]{footmisc}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue]{hyperref}
+\usepackage{amsthm,multirow,wasysym,appendix}
+\usepackage{array,subcaption} 
+% \usepackage[small,bf]{caption}
+\usepackage{bbm}
+\usepackage{pgfplots}
+\usetikzlibrary{spy}
+\usepgfplotslibrary{external}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{arrows,automata}
+\usepackage{thmtools}
+\usepackage{blkarray} 
+\usepackage{textcomp}
+\usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+
+
+\usepackage{times}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{color}
+\usepackage{graphics}
+\usepackage{enumerate}
+\usepackage{amstext}
+\usepackage{blkarray}
+\usepackage{url}
+\usepackage{epsfig}
+\usepackage{bm}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\usepackage{textcomp}
+\usepackage[left=0.8in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+\usepackage{mathtools}
+\usepackage{minted}
+
+
+
+\input{macros}
+
+\begin{document}
+
+\noindent Professor Rio\\
+EN.585.615.81.SP21 Mathematical Methods\\
+Short analysis of \href{https://blackboard.jhu.edu/courses/1/EN.585.615.81.SP21/db/_11111758_1/JSIP20120400006_16101005.pdf}{''Analysis of fMRI Single Subject Data in the Fourier Domain Acquired Using a Multiple Input Stimulus Experimental Design'} \\
+Johns Hopkins University\\
+Student: Yves Greatti\\\
+
+\section*{Introduction}
+This paper addresses the limitations of existing fMRI blood oxygenation level data analyses which typically use autoregressive (AR) models 
+or pre-whitening data to model the noise, by proposing a novel approach using a general linear model in the Fourier domain
+with a two-way ANOVA design for the deterministic stimulus inputs with inter-stimulus times chosen from a Poisson distribution of equal intensity.
+
+\section*{Contribution}
+By nature fMRI data is highly correlated and developing statistical models using this data  is difficult.
+In addition, parametric AR models are inappropriate when they need to handle every spatial position of voxel acquired within the brain 
+so they are not universally relevant for every experiment to be carried on. 
+Pre-whitening the data could help by removing the data correlation but it does not scale well with fast sampling times.
+For fMRI BOLD data (blood level data oxygenation) the model is a general linear model with normal gaussian noise term $\epsilon(t)$:
+\[
+	s(t) = \mu + a(t) * r(t) + \epsilon(t)
+\]
+$s(t)$ is the univariate time series fMRI signal collected at discrete time $t$, and at each voxel $\bar{x}=(x,y,z)$.
+$s(t)$ is represented as the convolution over time of the deterministic input $r(t)$by the hemodynamic response function (HRF) $a(t)$.
+This model is carried over all the (R) input stimuli, i.e. $,r(t): 1 \times R$ and $a(t): R \times 1$.
+Applying the Fourier transform for a convolution gives:
+\[
+	\tilde{s}(\lambda_k) = \tilde{a} (\lambda_k) \tilde{r}  (\lambda_k) + \tilde{\epsilon}  (\lambda_k) 
+\] where $\lambda_k = \frac{2 \pi k}{T}, T$:number of time points, $k$: frequency number.
+For the fMRI signal, at each voxel, the model is a linear time invariant model with stationarity property and with a response,
+$s(x,t)$, that is a convolution of the input $r(t)$ and $a(t)$.
+The transfer function of such system is referred as the hemodynamic transfer function or HTF: $\tilde{a} (\lambda_k)$.
+ The noise, $\epsilon(x,t)$, is considered Gaussian with zero mean (normal) .
+ Key assumption of uncorrelated noise term $\tilde{\epsilon}  (\lambda_k)$, allows to define the model as a linear regression model
+where $\tilde{a} (\lambda_k)$ represent the regression coefficients.
+Periodograms are then constructed from $ \tilde{r}  (\lambda_k)$ and $\tilde{s}(\lambda_k)$:
+\[
+	\textbf{I}_{\alpha\beta}(\lambda_k) = \frac{1}{2~\pi~T} \tilde{\alpha}(\lambda_k) \tilde{\beta}(\lambda_k)^H
+\]
+where $H$ refers to Hermitian transpose. And from each periodogram, corresponding cross-spectral functions are constructed:
+\[
+	\hat{\textbf{f}}_{\alpha\beta}(\lambda) = \frac{1}{2m+1} \sum_{k=-m}^m \textbf{I}_{\alpha\beta}(\lambda_k) 
+\]
+These estimates of the cross-spectral functions, are constructed over disjoint frequency bands, from $k=-m$ to $m$ with center frequency $\lambda$.
+Using the cross-spectral estimates, least-squares unbiased estimates of the HTF at center frequency $\lambda$ are defined as follows
+\[
+	\hat{A}(\lambda) = \hat{f}_{sr} (\lambda) [ \hat{f}_{rr} (\lambda)]^{-1}
+\]
+where  $\hat{f}_{sr}$, is cross-spectral input~output function, $\hat{f}_{rr}$, cross-spectral input~input function.
+Powers indicators are defined to characterize  the hemodynamic activity at every sampled voxel
+within the brain in response to each individual input stimulus: $P_r$, or for all stimuli: $P_\text{tot}$:
+\be
+		\item [.] Power per band
+		\[
+			p(\lambda) = \diag \bigg [ \hat{A}(\lambda)^H \hat{A}(\lambda) \bigg ]
+		\]
+		\item [.] Total power (sum over all bands) for $r^{\text{th}}$ transfer function
+		\[
+			P_r = \sum_\lambda \langle p(\lambda) \rangle_{rr} ~ ~ r=1 \text{ to } R
+		\]
+		\item [.] Total power for all transfer functions
+		\[
+			P_{\text{tot}} = \Tr \bigg [  \sum_\lambda p(\lambda) \bigg ]
+		\]
+\ee
+
+The paper then, provides statistical significance tests to measure the quality of the model predictions of the fMRI signal in function of the stimulus inputs
+
+\be
+		\item [-] F-distribution tests $F(\lambda)_{2b;2 (2m+1-R)}$ given in equations (9), (10) and (11) for test of the hypothesis $H_0: A(\lambda) B = 0$ where $B$ is the contrast matrix
+		
+		\item [-]  Correlation coefficient $R^2$ in the Fourier domain:
+		\[
+			|R_{sr}(\lambda)|^2 = \frac{ \hat{f}_{sr}(\lambda) \bigg [ \hat{f}_{rr} (\lambda) \bigg ]^{-1}   \hat{f}_{rs} (\lambda)  } { \hat{f}_{ss} (\lambda) } = 1 - \frac{g_{\epsilon\epsilon}  (\lambda)} { \hat{f}_{ss} (\lambda)} 
+		\]
+		where $g_{\epsilon\epsilon}  (\lambda)$ is the error term. For this model, large values of $F(\lambda)$ or $|R_{sr}(\lambda)|^2$ values close to $1$ are indications of poor model performance.
+\ee
+
+\section*{Applications}
+This novel methodology which allows to combine traditional signal processing and statistical techniques, was implemented for single analysis of fMRI BOLD time series data with fast acquisition times. In the experiment, subjects were exposed to four type of images presented using a split screen format. They consisted of paired images: positive and negative visual images paired with alcoholic and non-alcoholic beverages in a 2-way ANOVA experimental design. For every voxel, F-values were computed for every band (or center frequency), then a p-value was selected and an associated F-value threshold, then the corresponding binary mask pixel was applied, indicating whether the stimuli related to the images presented, produced a significant response at any center frequency. Details of the algorithm could be found in the paper. 
+
+\section*{Results}
+Analyzing power of the HTF and temporal shape of the HRF , it might be possible to conclude that, the BOLD response  for an alcoholic subject to a negative image in association with an alcohol image, is diminished as compared to the BOLD response seen when a negative images is combined with a non-alcoholic image. Then two hypothesis tests were conducted $H_0: A(\lambda) = 0$ and $H_0: A(\lambda) B = 0$ which lead to important observations regarding alcoholic subjects:
+\be
+	\item [1.] Activation in the occipital regions has a major low frequency response
+	\item [2.] Effect of emotional valence (positive versus negative) in the insula
+	\item [2.] Positive-alcohol stimulus much stronger than negative-alcohol stimulus
+	\item [3.]  Activation of occipital and insula regions of the brain
+	\item [4.] To a less extent effect of beverage type (alcohol versus non-alcohol)
+\ee 
+
+\section*{Conclusion}
+This is a strong and very novel paper, which combines statistical inference with traditional signal processing. It might be interesting to see how it scales with many more dimensions,  key equations are using "Hermitian" matrix and   matrix inversion, which could be source of performance degradation and numerical instability (equation 3 and 5). In addition, there might be a rapid increasing of parameters to be defined, F-values and p-values, as more granularity is required or  researchers want to use more  pairwise images. One interesting extension will be to consider multi-variates time series case when there is a need to correlate these time-series (like the paper mentions: need to analyze multiple fMRI runs data for an individual subject). 
+\end{document}
