@@ -30,4 +30,13 @@ clc
 clear all
 syms z y
 y = sinh(1/z)
-limit(y,z,0)
+limit(y,z,0);
+
+%%
+clc
+clear all
+z = 1/2 + 2 * exp(i*pi/4)
+(1+2*sqrt(2))/2
+%plot(z, 'o');
+syms z
+poles(1/sin(pi*z))
