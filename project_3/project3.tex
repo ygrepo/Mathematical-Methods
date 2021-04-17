@@ -120,9 +120,9 @@ We have
 	\lim_{r \rightarrow 0} u'(r) &= \lim_{r \rightarrow 0} C_1 J'_0(\lambda r) + C_2 Y'_0(\lambda r) \\
 					&=  0 + \lim_{r \rightarrow 0} C_2 Y'_0(\lambda r) \\
 \ea
-Looking at the plot of $Y_0(x)$, we see that in order to have $\frac{\partial w} {\partial r} |_{r=0} = 0$ or $\frac{\partial u} {\partial r} |_{r=0} = 0$
+Looking at the plot of $Y_0(x)$, we see that $Y_0(x)$ is not finite as $x \rightarrow 0$, thus in order to have $\frac{\partial w} {\partial r} |_{r=0} = 0$ or $\frac{\partial u} {\partial r} |_{r=0} = 0$
 , the term in $Y_0$ must be discarded and we need $C_2=0$.
-Thus
+Now we have
 \[
 	u(r) =   C_1 J_0(\lambda r) +\frac{A}{i~n~\rho}
 \]
@@ -130,12 +130,12 @@ Using the second boundary condition $w(R) = u(R) = 0$ we have $C_1 J_0(\lambda R
 Putting everything back
 \ba
 	u(r)	&= \frac{A}{\rho~i~n} \bigg [ 1 - \frac{J_0(\lambda r)} {J_0(\lambda R)} \bigg ] \\
-		&= \frac{A}{\rho~i~n} \bigg [ 1 - \frac{J_0(r \sqrt{\frac{\lambda}{\nu}} i^{\frac{3}{2}})} {J_0(R \sqrt{\frac{\lambda}{\nu}} i^{\frac{3}{2}}) } \bigg ] \\
+		&= \frac{A}{\rho~i~n} \bigg [ 1 - \frac{J_0(r \sqrt{\frac{n}{\nu}} i^{\frac{3}{2}})} {J_0(R \sqrt{\frac{n}{\nu}} i^{\frac{3}{2}}) } \bigg ] \\
 \ea
-Take $\alpha = R \sqrt{\frac{\lambda}{\nu}}$ and $y=\frac{r}{R}$ then
+Take $\alpha = R \sqrt{\frac{n}{\nu}}$ and $y=\frac{r}{R}$ then
 \ba
-	J_0(r \sqrt{\frac{\lambda}{\nu}} i^{\frac{3}{2}}) &= J_0(\frac{r}{R} R \sqrt{\frac{\lambda}{\nu}} i^{\frac{3}{2}}) = J_0(\alpha y  i^{\frac{3}{2}}) \\
-	J_0(R \sqrt{\frac{\lambda}{\nu}} i^{\frac{3}{2}}) &=  J_0(\alpha i^{\frac{3}{2}}) \\
+	J_0(r \sqrt{\frac{n}{\nu}} i^{\frac{3}{2}}) &= J_0(\frac{r}{R} R \sqrt{\frac{n}{\nu}} i^{\frac{3}{2}}) = J_0(\alpha y  i^{\frac{3}{2}}) \\
+	J_0(R \sqrt{\frac{n}{\nu}} i^{\frac{3}{2}}) &=  J_0(\alpha i^{\frac{3}{2}}) \\
 \ea
 Lastly
 \[
@@ -175,7 +175,7 @@ Start with the equation for $w(y,t)$ established in question 1:
 \[
 	w(y,t) = \frac{A}{\rho~i~n} \bigg [ 1 - \frac{ J_0(\alpha y  i^{\frac{3}{2}}) } { J_0(\alpha i^{\frac{3}{2}}) } \bigg ] e^{int}
 \]
-Substituting into the previous equation $n$ with $\alpha = R \sqrt{\frac{n}{\nu}}, n = \nu \frac{\alpha}{R}^2$
+Substituting into the previous equation $n$ with $\alpha = R \sqrt{\frac{n}{\nu}}, n = \nu (\frac{\alpha}{R})^2$
 
 \[
 	w(y,t) =  \frac{A~R^2}{i \rho \nu} \bigg [  \frac{  J_0(\alpha i^{\frac{3}{2}})  - J_0(\alpha y  i^{\frac{3}{2}}) } { \alpha^2 J_0(\alpha i^{\frac{3}{2}}) } \bigg ] e^{i \frac{\nu~t}{R^2} \alpha^2}	\\
@@ -190,7 +190,7 @@ Therefore we apply L'Hospital's rule, compute the derivatives of numerator and d
 \ba
 	\frac{d}{d \alpha} (J_0(C) - J_0(B)) e^D	&=	\frac{d}{d \alpha} (J_0(C) - J_0(B)) ~ e^D + (J_0(C) - J_0(B)) \frac{d}{d \alpha} e^D \\
 	\frac{d}{d \alpha} (J_0(C) - J_0(B))		&= -i^{\frac{3}{2}} J_1(C) + i^{\frac{3}{2}} y J_1(B) \\
-									&=  i^{\frac{3}{2}}  (y J_1(B) - J_1(C)) e^D \\
+									&=  i^{\frac{3}{2}}  (y J_1(B) - J_1(C))\\
 	\frac{d}{d \alpha} e^D				&= \frac{2 i \nu t}{R^2} \alpha e^D \\					
 \ea
 So
@@ -268,7 +268,7 @@ Finally
 \[
 	u(r) = -  \frac{A}{4 \mu}(r^2 - R^2) = \frac{A}{4 \mu} R^2 (1 - (\frac{r}{R})^2) =  \frac{A}{4 \mu} R^2 (1 - y^2)
 \]
-which is equation (2) in Wormersley’s paper with $n=0, A=\frac{p_1 - p_2}{l}$ and which is the expression of $w$ we just found in question 3.
+which is equation (2) in Wormersley’s paper for $n=0$, and $A=\frac{p_1 - p_2}{l}$ and which is the expression of $w$ we just found in question 3.
 
 
 \section*{Question 4}
@@ -290,7 +290,7 @@ Make the change of variable $y = \frac{r}{R}, dy = \frac{dr}{R}$ and we have
 		&= 2 \pi  \frac{p_1 - p_2}{4 \mu l} R^4  \frac{1}{4} \\
 		&=  \frac{p_1 - p_2}{8 \mu l} \pi R^4 
 \ea
-$=$ equation 20 in Wormersley’s paper.
+We just obtain equation 20 in Wormersley’s paper.
 
 
 \end{document}
