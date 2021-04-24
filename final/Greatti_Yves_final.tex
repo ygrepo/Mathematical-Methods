@@ -220,9 +220,128 @@ we have
 \ee
 
 \section*{Question 4}
+\be
+
+\item [a.]
+\[
+	\frac{\partial u}{\partial x} + 4 x u = 0
+\]
+Integration factor is
+\[
+	e^{\int 4 x dx} = e^{4 \int x dx} = e^{4 \frac{x^2}{2}} = e^{2 x^2}
+\]
+Multiply the partial differential equation by the I.F.:
+\ba
+	e^{2 x^2}\frac{\partial u}{\partial x} + 4 x e^{2 x^2} u	&= 0 \\
+	\frac{\partial}{\partial x} (e^{2 x^2} u)	&= 0 \\
+\ea
+Now integrate both sides with respect to x
+\ba
+	e^{2 x^2} u &= C \; C\text{:constant} \\
+	u(x) &= C e^{-2 x^2} \\
+\ea
+
+\item [b.]
+\[
+	y^2 u_x - x^2 u_y = 0
+\]
+
+Let $u(x,y)  = X(x) Y(y)$, substitution into the D.E. gives
+\ba
+	y^2 X' Y - x^2 X Y' &= 0 \\
+	y^2 \frac{X' Y}{X Y} - x^2 \frac{X Y' }{X Y} &= 0 \\
+	y^2 \frac{X'}{X} - x^2 \frac{Y' }{Y} &= 0 \\	
+	\frac{1}{x^2} \frac{X'}{X} = \frac{1}{y^2} \frac{Y' }{Y} &= k \\	
+\ea
+Integrating $\ln X = \frac{1}{3} k x^3 + \ln(C)$ and $\ln Y = \frac{1}{3} k y^3 + \ln(D)$, so
+\[
+	X = C e^{\frac{1}{3} k x^3} , Y = D e^{\frac{1}{3} k y^3}
+\]
+Therefore (with $C D = A$) $u(x,y) = A \; e^{\frac{1}{3} k (x^3 + y^3)}$
+\ee
+
+
 
 \section*{Question 5}
 
 \section*{Question 6}
+
+\be
+
+\item [a.]
+
+Substituting $u(r,z) = R(r) Z(z)$ into the diffusion equation in cylindrical coordinates gives
+\[
+R'' Z + \frac{1}{r} R' Z+ R Z'' = 0
+\]
+Diving by $R Z$ gives 
+\[
+	\frac{R''}{R} + \frac{1}{r}  \frac{R'}{R} + \frac{Z''}{Z} = 0
+\]
+Separation of variables gives
+\[
+	\frac{R''}{R} + \frac{1}{r}  \frac{R'}{R} = - \frac{Z''}{Z} = - k^2
+\]
+or
+\ba
+	\frac{R''}{R} + \frac{1}{r}  \frac{R'}{R} &= -k^2 \\
+	 \frac{Z''}{Z} &= k^2
+\ea
+
+\item [b.]
+For $\frac{d^2}{d z^2} Z(z) = k^2 Z(z)$, we immediately see that $Z(z) = c_1 e^{k z} + c_2 e^{-k z}$ which we can reformulate as $Z(z) = A \sinh(k z) + B \cosh(k z)$.\\
+For $\frac{R''}{R} + \frac{1}{r}  \frac{R'}{R} = -k^2$,
+starting with $ \frac{d^2 R(r)}{d r^2} + \frac{1}{r}\frac{d R(r)} {d r} + k^2 R(r) = 0$.
+\ba
+	s &=k r, r = \frac{s}{k}, \frac{d s}{d r} = k, R(r) \rightarrow R(s) \\
+	\frac{d R}{d r} &= \frac{d R}{d s} \frac{d s}{d r} = k \frac{d R}{d s} \\
+	\frac{d^2 R}{d r^2} &= k \frac{d}{d s} \bigg( k \frac{d R}{d s} \bigg ) = k^2 \frac{d^2 R}{d s^2} \\
+\ea
+Substitution into the ODE gives
+\ba
+	k^2  \frac{d^2 R(s)}{d s^2} + \frac{1}{ \frac{s}{k} } k  \frac{d R(s)}{d s} + k^2 R(s)	&= 0 \\
+	k^2  \frac{d^2 R(s)}{d s^2} + \frac{1}{s} k^2 \frac{d R(s)}{d s} + k^2 R(s)	&= 0 \\
+\ea
+Multiplying out by $(\frac{s}{k})^2$ gives
+\ba
+	 s^2 \frac{d^2 R(s)}{d s^2} + s  \frac{d R(s)}{d s} + s^2 R(s) &= 0 \\
+	 s^2 \frac{d^2 R(s)}{d s^2} + s  \frac{d R(s)}{d s} + (s^2 - 0^2) R(s) &= 0 \\
+\ea
+The last equation being a Bessel equation of order $0$ therefore the solution is of the form
+\[
+	R(r) = C_1 J_0(kr) + C_2 Y_0(kr)
+\]
+Since the temperature remains bounded at $r=0$ thus the term $Y_0(kr)$ has to be discarded, $C_2=0$, and $R(r) = C J_0(kr), C=C_1$
+
+\item [c.]
+Finally apply boundary conditions.
+First, $u(r,0)= R(r) Z(0)=0$, since in general $R(r) \neq 0$, thus $Z(0)=0$, which is $A ~ 0 + B ~ 1 = 0 \rightarrow B = 0$
+and $Z(z) = A \sinh(k z)$.
+Then $u(5,z) = R(5) Z(z) = 0 \rightarrow R(5) = 0 $, therefore $C J_0(5k) = 0 \rightarrow J_0(5k) = 0$. $5k$ represents the zero crossing for the Bessel function of order 0.
+We call them $\alpha_m$ and set $5k_m = \alpha_m  \rightarrow  k_m = \frac{\alpha_m}{5}$. Therefore the solutions are $R_m(r) = C_m J_0(k_m r) = C_m J_0(\frac{\alpha_m}{5} r)$.
+Note now that solutions in $z$ are $Z_m(z) = A_m \sinh(k_m z)$. Finally applying the superposition principle, we have
+\[
+	u(r, z) = \sum_{m=1}^\infty A_m \sinh(k_m z) J_0(\frac{\alpha_m}{5} r) \; \text{ where  } A_m C_m \rightarrow A_m
+\]
+Applying the last boundary condition $u(r, 20) = u_0, 0 < r < 5$, we get:
+\[
+	u(r, 20) = \sum_{m=1}^\infty A_m \sinh(20 k_m) J_0(\frac{\alpha_m}{5} r) = u_0
+\]
+This is a Fourier Bessel series where the coefficients are given by
+\[
+	 \sinh(20 k_m) A_m = \frac{2} {5^2 J_1^2(\alpha_m)} \int_0^5 r u_0  J_0(\frac{\alpha_m}{5} r) dr =  \frac{2 u_0} {25 J_1(\alpha_m)} \int_0^5 r J_0(\frac{\alpha_m}{5} r) dr
+\]
+Next, $\sinh(20 k_m) =  \sinh(20 \frac{\alpha_m}{5}) =  \sinh(4 \alpha_m)$, and we get
+\[
+	 A_m = \frac{2 u_0} {25 J_1(\alpha_m)  \sinh(4 \alpha_m)} \int_0^5 J_0(\frac{\alpha_m}{5} r) r dr 
+\]
+Finally using $\frac{\partial}{\partial r} [ r J_1(r)] = r J_0(r)$ 
+\ba
+	 A_m		&= \frac{2 u_0} {25 J_1(\alpha_m)  \sinh(4 \alpha_m)} \bigg [r J_1(\frac{\alpha_m}{5} r) \bigg ]_0^5 \\
+	 	 	&= \frac{2 u_0} {25 J_1(\alpha_m)  \sinh(4 \alpha_m)} \bigg (5 J_1(\frac{\alpha_m}{5} 5) \bigg ) \\
+	 		&= \frac{2 u_0} {5 \sinh(4 \alpha_m)}
+\ea
+
+\ee
 
 \end{document}
