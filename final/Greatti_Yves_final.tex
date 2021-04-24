@@ -263,6 +263,33 @@ Therefore (with $C D = A$) $u(x,y) = A \; e^{\frac{1}{3} k (x^3 + y^3)}$
 
 
 \section*{Question 5}
+We have the following problem
+\ba
+	\Delta u &= 0 \\
+	u(x,0) &= 0 \\
+	u(x,b) &= 100 x \\
+	u_x(0,y) &= 0 \\
+	u_x(a,y) &= 0 \\	
+\ea
+
+Assume a solution of the form $u(x,y) = X(x) Y(y)$. Substitute this expression and divide through by $XY$, to get:
+\ba
+	& \frac{X''}{X} + \frac{Y''}{Y}  = 0 \\
+	& - \frac{X''}{X} = \frac{Y''}{Y} \\
+\ea
+LHS is function of $x$ only and RHS is a function of $y$ only, thus we can write, with $k$ constant
+\[
+	- \frac{X''}{X} = \frac{Y''}{Y}  = k
+\]
+We see immediately that $X(x) = A \cos(\sqrt{k} x) + B \sin(\sqrt{k} x)$. And $X'(x) = \sqrt{k} \bigg ( B \cos(\sqrt{k} x) - A \sin(\sqrt{k} x) \bigg ) $.
+Also $u_x(x,y) = X'(x) Y(y)$.
+Take the  boundary condition $u_x(0,y) =  X'(0) Y(y) = 0$, 
+since in general $Y(y) \neq 0$ then $X'(0) = 0$. Plug it into $X'(x)$ gives $ \sqrt{k} \bigg ( B ~ 1 - A ~ 0 \bigg ) = 0 \rightarrow B = 0$.
+Now $X(x) = A \cos(\sqrt{k} x)$ and $X'(x) = - A \sqrt{k} \sin(\sqrt{k} x)$. Next, with $u_x(a,y) = 0$ gives $X'(a) Y(y) = 0   \rightarrow  X'(a) = 0$.
+$X'(a) = 0$ therefore $- A \sqrt{k} \sin(\sqrt{k} a) = 0  \rightarrow  \sqrt{k} a = n \pi$. Therefore $k_n =  \frac{n^2 \pi^2} {a^2}$ and 
+\[
+	X_n(x) = A_n \sin(\frac{n \pi}{a} x )
+\]
 
 \section*{Question 6}
 
