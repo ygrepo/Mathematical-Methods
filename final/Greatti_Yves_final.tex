@@ -285,11 +285,45 @@ We see immediately that $X(x) = A \cos(\sqrt{k} x) + B \sin(\sqrt{k} x)$. And $X
 Also $u_x(x,y) = X'(x) Y(y)$.
 Take the  boundary condition $u_x(0,y) =  X'(0) Y(y) = 0$, 
 since in general $Y(y) \neq 0$ then $X'(0) = 0$. Plug it into $X'(x)$ gives $ \sqrt{k} \bigg ( B ~ 1 - A ~ 0 \bigg ) = 0 \rightarrow B = 0$.
-Now $X(x) = A \cos(\sqrt{k} x)$ and $X'(x) = - A \sqrt{k} \sin(\sqrt{k} x)$. Next, with $u_x(a,y) = 0$ gives $X'(a) Y(y) = 0   \rightarrow  X'(a) = 0$.
-$X'(a) = 0$ therefore $- A \sqrt{k} \sin(\sqrt{k} a) = 0  \rightarrow  \sqrt{k} a = n \pi$. Therefore $k_n =  \frac{n^2 \pi^2} {a^2}$ and 
+Now $X(x) = A \cos\bigg( \sqrt{k} x \bigg)$ and $X'(x) = - A \sqrt{k} \sin\ \bigg (\sqrt{k} x \bigg)$. Next, with $u_x(a,y) = 0$ gives $X'(a) Y(y) = 0   \rightarrow  X'(a) = 0$.
+$X'(a) = 0$ therefore $- A \sqrt{k} \sin\bigg (\sqrt{k} a \bigg) = 0  \rightarrow  \sqrt{k} a = n \pi$. So $k_n =  \frac{n^2 \pi^2} {a^2}$ and 
+\ba
+	X_n(x) &= A_n \cos(\frac{n \pi}{a} x ) \\
+	Y_n(y) &= B_n \cosh(\frac{n \pi}{a} y) + C_n  \sinh(\frac{n \pi}{a} y) \\
+\ea
+The boundary condition $u(x,0) = X(x) Y(0) = 0$ gives the non trivial solution $Y(0) = B_n ~ 1 + C_n ~ 0 = 0 \rightarrow B_n = 0$. 
+We are left with $u_n(x,y) = A_n  \cos(\frac{n \pi}{a} x ) \sinh(\frac{n \pi}{a} y)$ (where $A_n C_n \rightarrow A_n$).
+Applying the superposition principle we have
 \[
-	X_n(x) = A_n \sin(\frac{n \pi}{a} x )
+	u(x,y) = \sum_{n=1}^\infty A_n  \cos(\frac{n \pi}{a} x ) \sinh(\frac{n \pi}{a} y)
 \]
+Finally we apply the initial conditions $u(x,b) = 100 x$, therefore
+\[
+	u(x,b) =  \sum_{n=1}^\infty A_n  \cos(\frac{n \pi}{a} x) \sinh(\frac{n \pi}{a} b) = 100 x
+\]
+This is a Fourier series and we get
+\ba
+	A_n \sinh(n \pi \frac{a} {b})	&= \frac{2}{a} \int_0^a 100 x \cos(\frac{n \pi}{a} x) dx \\
+	A_n \sinh(n \pi \frac{a} {b})	&= \frac{200}{a} \int_0^a x \cos(\frac{n \pi}{a} x) dx \\
+\ea
+Now 
+\ba
+	\int_0^a x \cos(\frac{n \pi}{a} x) dx	&= \big [ x (\frac{a}{n \pi}) \sin( \frac{n \pi}{a} x) \big ]_0^a -\frac{a}{n \pi} \int_0^a \sin(\frac{n \pi}{a} x) dx \\
+								&= 0  - \frac{a}{n \pi} \int_0^a \sin(\frac{n \pi}{a} x) dx \\
+								&= - \frac{a}{n \pi} (- \frac{a}{n \pi}) [\cos(\frac{n \pi}{a} x)]_0^a \\
+								&=  \frac{a^2}{n^2 \pi^2} (\cos(n \pi) - 1) \\
+								&=  \begin{cases}
+      										-  \frac{2 a^2}{n^2 \pi^2} & \text{odd n} \\
+										0 &  \text{even n}
+   									 \end{cases} \\
+\ea
+Substitute it back to get $A_n$
+\ba
+	A_{n, n \text{ odd }}	&= \frac{1}{\sinh(n \pi \frac{a} {b})} \frac{200}{a}  (-  \frac{2 a^2}{n^2 \pi^2} ) \\ 	
+	A_{n, n \text{ odd }}	&= - 	 \frac{400 a} {n^2 \pi^2 \sinh(n \pi \frac{a} {b})} \\	
+	A_{n, n \text{ odd }}	&= - 	 \frac{800 a} {n^2 \pi^2 (e^{n \pi \frac{a} {b}} - e^{-n \pi \frac{a} {b}})} \\	
+	A_{n, n \text{ even }}	&= 0 \\
+\ea
 
 \section*{Question 6}
 
