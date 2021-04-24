@@ -405,4 +405,39 @@ Finally using $\frac{\partial}{\partial r} [ r J_1(r)] = r J_0(r)$
 
 \ee
 
+\section*{Question 7}
+\be
+
+\item [a.]
+Let $z=x+iy$  then $z^2 = (x+iy)^2 = x^2 - y^2 + 2 i x y$ and
+\ba
+	e^{z^2}	&= e^{ x^2 - y^2 + 2 i x y} = e^{x^2 - y^2} e^{2 i x y} \\
+			&= e^{x^2 - y^2} (\cos{2xy} + \sin{2xy}) \\
+\ea
+Now take $u(x,y) = e^{x^2 - y^2} \cos{2xy}$ and $v(x,y) = e^{x^2 - y^2} \sin{2xy}$.
+We have
+\ba
+	\frac{\partial u}{\partial x}	&= 2 x ~ e^{x^2 - y^2} \cos{2xy} + e^{x^2 - y^2}  (-2y) \sin{2xy} \\
+	\frac{\partial u}{\partial x}	&= 2 e^{x^2 - y^2} (x \cos{2xy} -y \sin{2xy}) \\
+	\frac{\partial v}{\partial y}	&= -2 y ~ e^{x^2 - y^2} \sin{2xy} + e^{x^2 - y^2}  (2x) \cos{2xy} \\
+	\frac{\partial v}{\partial y}	&= 2 e^{x^2 - y^2} (x \cos{2xy} -y \sin{2xy}) \\
+	\Rightarrow \frac{\partial u}{\partial x}	&= \frac{\partial v}{\partial y} \\
+	\frac{\partial u}{\partial y}	&= -2 y ~ e^{x^2 - y^2} \cos{2xy} + e^{x^2 - y^2}  (-2x) \sin{2xy} \\
+	\frac{\partial u}{\partial y}	&= -2 e^{x^2 - y^2} (y \cos{2xy} +x \sin{2xy}) \\
+	\frac{\partial v}{\partial x}	&= 2 x ~ e^{x^2 - y^2} \sin{2xy} + e^{x^2 - y^2}  (2y) \cos{2xy} \\
+	\frac{\partial v}{\partial x}	&= 2 e^{x^2 - y^2} (y \cos{2xy} +x \sin{2xy}) \\
+	\Rightarrow \frac{\partial u}{\partial y}	&= -\frac{\partial v}{\partial x} \\
+\ea
+The Cauchy-Riemann conditions are satisfied therefore $e^{z^2}$ is analytic (as required, since both $z^2$ and $e^z$ are entire functions).
+
+\item [b.]
+For $v(x,y) = xy$, we have
+\ba
+	v_x &= y, v_{xx} = 0 \\
+	v_y &= x, v_{yy} = 0 \\
+	& v_{xx} + v_{yy} = 0 \\
+\ea
+
+\ee
+
 \end{document}
