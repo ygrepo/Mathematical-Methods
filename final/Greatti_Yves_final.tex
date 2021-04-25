@@ -452,7 +452,7 @@ For $v(x,y) = xy$, we have
 	\rightarrow & v_{xx} + v_{yy} = 0 \\
 \ea
 Using Cauchy conditions $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$, we have $\frac{\partial u}{\partial x} = x$
-integration on booth sides gives:
+integration on both sides, gives:
 \ba
 	u &= \int x dx + g(y) \\
 	u &= \frac{x^2}{2} + g(y) \\
@@ -462,7 +462,7 @@ Next the Cauchy condition $\frac{\partial u}{\partial y} = -\frac{\partial v}{\p
 	\frac{\partial u}{\partial y} &= g'(y) = - \frac{\partial v}{\partial x} = - y \\
 	g(y) &=  -\frac{y^2}{2} + C \\
 \ea
-Therefore $u(x,y)= \frac{x^2-y^2}{2} + C$ and $f(x,y) =  \frac{x^2-y^2}{2}  + i xy$
+Therefore $u(x,y)= \frac{x^2-y^2}{2} + C$ and $f(x,y) =  \frac{x^2-y^2}{2} + C + i xy$
 \ee
 
 \section*{Question 8}
@@ -479,7 +479,7 @@ Substitute $y=x^2, dy = 2 x dx$ then we get
 \ea
 
 \item [b.]
-Take $z=x_iy, Re(z) = x$, let parametrize the line from $1$ to $i$ as $z(t) = 1 \cdot (1-t) + i \cdot t, = 1 + (i-1)~t, dz = (i-1) dt$ for $0 \le t \le 1$. We have then
+Take $z=x+iy, Re(z) = x$, let parametrize the line from $1$ to $i$ as $z(t) = 1 \cdot (1-t) + i \cdot t, = 1 + (i-1)~t, dz = (i-1) dt$ for $0 \le t \le 1$. We have then
 \ba
 	\int_C Re(z)  dz 	&= 	\int_0^1 (1-t) (i-1) dt \\
 					&= (i-1) \int_0^1 (1-t) dt \\
@@ -506,7 +506,7 @@ Take $z = \xi +1$ then
 			&= -\frac{1}{\xi^2} (1 + \xi + \xi^2 + \xi^3 + \cdots) \\
 			&= -\frac{1}{ \xi^2} - \frac{1}{\xi} -\frac{1}{2} - \xi + \cdots \\
 \ea	
-Therefore the pole is of order $2$ and Res$(f, 1) = -1$, Poles within the circle centered at $z=0$ with radius $4$ are $1$ and $2$.
+Therefore the pole is of order $2$ and Res$(f, 1) = -1$. Poles within the circle centered at $z=0$ with radius $4$, are $1$ and $2$.
 Applying the residue theorem
 \[
  \oint_C f(z) dz =   \oint_C  \frac{1}{(z-2)(z-1)^2} dz = 2 \pi i (\textrm{Res}(f,2) + \textrm{Res}(f,1)) = 2 \pi i ~ (1-1) = 0
@@ -521,11 +521,22 @@ We have
 					&= 	\frac{1}{z^n} + \frac{1}{z^{n+1}} + \frac{1}{z^{n+2}} + \cdots \\
 \ea
 Looking at $\lim_{z\rightarrow 0} (z-0)^\alpha \sum_{k=0}^\infty \frac{1}{k!} \frac{1}{z^{n+k}}$, there is no largest $\alpha$ such this quantity is finite.
-Thus $0$ is an essential singularity. The Laurent expansion has only negative powers of z starting at n. We see that  Res$(e^{\frac{1}{z^n}}, 0) = 0$.
+Thus $0$ is an essential singularity. The Laurent expansion has only negative powers of z starting at n. 
 $e^{\frac{1}{z^n}}$ has only the singularity $0$ within the unit circle, therefore applying the residue theorem
+\bi
+\item $n = 0$, the function is $e^{\frac{1}{z^0}} = e$, take $z=e^{i \theta}, dz = i e^{i \theta} d\theta$
+\[
+	 \oint_C edz = e \oint_C dz = e i \int_0^{2\pi} e^{i \theta} d\theta = e i [\frac{e^{i \theta}}{i}]_0^{2\pi} = e (e^{i 2 \pi} - 1) = 0
+\]
+\item $n = 1$, Res$(e^{\frac{1}{z}}, 0) = 1$
+\[
+	 \oint_C e^{\frac{1}{z}} dz = 2 \pi i ~ 1 = 2 \pi i
+\]
+\item case $n > 1$ Res$(e^{\frac{1}{z^n}}, 0) = 0$
 \[
 	 \oint_C e^{\frac{1}{z^n}} dz = 2 \pi i ~ 0 = 0
 \]
+\ei
 
 \ee
 
