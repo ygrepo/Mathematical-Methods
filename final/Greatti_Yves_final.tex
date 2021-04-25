@@ -451,4 +451,28 @@ Next the Cauchy condition $\frac{\partial u}{\partial y} = -\frac{\partial v}{\p
 Therefore $u(x,y)= \frac{x^2-y^2}{2} + C$ and $f(x,y) =  \frac{x^2-y^2}{2}  + i xy$
 \ee
 
+\section*{Question 7}
+\be
+
+\item [a.]
+Substitute $y=x^2, dy = 2 x dx$ then we get
+\ba
+	\int_C (x^2 + y) dx + 2 xy dy	&= \int_0^1 (x^2 + x^2) dx + 2x ~ x^2 2 x dx \\
+							&=  \int_0^1 (2 x^2 + 4 x^4) dx \\
+							&= 2 [\frac{x^3}{3}]_0^1 + 4 [\frac{x^5}{5}]_0^1 \\
+							&= \frac{2}{3} +  \frac{4}{5} \\
+							&=  \frac{10 + 12}{15} = \frac{22}{15} \\  
+\ea
+
+\item [b.]
+Take $z=x_iy, Re(z) = x$, let parametrize the line from $1$ to $i$ as $z(t) = 1 \cdot (1-t) + i \cdot t, = 1 + (i-1)~t, dz = (i-1) dt$ for $0 \le t \le 1$. We have then
+\ba
+	\int_C Re(z)  dz 	&= 	\int_0^1 (1-t) (i-1) dt \\
+					&= (i-1) \int_0^1 (1-t) dt \\
+					&= (i-1) [t - \frac{t^2}{2}]_0^1 \\
+					&=  (i-1) \frac{1}{2} = \frac{i-1}{2} \\		
+\ea
+
+
+\ee
 \end{document}
