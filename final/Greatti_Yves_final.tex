@@ -435,9 +435,20 @@ For $v(x,y) = xy$, we have
 \ba
 	v_x &= y, v_{xx} = 0 \\
 	v_y &= x, v_{yy} = 0 \\
-	& v_{xx} + v_{yy} = 0 \\
+	\rightarrow & v_{xx} + v_{yy} = 0 \\
 \ea
-
+Using Cauchy conditions $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$, we have $\frac{\partial u}{\partial x} = x$
+integration on booth sides gives:
+\ba
+	u &= \int x dx + g(y) \\
+	u &= \frac{x^2}{2} + g(y) \\
+\ea
+Next the Cauchy condition $\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$ yields
+\ba
+	\frac{\partial u}{\partial y} &= g'(y) = - \frac{\partial v}{\partial x} = - y \\
+	g(y) &=  -\frac{y^2}{2} + C \\
+\ea
+Therefore $u(x,y)= \frac{x^2-y^2}{2} + C$ and $f(x,y) =  \frac{x^2-y^2}{2}  + i xy$
 \ee
 
 \end{document}
