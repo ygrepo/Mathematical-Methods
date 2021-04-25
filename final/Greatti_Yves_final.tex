@@ -69,7 +69,7 @@ $f(x) = x$ is odd on $[-\pi,\pi]$ therefore its Fourier coefficients $a_n$ are $
 	 					&=( -\frac{\pi}{n}) \cos(n \pi) + \frac{1}{n} [\sin(nx)]_0^\pi \\
 						&= \frac{(-1)^{n+1} \pi}{n} \\
  \ea
- Thus $b_n = \frac{2}{\pi}   \frac{(-1)^{n+1} \pi}{n} = \frac{(-1)^{n+1} 2}{n}$ and the Fourier series of $x$, on $[-\pi,\pi]$, is:
+ Thus $b_n = \frac{2}{\pi}   \frac{(-1)^{n+1} \pi}{n} = \frac{2 (-1)^{n+1}}{n}$ and the Fourier series of $x$, on $[-\pi,\pi]$, is:
  \[
  	x = \sum_{n=1}^\infty b_n \sin(nx) = 2  \sum_{n=1}^\infty \frac{(-1)^{n+1}  \sin(nx)}{n}
  \]
@@ -77,7 +77,7 @@ $f(x) = x$ is odd on $[-\pi,\pi]$ therefore its Fourier coefficients $a_n$ are $
 \item [b.]
 If we integrate terms by terms the previous expression, the Fourier series of $x$ over  $[-\pi,\pi]$, we have:
 \ba
-	\frac{x^2}{2}	&= 2 \sum_{n=1}^\infty \frac{(-1)^{n+1}}{n} (-\frac{\cos(nx)}{n}) + c ~ ~ c\text{constant of integration} \\
+	\frac{x^2}{2}	&= 2 \sum_{n=1}^\infty \frac{(-1)^{n+1}}{n} (-\frac{\cos(nx)}{n}) + c ~ ~ c\text{ constant of integration} \\
 			x^2	&= 4 \sum_{n=1}^\infty \frac{(-1)^n}{n^2} \cos(nx) + c \text{ with } 2 c \rightarrow c \\
 				&= c + 4 \sum_{n=1}^\infty \frac{(-1)^n}{n^2} \cos(nx)
 \ea
@@ -105,7 +105,8 @@ Substituting for $a_n$ in (1):
 \]
 
 \item [d.]
-Fourier series of $x^2$ using integration term by term or calculating directly, match, as required, by taking $c=\frac{\pi^2}{3}$ since $x$ is a piecewise smooth function on the specified range.
+As required, taking $c=\frac{\pi^2}{3}$, since $x$ is a piecewise smooth function on the specified range,
+the Fourier series of $x^2$, using integration term by term or directly calculating, match, .
 
 \ee
 
@@ -154,7 +155,7 @@ Since every power of $z$ term must be $0$ and $z^n \neq 0$, gives:
 \[
 	a_n = - \frac{1}{(n+1)n} a_{n-1}
 \]
-Taking $a_0=1$, now 
+Taking $a_0=1$
 \ba
 	n =1 ~ & a_1 = - \frac{1}{2 ~ 1} a_0 = - \frac{1}{2 ~ 1} = \frac{(-1)^1}{2 ~ 1} \\
 	n =2 ~ & a_2 = - \frac{1}{3 ~ 2} a_1 = \frac{1}{3 ~ 2 ~ 2 ~ 1} = \frac{(-1)^2}{(3 ~ 2 ~ 1) ~ (2 ~ 1)} \\
@@ -199,7 +200,7 @@ we have
 		& = \frac{5}{2} \int_{-1}^1 x  [ \frac{1}{2} (3 x^2 - 1) ]  dx =  \frac{5}{4}  \int_{-1}^1 (3 ~ x^3 - x) dx\\
 		& = 0 ~ \text{ since the powers of } x \text{ in the integrand are odd} \\
 \ea
-Therefore the Fourier-Legendre series of $x$ iss $x = 1 \cdot P_1(x)$ as required.
+Therefore the Fourier-Legendre series of $x$ is $x = 1 \cdot P_1(x)$, as required.
 
 \item [c.]
 Using Rodrigues's formula
@@ -307,11 +308,11 @@ Applying the superposition principle we have
 \[
 	u(x,y) = \sum_{n=1}^\infty A_n  \cos(\frac{n \pi}{a} x ) \sinh(\frac{n \pi}{a} y)
 \]
-Finally we apply the initial conditions $u(x,b) = 100 x$, therefore
+Finally we apply the initial condition $u(x,b) = 100 x$, therefore
 \[
 	u(x,b) =  \sum_{n=1}^\infty A_n  \cos(\frac{n \pi}{a} x) \sinh(\frac{n \pi}{a} b) = 100 x
 \]
-This is a Fourier series and we get
+This is a Fourier cosine series and we get
 \ba
 	A_n \sinh(n \pi \frac{a} {b})	&= \frac{2}{a} \int_0^a 100 x \cos(\frac{n \pi}{a} x) dx \\
 	A_n \sinh(n \pi \frac{a} {b})	&= \frac{200}{a} \int_0^a x \cos(\frac{n \pi}{a} x) dx \\
