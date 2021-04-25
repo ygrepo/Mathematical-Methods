@@ -372,9 +372,9 @@ starting with $ \frac{d^2 R(r)}{d r^2} + \frac{1}{r}\frac{d R(r)} {d r} + k^2 R(
 Substitution into the ODE gives
 \ba
 	k^2  \frac{d^2 R(s)}{d s^2} + \frac{1}{ \frac{s}{k} } k  \frac{d R(s)}{d s} + k^2 R(s)	&= 0 \\
-	k^2  \frac{d^2 R(s)}{d s^2} + \frac{1}{s} k^2 \frac{d R(s)}{d s} + k^2 R(s)	&= 0 \\
+	k^2  \frac{d^2 R(s)}{d s^2} + \frac{k^2}{s}  \frac{d R(s)}{d s} + k^2 R(s)	&= 0 \\
 \ea
-Multiplying out by $(\frac{s}{k})^2$ gives
+Multiplying out by $\frac{s^2}{k^2}$ gives
 \ba
 	 s^2 \frac{d^2 R(s)}{d s^2} + s  \frac{d R(s)}{d s} + s^2 R(s) &= 0 \\
 	 s^2 \frac{d^2 R(s)}{d s^2} + s  \frac{d R(s)}{d s} + (s^2 - 0^2) R(s) &= 0 \\
@@ -383,7 +383,7 @@ The last equation being a Bessel equation of order $0$ therefore the solution is
 \[
 	R(r) = C_1 J_0(kr) + C_2 Y_0(kr)
 \]
-Since the temperature remains bounded at $r=0$ thus the term $Y_0(kr)$ has to be discarded, $C_2=0$, and $R(r) = C J_0(kr), C=C_1$
+Since the temperature remains bounded at $r=0$, the term $Y_0(kr)$ has to be discarded, $C_2=0$, and $R(r) = C J_0(kr)$ with $C=C_1$
 
 \item [c.]
 Finally apply boundary conditions.
@@ -407,8 +407,11 @@ Next, $\sinh(20 k_m) =  \sinh(20 \frac{\alpha_m}{5}) =  \sinh(4 \alpha_m)$, and 
 \[
 	 A_m = \frac{2 u_0} {25 J_1(\alpha_m)  \sinh(4 \alpha_m)} \int_0^5 J_0(\frac{\alpha_m}{5} r) r dr 
 \]
-Finally using $\frac{\partial}{\partial r} [ r J_1(r)] = r J_0(r)$ 
+Finally using $\frac{\partial}{\partial r} [ r J_1(r)] = r J_0(r)$ which also gives
 \ba
+	\frac{\partial}{\partial r} [\alpha r J_1 (\alpha r)] &= \alpha r J_0(\alpha r) dr \\
+	\alpha r J_1 (\alpha r) &= \int  \alpha r J_0(\alpha r) dr \\
+	r J_1 (\alpha r) &= \int  r J_0(\alpha r) dr \\
 	 A_m		&= \frac{2 u_0} {25 J_1(\alpha_m)  \sinh(4 \alpha_m)} \bigg [r J_1(\frac{\alpha_m}{5} r) \bigg ]_0^5 \\
 	 	 	&= \frac{2 u_0} {25 J_1(\alpha_m)  \sinh(4 \alpha_m)} \bigg (5 J_1(\frac{\alpha_m}{5} 5) \bigg ) \\
 	 		&= \frac{2 u_0} {5 \sinh(4 \alpha_m)}
