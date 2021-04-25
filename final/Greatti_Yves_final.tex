@@ -473,6 +473,47 @@ Take $z=x_iy, Re(z) = x$, let parametrize the line from $1$ to $i$ as $z(t) = 1 
 					&=  (i-1) \frac{1}{2} = \frac{i-1}{2} \\		
 \ea
 
+\section*{Extra Credit}
+
+\be
+
+\item [a.]
+Take $f(z)=\frac{1}{(z-2)(z-1)^2} = \frac{1}{z-2} - \frac{z}{(z-1)^2}$, the poles are at $z=2$ and $z=1$. We compute the residues at each pole.
+At $z = 2$
+\[
+	f(z) =  \frac{1}{z-2} + \textrm{something analytic at } 2
+\]
+Therefore the pole is simple and Res$(f, 2) = 1$
+At $z=1$.
+Take $z = \xi +1$ then 
+\ba
+	f(\xi)	&= \frac{1}{(\xi-1) \xi^2} \\
+			&= -\frac{1}{ \xi^2} (1-\xi)^{-1}\\
+			&= -\frac{1}{\xi^2} (1 + \xi + \xi^2 + \xi^3 + \cdots) \\
+			&= -\frac{1}{ \xi^2} - \frac{1}{\xi} -\frac{1}{2} - \xi + \cdots \\
+\ea	
+Therefore the pole is of order $2$ and Res$(f, 1) = -1$, Poles within the circle centered at $z=0$ with radius $4$ are $1$ and $2$.
+Applying the residue theorem
+\[
+ \oint_C f(z) dz =   \oint_C  \frac{1}{(z-2)(z-1)^2} dz = 2 \pi i (\textrm{Res}(f,2) + \textrm{Res}(f,1)) = 2 \pi i ~ (1-1) = 0
+\] 
+
+
+\item [b.]
+We have
+\ba
+	e^z				&=	\sum_{k=0}^\infty \frac{1}{k!} z^k \\
+	e^{\frac{1}{z^n}}	&=	\sum_{k=0}^\infty \frac{1}{k!} \frac{1}{z^{n+k}} \\
+					&= 	\frac{1}{z^n} + \frac{1}{z^{n+1}} + \frac{1}{z^{n+2}} + \cdots \\
+\ea
+Looking at $\lim_{z\rightarrow 0} (z-0)^\alpha \sum_{k=0}^\infty \frac{1}{k!} \frac{1}{z^{n+k}}$, there is no largest $\alpha$ such this quantity is finite.
+Thus $0$ is an essential singularity. The Laurent expansion has only negative powers of z starting at n. We see that  Res$(e^{\frac{1}{z^n}}, 0) = 0$.
+$e^{\frac{1}{z^n}}$ has only the singularity $0$ within the unit circle, therefore applying the residue theorem
+\[
+	 \oint_C e^{\frac{1}{z^n}} dz = 2 \pi i ~ 0 = 0
+\]
+
+\ee
 
 \ee
 \end{document}
