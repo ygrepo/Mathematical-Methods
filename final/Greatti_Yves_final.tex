@@ -105,7 +105,7 @@ Substituting for $a_n$ in (1):
 \]
 
 \item [d.]
-Fourier series of $x^2$ using integration terms by terms or calculating directly match, as required, by taking $c=\frac{\pi^2}{3}$ since $x$ is a piecewise smooth function on the specified range.
+Fourier series of $x^2$ using integration term by term or calculating directly, match, as required, by taking $c=\frac{\pi^2}{3}$ since $x$ is a piecewise smooth function on the specified range.
 
 \ee
 
@@ -217,6 +217,16 @@ we have
 			&  P_2(x) = \frac{1}{2^2 ~ 2!} ~ (12 ~ x^2 - 4) = \frac{4}{4 ~ 2} (3 x^2 - 1) =  \frac{1}{2} (3 x^2 - 1) \\
 \ea
 
+\item [d.] Extra Credit\\
+Take $f$ an even function and consider odd coefficients, let $n = 2p+1$. Since n is odd $M = \frac{2p+1-1}{2} = p$, and we have
+\ba
+	a_{2p+1} 	&= \frac{2 (2p+1) + 1}{2} \int_{-1}^1 f(x) P_{2p+1}(x) dx \\
+			&= \frac{4p+3}{2} \int_{-1}^1 f(x) \sum_{m=0}^p (-1)^m \frac { \bigg ( 2 (2p+1) - 2m \bigg )! } { 2^{2p+1} (2p+1 - m)! (2p+1-2m)!} x^{2p+1-2m} dx \\
+			&= \frac{4p+3}{2} \sum_{m=0}^p (-1)^m \frac { \bigg ( 2 (2p+1) - 2m \bigg )! } { 2^{2p+1} (2p+1 - m)! (2p+1-2m)!} \int_{-1}^1 f(x)  x^{2p+1-2m} dx \\
+			&= \frac{4p+3}{2} \sum_{m=0}^p (-1)^m \frac { \bigg ( 2 (2p+1) - 2m \bigg )! } { 2^{2p+1} (2p+1 - m)! (2p+1-2m)!} \int_{-1}^1 f(x)  x^{2(p-m) +1} dx \\
+\ea
+The integral term is $0$ since the integration is over a symmetric range and $f(x) x^{2(p-m) +1}$ is odd. 
+Therefore given an even function $f(x)$ all the odd coefficients for the Fourier-Legendre series are zero. Similarly given an odd function, the even coefficients are zero.
 \ee
 
 \section*{Question 4}
@@ -451,7 +461,7 @@ Next the Cauchy condition $\frac{\partial u}{\partial y} = -\frac{\partial v}{\p
 Therefore $u(x,y)= \frac{x^2-y^2}{2} + C$ and $f(x,y) =  \frac{x^2-y^2}{2}  + i xy$
 \ee
 
-\section*{Question 7}
+\section*{Question 8}
 \be
 
 \item [a.]
