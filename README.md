@@ -1,1 +1,1 @@
-# Mathematical Methods Johns Hopskins Biomedical Master
+# Mathematical Methods Johns Hopkins Biomedical Master
