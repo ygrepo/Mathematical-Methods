@@ -1,1 +1,1 @@
-# Mathematical Methods EN-585-615
+# Mathematical Methods Johns Hopskins Biomedical Master
